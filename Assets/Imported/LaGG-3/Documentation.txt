@@ -1,0 +1,26 @@
+=====================================
+=            BYALEXEYKH		    =
+=     LaGG-3 asset documentation    =
+=====================================
+
+Asset includes 2 (two) animations:
+	- LandingGear | Landing gear down (can be reversed in Unity animation controller)
+	- WheelForward | Wheels rotation forward (can be reversed in Unity animation controller)
+
+To access animation you need to:
+	- Add "Animator" component to your LaGG-3 and assign to it "Animator Controller".
+	- In "Animator Controller" create new "Empty State" and click on it
+	- In state inspector, to the right of the "Motion" field, click on circle and choose animation you need
+
+To reverse animation:
+	- Select State that you want to reverse in Animator Controller 
+	- Set "Speed" parameter in inspector to a negative value
+
+To add wheels animation to landing gear animation:
+	- In Animator Controller create new layer
+	- In new layer create new Empty State and assign to it wheels animation
+	- In layer settings of the new layer set "weight" to 1 and "Blending" to "Additive"
+
+For the correct rotation of the elements of the plane toggle Tool Handle to "Pivot" mode
+
+Animation set-up shown in demo scene
