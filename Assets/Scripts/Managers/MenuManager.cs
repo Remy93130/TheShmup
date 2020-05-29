@@ -75,6 +75,13 @@ public class MenuManager : Manager<MenuManager>
 		if (m_PanelGameOver) m_AllPanels.Add(m_PanelGameOver);
 	}
 
+
+    public void SetVolume(float volume)
+    {
+        Debug.Log(volume);
+    }
+
+
 	void OpenPanel(GameObject panel)
 	{
 		foreach (var item in m_AllPanels)
@@ -149,5 +156,11 @@ public class MenuManager : Manager<MenuManager>
 	{
 		OpenPanel(m_PanelVictory);
 	}
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 	#endregion
 }

@@ -119,6 +119,12 @@ public class MusicLoopsManager : Singleton<MusicLoopsManager> {
 		m_AudioSources[m_IndexFadeIn].Stop();
 	}
 
+    public void SetVolume(float volume)
+    {
+        m_AudioSources[m_IndexFadeIn].volume = volume;
+        m_AudioSources[1 - m_IndexFadeIn].volume = volume;
+    }
+
 	void OnGUI()
 	{
 		if(!m_ShowGui) return;

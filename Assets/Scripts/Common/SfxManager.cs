@@ -99,4 +99,8 @@ public class SfxManager : Singleton<SfxManager> {
 		}
 		GUILayout.EndArea();
 	}
+
+    
+
+
 }
