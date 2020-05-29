@@ -75,7 +75,12 @@ public class MenuManager : Manager<MenuManager>
 		if (m_PanelGameOver) m_AllPanels.Add(m_PanelGameOver);
 	}
 
+    public void Quit()
+    {
+        Debug.Log("QUIT !");
+        Application.Quit();
 
+    }
     public void SetVolume(float volume)
     {
         Debug.Log(volume);
