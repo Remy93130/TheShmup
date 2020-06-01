@@ -18,6 +18,8 @@ public class MusicLoopsManager : Singleton<MusicLoopsManager> {
 
 	[SerializeField] bool m_ShowGui;
 
+    private float gameVolume = 0.5f;
+
 	int m_IndexFadeIn=0;
 	float[] m_MaxVolumes = new float[2] ;
 
@@ -66,12 +68,12 @@ public class MusicLoopsManager : Singleton<MusicLoopsManager> {
 		while(elapsedTime<m_FadeDuration)
 		{
 			float k = elapsedTime/m_FadeDuration;
-			m_AudioSources[m_IndexFadeIn].volume = Mathf.Lerp(0,m_MaxVolumes[m_IndexFadeIn],k);			//Fade in 1st audiosource
-			m_AudioSources[1-m_IndexFadeIn].volume = Mathf.Lerp(0,m_MaxVolumes[1-m_IndexFadeIn],1-k);	//Fade out 2nd audiosource
+			m_AudioSources[m_IndexFadeIn].volume = Mathf.Lerp(0,gameVolume,k);			//Fade in 1st audiosource
+			m_AudioSources[1-m_IndexFadeIn].volume = Mathf.Lerp(0,gameVolume,1-k);	//Fade out 2nd audiosource
 			elapsedTime+= Time.timeScale != 0 ? Time.deltaTime : 1 / 60f;
 			yield return null;
 		}
-		m_AudioSources[m_IndexFadeIn].volume = Mathf.Lerp(0,m_MaxVolumes[m_IndexFadeIn],1);
+		m_AudioSources[m_IndexFadeIn].volume = gameVolume;
 		m_AudioSources[1-m_IndexFadeIn].volume = Mathf.Lerp(0,m_MaxVolumes[1-m_IndexFadeIn],0);
 		m_AudioSources[1-m_IndexFadeIn].Stop();
 	}
@@ -90,7 +92,9 @@ public class MusicLoopsManager : Singleton<MusicLoopsManager> {
 			m_AudioSources[m_IndexFadeIn].Play();
 			Time.timeScale = currentTimeScale;
 		}
-	}
+        SetVolume(gameVolume);
+        Debug.Log(gameVolume);
+    }
 
 	public void PlayCurrentMusic()
 	{
@@ -121,8 +125,10 @@ public class MusicLoopsManager : Singleton<MusicLoopsManager> {
 
     public void SetVolume(float volume)
     {
-        m_AudioSources[m_IndexFadeIn].volume = volume;
-        m_AudioSources[1 - m_IndexFadeIn].volume = volume;
+        gameVolume = volume;
+        m_AudioSources[m_IndexFadeIn].volume = gameVolume;
+        m_AudioSources[1 - m_IndexFadeIn].volume = gameVolume;
+        Debug.Log(gameVolume);
     }
 
 	void OnGUI()

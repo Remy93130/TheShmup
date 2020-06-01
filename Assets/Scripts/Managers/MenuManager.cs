@@ -18,7 +18,10 @@ public class MenuManager : Manager<MenuManager>
 	[SerializeField] GameObject m_PanelVictory;
 	[SerializeField] GameObject m_PanelGameOver;
 
-	List<GameObject> m_AllPanels;
+    [SerializeField] GameObject m_PanelSettings;
+    [SerializeField] GameObject m_PanelControls;
+
+    List<GameObject> m_AllPanels;
 	#endregion
 
 	#region Events' subscription
@@ -73,19 +76,11 @@ public class MenuManager : Manager<MenuManager>
 		if (m_PanelNextLevel) m_AllPanels.Add(m_PanelNextLevel);
 		if (m_PanelVictory) m_AllPanels.Add(m_PanelVictory);
 		if (m_PanelGameOver) m_AllPanels.Add(m_PanelGameOver);
-	}
-
-    public void Quit()
-    {
-        Debug.Log("QUIT !");
-        Application.Quit();
+        if (m_PanelSettings) m_AllPanels.Add(m_PanelSettings);
+        if (m_PanelControls) m_AllPanels.Add(m_PanelControls);
 
     }
-    public void SetVolume(float volume)
-    {
-        Debug.Log(volume);
-    }
-
+    
 
 	void OpenPanel(GameObject panel)
 	{
@@ -119,10 +114,23 @@ public class MenuManager : Manager<MenuManager>
 	{
 		EventManager.Instance.Raise(new NextLevelButtonClickedEvent());
 	}
-	#endregion
 
-	#region Callbacks to GameManager events
-	private void AskToGoToNextLevel(AskToGoToNextLevelEvent e)
+
+    public void SettingsButtonHasBeenClicked()
+    {
+        EventManager.Instance.Raise(new SettingsButtonClickedEvent());
+    }
+
+    public void ControlsButtonHasBeenClicked()
+    {
+        EventManager.Instance.Raise(new ControlsButtonClickedEvent());
+    }
+
+
+    #endregion
+
+    #region Callbacks to GameManager events
+    private void AskToGoToNextLevel(AskToGoToNextLevelEvent e)
 	{
 		OpenPanel(m_PanelNextLevel);
 	}
@@ -161,6 +169,16 @@ public class MenuManager : Manager<MenuManager>
 	{
 		OpenPanel(m_PanelVictory);
 	}
+
+    protected override void GameSettings(GameSettingsEvent e)
+    {
+        OpenPanel(m_PanelSettings);
+    }
+
+    protected override void GameControls(GameControlsEvent e)
+    {
+        OpenPanel(m_PanelControls);
+    }
 
     public void QuitGame()
     {

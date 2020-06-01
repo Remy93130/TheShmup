@@ -103,9 +103,11 @@ public class GameManager : Manager<GameManager> {
 		EventManager.Instance.AddListener<NextLevelButtonClickedEvent>(NextLevelButtonClicked);
 		EventManager.Instance.AddListener<ResumeButtonClickedEvent>(ResumeButtonClicked);
 		EventManager.Instance.AddListener<EscapeButtonClickedEvent>(EscapeButtonClicked);
+        EventManager.Instance.AddListener<SettingsButtonClickedEvent>(SettingsButtonClicked);
+        EventManager.Instance.AddListener<ControlsButtonClickedEvent>(ControlsButtonClicked);
 
-		//Enemy
-		EventManager.Instance.AddListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);		
+        //Enemy
+        EventManager.Instance.AddListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);		
 
 		//Score Item
 		EventManager.Instance.AddListener<ScoreItemEvent>(ScoreHasBeenGained);
@@ -128,9 +130,11 @@ public class GameManager : Manager<GameManager> {
 		EventManager.Instance.RemoveListener<NextLevelButtonClickedEvent>(NextLevelButtonClicked);
 		EventManager.Instance.RemoveListener<ResumeButtonClickedEvent>(ResumeButtonClicked);
 		EventManager.Instance.RemoveListener<EscapeButtonClickedEvent>(EscapeButtonClicked);
+        EventManager.Instance.RemoveListener<SettingsButtonClickedEvent>(SettingsButtonClicked);
+        EventManager.Instance.RemoveListener<ControlsButtonClickedEvent>(ControlsButtonClicked);
 
-		//Enemy
-		EventManager.Instance.RemoveListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);
+        //Enemy
+        EventManager.Instance.RemoveListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);
 
 		//Score Item
 		EventManager.Instance.RemoveListener<ScoreItemEvent>(ScoreHasBeenGained);
@@ -227,12 +231,20 @@ public class GameManager : Manager<GameManager> {
 		if (IsPlaying)
 			Pause();
 	}
-	#endregion
+    private void SettingsButtonClicked(SettingsButtonClickedEvent e)
+    {
+        Settings();
+    }
+    private void ControlsButtonClicked(ControlsButtonClickedEvent e)
+    {
+        Controls();
+    }
+    #endregion
 
 
 
-	//EVENTS
-	private void Menu()
+    //EVENTS
+    private void Menu()
 	{
 		SetTimeScale(0);
 		m_GameState = GameState.gameMenu;
@@ -279,4 +291,18 @@ public class GameManager : Manager<GameManager> {
 		EventManager.Instance.Raise(new GameVictoryEvent());
 	}
 
+    private void Settings()
+    {
+        SetTimeScale(0);
+        m_GameState = GameState.gameMenu;
+        
+        EventManager.Instance.Raise(new GameSettingsEvent());
+    }
+    private void Controls()
+    {
+        SetTimeScale(0);
+        m_GameState = GameState.gameMenu;
+        
+        EventManager.Instance.Raise(new GameControlsEvent());
+    }
 }
