@@ -16,6 +16,13 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 	[SerializeField] private float m_MinTranslationSpeed;
 	[SerializeField] private AnimationCurve m_TranslationSpeedProbaCurve;
 	protected float m_TranslationSpeed;
+
+	[Header("Shoot")]
+	[SerializeField] private GameObject m_BulletPrefab;
+	[SerializeField] private float m_ShootPeriod;
+	private float m_NextShootTime;
+	[SerializeField] private Transform m_BulletSpawnPoint;
+
 	public float TranslationSpeed { get { return m_TranslationSpeed; } }
 
 	protected abstract Vector3 MoveVect { get; }
@@ -32,6 +39,8 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 
 		m_Rigidbody = GetComponent<Rigidbody>();
 		m_Transform = GetComponent<Transform>();
+		m_NextShootTime = Time.time;
+
 
 		m_TranslationSpeed = Mathf.Lerp(m_MinTranslationSpeed, m_MaxTranslationSpeed, m_TranslationSpeedProbaCurve.Evaluate(Random.value));
 	}
@@ -44,12 +53,23 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 			m_Destroyed = true;
 			Destroy(gameObject);
 		}
+		//Fire
+		if (m_NextShootTime < Time.time)
+		{
+			//ShootBullet();
+			m_NextShootTime = Time.time + m_ShootPeriod;
+		}
 	}
 
 	public virtual void FixedUpdate()
 	{
 		if (!GameManager.Instance.IsPlaying) return;
 		m_Rigidbody.MovePosition(m_Rigidbody.position + MoveVect);
+	}
+
+	void ShootBullet()
+	{
+		GameObject bulletGO = Instantiate(m_BulletPrefab, m_BulletSpawnPoint.position, Quaternion.identity);
 	}
 
 	private void OnCollisionEnter(Collision collision)

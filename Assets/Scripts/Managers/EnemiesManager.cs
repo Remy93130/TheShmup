@@ -14,6 +14,7 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	private int m_CurrentPatternIndex;
 	private GameObject m_CurrentPatternGO;
 	private IPattern m_CurrentPattern;
+
 	public IPattern CurrentPattern { get { return m_CurrentPattern; } }
 	#endregion
 
