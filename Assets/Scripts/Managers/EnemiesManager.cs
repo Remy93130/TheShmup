@@ -6,12 +6,27 @@ using System;
 using Random = UnityEngine.Random;
 using SDD.Events;
 
+
+[Serializable]
+public class Level
+{
+	[SerializeField] GameObject[] m_PatternsPrefabs;
+
+	public GameObject getLevelPattern(int indexPattern)
+	{
+		indexPattern = Mathf.Max(indexPattern, 0) % m_PatternsPrefabs.Length;
+		return m_PatternsPrefabs[indexPattern];
+	}
+}
+
+
 public class EnemiesManager : Manager<EnemiesManager> {
 
 	[Header("EnemiesManager")]
 	#region patterns & current pattern management
-	[SerializeField] GameObject[] m_PatternsPrefabs;
+	[SerializeField] Level[] m_levels;
 	private int m_CurrentPatternIndex;
+	private int m_CurrentLevelIndex;
 	private GameObject m_CurrentPatternGO;
 	private IPattern m_CurrentPattern;
 
@@ -53,10 +68,10 @@ public class EnemiesManager : Manager<EnemiesManager> {
 		m_CurrentPatternIndex = -1;
 	}
 
-	IPattern InstantiatePattern(int levelIndex)
+	IPattern InstantiatePattern(int patternIndex)
 	{
-		levelIndex = Mathf.Max(levelIndex, 0) % m_PatternsPrefabs.Length;
-		m_CurrentPatternGO = Instantiate(m_PatternsPrefabs[levelIndex]);
+		Level currentLevel = m_levels[m_CurrentLevelIndex];
+		m_CurrentPatternGO = Instantiate(currentLevel.getLevelPattern(patternIndex));
 		return m_CurrentPatternGO.GetComponent<IPattern>();
 	}
 
@@ -77,9 +92,12 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	{
 		Reset();
 	}
+
+
 	protected override void GamePlay(GamePlayEvent e)
 	{
 		Reset();
+		m_CurrentLevelIndex = 0;
 		EventManager.Instance.Raise(new GoToNextPatternEvent());
 	}
 	#endregion
