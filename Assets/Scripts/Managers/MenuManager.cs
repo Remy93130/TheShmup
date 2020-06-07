@@ -21,7 +21,6 @@ public class MenuManager : Manager<MenuManager>
     [SerializeField] GameObject m_PanelSettings;
     [SerializeField] GameObject m_PanelControls;
 
-    
 
     List<GameObject> m_AllPanels;
 	#endregion
@@ -192,10 +191,22 @@ public class MenuManager : Manager<MenuManager>
         
     }
 
-    public void setActiveSlider()
+    public void setActiveRecursif(GameObject obj)
     {
-        
+        //for (int i = 0; i < obj.Length; i++)
+        //{
+            if (obj.activeSelf)
+            {
+                obj.SetActive(false);
+            }
+            else
+            {
+                obj.SetActive(true);
+            }
+        //}
+
     }
 
-	#endregion
+
+    #endregion
 }
