@@ -20,9 +20,10 @@ public class MenuManager : Manager<MenuManager>
 
     [SerializeField] GameObject m_PanelSettings;
     [SerializeField] GameObject m_PanelControls;
+	[SerializeField] GameObject m_PanelChooseLevel;
 
 
-    List<GameObject> m_AllPanels;
+	List<GameObject> m_AllPanels;
 	#endregion
 
 	#region Events' subscription
@@ -79,8 +80,9 @@ public class MenuManager : Manager<MenuManager>
 		if (m_PanelGameOver) m_AllPanels.Add(m_PanelGameOver);
         if (m_PanelSettings) m_AllPanels.Add(m_PanelSettings);
         if (m_PanelControls) m_AllPanels.Add(m_PanelControls);
+		if (m_PanelChooseLevel) m_AllPanels.Add(m_PanelChooseLevel);
 
-    }
+	}
     
 
 	void OpenPanel(GameObject panel)
@@ -127,11 +129,26 @@ public class MenuManager : Manager<MenuManager>
         EventManager.Instance.Raise(new ControlsButtonClickedEvent());
     }
 
+	public void BeginnerButtonHasBeenClicked()
+	{
+		EventManager.Instance.Raise(new BeginnerButtonClickedEvent());
+	}
 
-    #endregion
+	public void IntermediateButtonHasBeenClicked()
+	{
+		EventManager.Instance.Raise(new IntermediateButtonClickedEvent());
+	}
 
-    #region Callbacks to GameManager events
-    private void AskToGoToNextLevel(AskToGoToNextLevelEvent e)
+	public void DifficultButtonHasBeenClicked()
+	{
+		EventManager.Instance.Raise(new DifficultButtonClickedEvent());
+	}
+
+
+	#endregion
+
+	#region Callbacks to GameManager events
+	private void AskToGoToNextLevel(AskToGoToNextLevelEvent e)
 	{
 		OpenPanel(m_PanelNextLevel);
 	}
@@ -146,7 +163,15 @@ public class MenuManager : Manager<MenuManager>
 		OpenPanel(m_PanelMainMenu);
 	}
 
-	protected override void GamePlay(GamePlayEvent e)
+	protected override void GameBeginnerLevelPlay(GameBeginnerLevelEvent e)
+	{
+		OpenPanel(null);
+	}
+	protected override void GameIntermediateLevelPlay(GameIntermediateLevelEvent e)
+	{
+		OpenPanel(null);
+	}
+	protected override void GameDifficultLevelPlay(GameDifficultLevelEvent e)
 	{
 		OpenPanel(null);
 	}
@@ -181,7 +206,12 @@ public class MenuManager : Manager<MenuManager>
         OpenPanel(m_PanelControls);
     }
 
-    public void QuitGame()
+	protected override void GameChooseLevel(GameChooseLevelEvent e)
+	{
+		OpenPanel(m_PanelChooseLevel);
+	}
+
+	public void QuitGame()
     {
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;

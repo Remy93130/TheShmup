@@ -91,9 +91,21 @@ public class PlayerController : SimpleGameStateObserver {
 	}
 
 	//Game state events
-	protected override void GamePlay(GamePlayEvent e)
+	protected override void GameBeginnerLevelPlay(GameBeginnerLevelEvent e)
 	{
 		Reset();
 	}
+
+	protected override void GameIntermediateLevelPlay(GameIntermediateLevelEvent e)
+	{
+		Reset();
+	}
+
+	protected override void GameDifficultLevelPlay(GameDifficultLevelEvent e)
+	{
+		Reset();
+	}
+
+
 
 }

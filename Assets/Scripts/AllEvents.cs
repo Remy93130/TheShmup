@@ -7,7 +7,13 @@ using SDD.Events;
 public class GameMenuEvent : SDD.Events.Event
 {
 }
-public class GamePlayEvent : SDD.Events.Event
+public class GameBeginnerLevelEvent : SDD.Events.Event
+{
+}
+public class GameIntermediateLevelEvent : SDD.Events.Event
+{
+}
+public class GameDifficultLevelEvent : SDD.Events.Event
 {
 }
 public class GamePauseEvent : SDD.Events.Event
@@ -26,6 +32,9 @@ public class GameSettingsEvent : SDD.Events.Event
 {
 }
 public class GameControlsEvent : SDD.Events.Event
+{
+}
+public class GameChooseLevelEvent : SDD.Events.Event
 {
 }
 public class GameStatisticsChangedEvent : SDD.Events.Event
@@ -57,6 +66,15 @@ public class SettingsButtonClickedEvent : SDD.Events.Event
 {
 }
 public class ControlsButtonClickedEvent : SDD.Events.Event
+{
+}
+public class BeginnerButtonClickedEvent : SDD.Events.Event
+{
+}
+public class IntermediateButtonClickedEvent : SDD.Events.Event
+{
+}
+public class DifficultButtonClickedEvent : SDD.Events.Event
 {
 }
 #endregion

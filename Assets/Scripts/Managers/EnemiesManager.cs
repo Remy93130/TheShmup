@@ -93,11 +93,27 @@ public class EnemiesManager : Manager<EnemiesManager> {
 		Reset();
 	}
 
+	protected override void GameBeginnerLevelPlay(GameBeginnerLevelEvent e)
+	{
+		m_CurrentLevelIndex = 0;
+		PlayLevel();
+	}
 
-	protected override void GamePlay(GamePlayEvent e)
+	protected override void GameIntermediateLevelPlay(GameIntermediateLevelEvent e)
+	{
+		m_CurrentLevelIndex = 0;
+		PlayLevel();
+	}
+
+	protected override void GameDifficultLevelPlay(GameDifficultLevelEvent e)
+	{
+		m_CurrentLevelIndex = 0;
+		PlayLevel();
+	}
+
+	protected void PlayLevel()
 	{
 		Reset();
-		m_CurrentLevelIndex = 0;
 		EventManager.Instance.Raise(new GoToNextPatternEvent());
 	}
 	#endregion

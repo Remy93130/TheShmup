@@ -105,9 +105,13 @@ public class GameManager : Manager<GameManager> {
 		EventManager.Instance.AddListener<EscapeButtonClickedEvent>(EscapeButtonClicked);
         EventManager.Instance.AddListener<SettingsButtonClickedEvent>(SettingsButtonClicked);
         EventManager.Instance.AddListener<ControlsButtonClickedEvent>(ControlsButtonClicked);
+		EventManager.Instance.AddListener<BeginnerButtonClickedEvent>(BeginnerButtonClicked);
+		EventManager.Instance.AddListener<IntermediateButtonClickedEvent>(IntermediateButtonClicked);
+		EventManager.Instance.AddListener<DifficultButtonClickedEvent>(DifficultButtonClicked);
 
-        //Enemy
-        EventManager.Instance.AddListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);		
+
+		//Enemy
+		EventManager.Instance.AddListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);		
 
 		//Score Item
 		EventManager.Instance.AddListener<ScoreItemEvent>(ScoreHasBeenGained);
@@ -132,9 +136,12 @@ public class GameManager : Manager<GameManager> {
 		EventManager.Instance.RemoveListener<EscapeButtonClickedEvent>(EscapeButtonClicked);
         EventManager.Instance.RemoveListener<SettingsButtonClickedEvent>(SettingsButtonClicked);
         EventManager.Instance.RemoveListener<ControlsButtonClickedEvent>(ControlsButtonClicked);
+		EventManager.Instance.RemoveListener<BeginnerButtonClickedEvent>(BeginnerButtonClicked);
+		EventManager.Instance.RemoveListener<IntermediateButtonClickedEvent>(IntermediateButtonClicked);
+		EventManager.Instance.RemoveListener<DifficultButtonClickedEvent>(DifficultButtonClicked);
 
-        //Enemy
-        EventManager.Instance.RemoveListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);
+		//Enemy
+		EventManager.Instance.RemoveListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);
 
 		//Score Item
 		EventManager.Instance.RemoveListener<ScoreItemEvent>(ScoreHasBeenGained);
@@ -213,7 +220,22 @@ public class GameManager : Manager<GameManager> {
 
 	private void PlayButtonClicked(PlayButtonClickedEvent e)
 	{
-		Play();
+		ChooseLevel();
+	}
+
+	private void BeginnerButtonClicked(BeginnerButtonClickedEvent e)
+	{
+		BeginnerLevel();
+	}
+
+	private void IntermediateButtonClicked(IntermediateButtonClickedEvent e)
+	{
+		IntermediateLevel();
+	}
+
+	private void DifficultButtonClicked(DifficultButtonClickedEvent e)
+	{
+		DifficultLevel();
 	}
 
 	private void NextLevelButtonClicked(NextLevelButtonClickedEvent e)
@@ -239,12 +261,12 @@ public class GameManager : Manager<GameManager> {
     {
         Controls();
     }
-    #endregion
+	#endregion
 
 
 
-    //EVENTS
-    private void Menu()
+	//EVENTS
+	private void Menu()
 	{
 		SetTimeScale(0);
 		m_GameState = GameState.gameMenu;
@@ -252,13 +274,37 @@ public class GameManager : Manager<GameManager> {
 		EventManager.Instance.Raise(new GameMenuEvent());
 	}
 
+	private void ChooseLevel()
+	{
+		SetTimeScale(0);
+		m_GameState = GameState.gameMenu;
+		MusicLoopsManager.Instance.PlayMusic(Constants.MENU_MUSIC);
+		EventManager.Instance.Raise(new GameChooseLevelEvent());
+	}
 	private void Play()
 	{
 		InitNewGame();
 		SetTimeScale(1);
 		m_GameState = GameState.gamePlay;
 		MusicLoopsManager.Instance.PlayMusic(Constants.GAMEPLAY_MUSIC);
-		EventManager.Instance.Raise(new GamePlayEvent());
+	}
+
+	private void BeginnerLevel()
+	{
+		Play();
+		EventManager.Instance.Raise(new GameBeginnerLevelEvent());
+	}
+
+	private void IntermediateLevel()
+	{
+		Play();
+		EventManager.Instance.Raise(new GameIntermediateLevelEvent());
+	}
+
+	private void DifficultLevel()
+	{
+		Play();
+		EventManager.Instance.Raise(new GameDifficultLevelEvent());
 	}
 
 	private void Pause()

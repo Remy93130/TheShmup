@@ -9,7 +9,9 @@ public abstract class SingletonGameStateObserver<T> :  Singleton<T>,IEventHandle
 	public virtual void SubscribeEvents()
 	{
 		EventManager.Instance.AddListener<GameMenuEvent>(GameMenu);
-		EventManager.Instance.AddListener<GamePlayEvent>(GamePlay);
+		EventManager.Instance.AddListener<GameBeginnerLevelEvent>(GameBeginnerLevelPlay);
+		EventManager.Instance.AddListener<GameIntermediateLevelEvent>(GameIntermediateLevelPlay);
+		EventManager.Instance.AddListener<GameDifficultLevelEvent>(GameDifficultLevelPlay);
 		EventManager.Instance.AddListener<GamePauseEvent>(GamePause);
 		EventManager.Instance.AddListener<GameResumeEvent>(GameResume);
 		EventManager.Instance.AddListener<GameOverEvent>(GameOver);
@@ -17,12 +19,15 @@ public abstract class SingletonGameStateObserver<T> :  Singleton<T>,IEventHandle
 		EventManager.Instance.AddListener<GameStatisticsChangedEvent>(GameStatisticsChanged);
         EventManager.Instance.AddListener<GameSettingsEvent>(GameSettings);
         EventManager.Instance.AddListener<GameControlsEvent>(GameControls);
-    }
+		EventManager.Instance.AddListener<GameChooseLevelEvent>(GameChooseLevel);
+	}
 
 	public virtual void UnsubscribeEvents()
 	{
 		EventManager.Instance.RemoveListener<GameMenuEvent>(GameMenu);
-		EventManager.Instance.RemoveListener<GamePlayEvent>(GamePlay);
+		EventManager.Instance.RemoveListener<GameBeginnerLevelEvent>(GameBeginnerLevelPlay);
+		EventManager.Instance.RemoveListener<GameIntermediateLevelEvent>(GameIntermediateLevelPlay);
+		EventManager.Instance.RemoveListener<GameDifficultLevelEvent>(GameDifficultLevelPlay);
 		EventManager.Instance.RemoveListener<GamePauseEvent>(GamePause);
 		EventManager.Instance.RemoveListener<GameResumeEvent>(GameResume);
 		EventManager.Instance.RemoveListener<GameOverEvent>(GameOver);
@@ -30,7 +35,8 @@ public abstract class SingletonGameStateObserver<T> :  Singleton<T>,IEventHandle
 		EventManager.Instance.RemoveListener<GameStatisticsChangedEvent>(GameStatisticsChanged);
         EventManager.Instance.RemoveListener<GameSettingsEvent>(GameSettings);
         EventManager.Instance.RemoveListener<GameControlsEvent>(GameControls);
-    }
+		EventManager.Instance.RemoveListener<GameChooseLevelEvent>(GameChooseLevel);
+	}
 
 	protected override void Awake()
 	{
@@ -47,7 +53,15 @@ public abstract class SingletonGameStateObserver<T> :  Singleton<T>,IEventHandle
 	{
 	}
 
-	protected virtual void GamePlay(GamePlayEvent e)
+	protected virtual void GameBeginnerLevelPlay(GameBeginnerLevelEvent e)
+	{
+	}
+
+	protected virtual void GameIntermediateLevelPlay(GameIntermediateLevelEvent e)
+	{
+	}
+
+	protected virtual void GameDifficultLevelPlay(GameDifficultLevelEvent e)
 	{
 	}
 
@@ -75,7 +89,11 @@ public abstract class SingletonGameStateObserver<T> :  Singleton<T>,IEventHandle
     {
     }
 
-    protected virtual void GameStatisticsChanged(GameStatisticsChangedEvent e)
+	protected virtual void GameChooseLevel(GameChooseLevelEvent e)
+	{
+	}
+
+	protected virtual void GameStatisticsChanged(GameStatisticsChangedEvent e)
 	{
 	}
 
