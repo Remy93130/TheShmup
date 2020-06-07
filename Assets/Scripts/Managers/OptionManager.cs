@@ -5,6 +5,7 @@ using UnityEngine;
 public class OptionManager : MonoBehaviour
 {
     public AudioSource audioSource;
+   
     public void SetVolume(float volume)
     {
         audioSource.volume = volume;
@@ -14,4 +15,5 @@ public class OptionManager : MonoBehaviour
     {
         QualitySettings.SetQualityLevel(qualityIndex);
     }
+
 }

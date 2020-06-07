@@ -21,6 +21,8 @@ public class MenuManager : Manager<MenuManager>
     [SerializeField] GameObject m_PanelSettings;
     [SerializeField] GameObject m_PanelControls;
 
+    
+
     List<GameObject> m_AllPanels;
 	#endregion
 
@@ -187,6 +189,11 @@ public class MenuManager : Manager<MenuManager>
         #else
         Application.Quit();
         #endif
+        
+    }
+
+    public void setActiveSlider()
+    {
         
     }
 
