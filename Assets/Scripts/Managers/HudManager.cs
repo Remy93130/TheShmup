@@ -31,7 +31,7 @@ public class HudManager : Manager<HudManager>
 		m_TxtScore.text = e.eScore.ToString();
 		m_TxtNLives.text = e.eNLives.ToString();
         slider.value = e.eNLives;
-        m_TxtNEnemiesLeftBeforeVictory.text = e.eNEnemiesLeftBeforeVictory.ToString();
+       // m_TxtNEnemiesLeftBeforeVictory.text = e.eNEnemiesLeftBeforeVictory.ToString();
 	}
 
    

@@ -14,8 +14,17 @@ public class Level
 
 	public GameObject getLevelPattern(int indexPattern)
 	{
-		indexPattern = Mathf.Max(indexPattern, 0) % m_PatternsPrefabs.Length;
+		indexPattern = Mathf.Max(indexPattern, 0);
 		return m_PatternsPrefabs[indexPattern];
+	}
+
+	public Boolean hasLevelFinished(int indexPattern)
+	{
+		if (indexPattern == m_PatternsPrefabs.Length)
+		{
+			return true;
+		}
+		return false;
 	}
 }
 
@@ -27,6 +36,7 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	[SerializeField] Level[] m_levels;
 	private int m_CurrentPatternIndex;
 	private int m_CurrentLevelIndex;
+	private Level m_CurrentLevel;
 	private GameObject m_CurrentPatternGO;
 	private IPattern m_CurrentPattern;
 
@@ -70,8 +80,7 @@ public class EnemiesManager : Manager<EnemiesManager> {
 
 	IPattern InstantiatePattern(int patternIndex)
 	{
-		Level currentLevel = m_levels[m_CurrentLevelIndex];
-		m_CurrentPatternGO = Instantiate(currentLevel.getLevelPattern(patternIndex));
+		m_CurrentPatternGO = Instantiate(m_CurrentLevel.getLevelPattern(patternIndex));
 		return m_CurrentPatternGO.GetComponent<IPattern>();
 	}
 
@@ -80,10 +89,17 @@ public class EnemiesManager : Manager<EnemiesManager> {
 		Destroy(m_CurrentPatternGO);
 		while (m_CurrentPatternGO) yield return null;
 
-		m_CurrentPattern = InstantiatePattern(m_CurrentPatternIndex);
-		m_CurrentPattern.StartPattern();
+		if (m_CurrentLevel.hasLevelFinished(m_CurrentPatternIndex))
+		{
+			EventManager.Instance.Raise(new LevelHasEnded());
+		}
+		else
+		{
+			m_CurrentPattern = InstantiatePattern(m_CurrentPatternIndex);
+			m_CurrentPattern.StartPattern();
 
-		EventManager.Instance.Raise(new PatternHasBeenInstantiatedEvent() { ePattern = m_CurrentPattern });
+			EventManager.Instance.Raise(new PatternHasBeenInstantiatedEvent() { ePattern = m_CurrentPattern });
+		}
 	}
 	#endregion
 
@@ -96,18 +112,21 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	protected override void GameBeginnerLevelPlay(GameBeginnerLevelEvent e)
 	{
 		m_CurrentLevelIndex = 0;
+		m_CurrentLevel = m_levels[m_CurrentLevelIndex];
 		PlayLevel();
 	}
 
 	protected override void GameIntermediateLevelPlay(GameIntermediateLevelEvent e)
 	{
 		m_CurrentLevelIndex = 0;
+		m_CurrentLevel = m_levels[m_CurrentLevelIndex];
 		PlayLevel();
 	}
 
 	protected override void GameDifficultLevelPlay(GameDifficultLevelEvent e)
 	{
 		m_CurrentLevelIndex = 0;
+		m_CurrentLevel = m_levels[m_CurrentLevelIndex];
 		PlayLevel();
 	}
 
