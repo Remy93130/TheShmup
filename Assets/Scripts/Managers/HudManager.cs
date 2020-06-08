@@ -15,6 +15,7 @@ public class HudManager : Manager<HudManager>
 	[SerializeField] private Text m_TxtScore;
 	[SerializeField] private Text m_TxtNLives;
 	[SerializeField] private Text m_TxtNEnemiesLeftBeforeVictory;
+    [SerializeField] private Slider slider;
 
 	#endregion
 
@@ -29,7 +30,8 @@ public class HudManager : Manager<HudManager>
 		m_TxtBestScore.text = e.eBestScore.ToString();
 		m_TxtScore.text = e.eScore.ToString();
 		m_TxtNLives.text = e.eNLives.ToString();
-		m_TxtNEnemiesLeftBeforeVictory.text = e.eNEnemiesLeftBeforeVictory.ToString();
+        slider.value = e.eNLives;
+        m_TxtNEnemiesLeftBeforeVictory.text = e.eNEnemiesLeftBeforeVictory.ToString();
 	}
 
    
@@ -37,5 +39,6 @@ public class HudManager : Manager<HudManager>
     {
         yield break;
     }
+ 
     #endregion
 }
