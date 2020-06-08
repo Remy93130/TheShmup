@@ -278,7 +278,7 @@ public class GameManager : Manager<GameManager> {
 	{
 		SetTimeScale(0);
 		m_GameState = GameState.gameMenu;
-		MusicLoopsManager.Instance.PlayMusic(Constants.MENU_MUSIC);
+		
 		EventManager.Instance.Raise(new GameChooseLevelEvent());
 	}
 	private void Play()
@@ -286,26 +286,29 @@ public class GameManager : Manager<GameManager> {
 		InitNewGame();
 		SetTimeScale(1);
 		m_GameState = GameState.gamePlay;
-		MusicLoopsManager.Instance.PlayMusic(Constants.GAMEPLAY_MUSIC);
+		
 	}
 
 	private void BeginnerLevel()
 	{
 		Play();
 		EventManager.Instance.Raise(new GameBeginnerLevelEvent());
-	}
+        MusicLoopsManager.Instance.PlayMusic(Constants.GAMEPLAY_MUSIC);
+    }
 
 	private void IntermediateLevel()
 	{
 		Play();
 		EventManager.Instance.Raise(new GameIntermediateLevelEvent());
-	}
+        MusicLoopsManager.Instance.PlayMusic(Constants.GAMEPLAY_MUSIC);
+    }
 
 	private void DifficultLevel()
 	{
 		Play();
 		EventManager.Instance.Raise(new GameDifficultLevelEvent());
-	}
+        MusicLoopsManager.Instance.PlayMusic(Constants.GAMEPLAY_MUSIC);
+    }
 
 	private void Pause()
 	{
