@@ -52,7 +52,8 @@ public class GameManager : Manager<GameManager> {
 	void SetScore(int score)
 	{
 		Score = score;
-		EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = m_Score, eNLives = m_NLives, eNEnemiesLeftBeforeVictory = m_NEnemiesLeftBeforeVictory });
+		//EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = m_Score, eNLives = m_NLives, eNEnemiesLeftBeforeVictory = m_NEnemiesLeftBeforeVictory });
+		EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = m_Score, eNLives = m_NLives});
 	}
 
 	//LIVES
@@ -69,11 +70,12 @@ public class GameManager : Manager<GameManager> {
 	void SetNLives(int nLives)
 	{
 		m_NLives =nLives;
-		EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = m_Score, eNLives = m_NLives, eNEnemiesLeftBeforeVictory = m_NEnemiesLeftBeforeVictory });
+		//EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = m_Score, eNLives = m_NLives, eNEnemiesLeftBeforeVictory = m_NEnemiesLeftBeforeVictory });
+		EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = m_Score, eNLives = m_NLives});
 	}
 
 	// Victory Condition
-	[SerializeField] private int m_NEnemiesToDestroyForVictory;
+	/*[SerializeField] private int m_NEnemiesToDestroyForVictory;
 	private int m_NEnemiesLeftBeforeVictory;
 	void DecrementNEnemiesLeftBeforeVictory(int decrement)
 	{
@@ -83,7 +85,7 @@ public class GameManager : Manager<GameManager> {
 	{
 		m_NEnemiesLeftBeforeVictory = Mathf.Max(nEnemies,0);
 		EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = m_Score, eNLives = m_NLives, eNEnemiesLeftBeforeVictory = m_NEnemiesLeftBeforeVictory });
-	}
+	}*/
 
 	//Players
 	[SerializeField]
@@ -112,7 +114,10 @@ public class GameManager : Manager<GameManager> {
 
 
 		//Enemy
-		EventManager.Instance.AddListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);		
+		//EventManager.Instance.AddListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);
+
+		//Enemy Manager
+		EventManager.Instance.AddListener<LevelHasEnded>(Victory);
 
 		//Score Item
 		EventManager.Instance.AddListener<ScoreItemEvent>(ScoreHasBeenGained);
@@ -143,7 +148,10 @@ public class GameManager : Manager<GameManager> {
 		EventManager.Instance.RemoveListener<DifficultButtonClickedEvent>(DifficultButtonClicked);
 
 		//Enemy
-		EventManager.Instance.RemoveListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);
+		//EventManager.Instance.RemoveListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);
+
+		//Enemy Manager
+		EventManager.Instance.RemoveListener<LevelHasEnded>(Victory);
 
 		//Score Item
 		EventManager.Instance.RemoveListener<ScoreItemEvent>(ScoreHasBeenGained);
@@ -158,7 +166,8 @@ public class GameManager : Manager<GameManager> {
 	protected override IEnumerator InitCoroutine()
 	{
 		Menu();
-		EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = 0, eNLives = 0, eNEnemiesLeftBeforeVictory = 0 });
+		//EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = 0, eNLives = 0, eNEnemiesLeftBeforeVictory = 0 });
+		EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = 0, eNLives = 0});
 		yield break;
 	}
 	#endregion
@@ -167,11 +176,11 @@ public class GameManager : Manager<GameManager> {
 	{
 		SetScore(0);
 		SetNLives(m_NStartLives);
-		SetNEnemiesLeftBeforeVictory(m_NEnemiesToDestroyForVictory);
+		//SetNEnemiesLeftBeforeVictory(m_NEnemiesToDestroyForVictory);
 	}
 
 	#region Callbacks to events issued by Enemy
-	private void EnemyHasBeenDestroyed(EnemyHasBeenDestroyedEvent e)
+	/*private void EnemyHasBeenDestroyed(EnemyHasBeenDestroyedEvent e)
 	{
 		if (e.eDestroyedByPlayer)
 		{
@@ -182,7 +191,7 @@ public class GameManager : Manager<GameManager> {
 				Victory();
 			}
 		}
-	}
+	}*/
 	#endregion
 
 	#region Callbacks to events issued by Score items
@@ -292,7 +301,6 @@ public class GameManager : Manager<GameManager> {
 	{
 		SetTimeScale(0);
 		m_GameState = GameState.gameMenu;
-		
 		EventManager.Instance.Raise(new GameChooseLevelEvent());
 	}
 	private void Play()
@@ -346,7 +354,7 @@ public class GameManager : Manager<GameManager> {
 		EventManager.Instance.Raise(new GameOverEvent());
 	}
 
-	private void Victory()
+	private void Victory(LevelHasEnded e)
 	{
 		SetTimeScale(0);
 		m_GameState = GameState.gameVictory;
