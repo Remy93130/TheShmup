@@ -20,8 +20,9 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 	[Header("Shoot")]
 	[SerializeField] private GameObject m_BulletPrefab;
 	[SerializeField] private float m_ShootPeriod;
-	private float m_NextShootTime;
+	[SerializeField] private float m_ProbaShoot;
 	[SerializeField] private Transform m_BulletSpawnPoint;
+	private float m_NextShootTime;
 
 	public float TranslationSpeed { get { return m_TranslationSpeed; } }
 
@@ -53,10 +54,12 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 			m_Destroyed = true;
 			Destroy(gameObject);
 		}
+
 		//Fire
-		if (m_NextShootTime < Time.time)
+		float probaShoot = Random.Range(0f, 1f);
+		if (m_NextShootTime < Time.time && probaShoot <= m_ProbaShoot)
 		{
-			//ShootBullet();
+			ShootBullet();
 			m_NextShootTime = Time.time + m_ShootPeriod;
 		}
 	}
@@ -65,6 +68,7 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 	{
 		if (!GameManager.Instance.IsPlaying) return;
 		m_Rigidbody.MovePosition(m_Rigidbody.position + MoveVect);
+
 	}
 
 	void ShootBullet()
@@ -75,7 +79,7 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 	private void OnCollisionEnter(Collision collision)
 	{
 		Debug.Log( name+" Collision with " + collision.gameObject.name);
-		if(collision.gameObject.CompareTag("Bullet")
+		if(collision.gameObject.CompareTag("PlayerBullet")
 			|| collision.gameObject.CompareTag("Player"))
 		{
 			EventManager.Instance.Raise(new ScoreItemEvent() { eScore = this as IScore });
