@@ -59,6 +59,9 @@ public class ResumeButtonClickedEvent : SDD.Events.Event
 public class MainMenuButtonClickedEvent : SDD.Events.Event
 {
 }
+public class MainMenuButtonFromSettingsClickedEvent : SDD.Events.Event
+{
+}
 public class NextLevelButtonClickedEvent : SDD.Events.Event
 {
 }

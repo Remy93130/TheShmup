@@ -113,7 +113,12 @@ public class MenuManager : Manager<MenuManager>
 		EventManager.Instance.Raise(new MainMenuButtonClickedEvent());
 	}
 
-	public void NextLevelButtonHasBeenClicked()
+    public void MainMenuButtonFromSettingsHasBeenClicked()
+    {
+        EventManager.Instance.Raise(new MainMenuButtonFromSettingsClickedEvent());
+    }
+
+    public void NextLevelButtonHasBeenClicked()
 	{
 		EventManager.Instance.Raise(new NextLevelButtonClickedEvent());
 	}

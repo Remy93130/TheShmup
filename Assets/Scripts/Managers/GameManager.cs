@@ -99,7 +99,8 @@ public class GameManager : Manager<GameManager> {
 
 		//MainMenuManager
 		EventManager.Instance.AddListener<MainMenuButtonClickedEvent>(MainMenuButtonClicked);
-		EventManager.Instance.AddListener<PlayButtonClickedEvent>(PlayButtonClicked);
+        EventManager.Instance.AddListener<MainMenuButtonFromSettingsClickedEvent>(MainMenuButtonFromSettingsClicked);
+        EventManager.Instance.AddListener<PlayButtonClickedEvent>(PlayButtonClicked);
 		EventManager.Instance.AddListener<NextLevelButtonClickedEvent>(NextLevelButtonClicked);
 		EventManager.Instance.AddListener<ResumeButtonClickedEvent>(ResumeButtonClicked);
 		EventManager.Instance.AddListener<EscapeButtonClickedEvent>(EscapeButtonClicked);
@@ -130,6 +131,7 @@ public class GameManager : Manager<GameManager> {
 
 		//MainMenuManager
 		EventManager.Instance.RemoveListener<MainMenuButtonClickedEvent>(MainMenuButtonClicked);
+        EventManager.Instance.RemoveListener<MainMenuButtonFromSettingsClickedEvent>(MainMenuButtonFromSettingsClicked);
 		EventManager.Instance.RemoveListener<PlayButtonClickedEvent>(PlayButtonClicked);
 		EventManager.Instance.RemoveListener<NextLevelButtonClickedEvent>(NextLevelButtonClicked);
 		EventManager.Instance.RemoveListener<ResumeButtonClickedEvent>(ResumeButtonClicked);
@@ -218,6 +220,11 @@ public class GameManager : Manager<GameManager> {
 		Menu();
 	}
 
+    private void MainMenuButtonFromSettingsClicked(MainMenuButtonFromSettingsClickedEvent e)
+    {
+        MenuFromSettings();
+    }
+
 	private void PlayButtonClicked(PlayButtonClickedEvent e)
 	{
 		ChooseLevel();
@@ -273,6 +280,13 @@ public class GameManager : Manager<GameManager> {
 		MusicLoopsManager.Instance.PlayMusic(Constants.MENU_MUSIC);
 		EventManager.Instance.Raise(new GameMenuEvent());
 	}
+
+    public void MenuFromSettings()
+    {
+        SetTimeScale(0);
+        m_GameState = GameState.gameMenu;
+        EventManager.Instance.Raise(new GameMenuEvent());
+    }
 
 	private void ChooseLevel()
 	{
