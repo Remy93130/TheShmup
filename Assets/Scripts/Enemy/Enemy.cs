@@ -18,10 +18,10 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 	protected float m_TranslationSpeed;
 
 	[Header("Shoot")]
-	[SerializeField] private GameObject m_BulletPrefab;
+	[SerializeField] protected GameObject m_BulletPrefab;
 	[SerializeField] private float m_ShootPeriod;
 	[SerializeField] private float m_ProbaShoot;
-	[SerializeField] private Transform m_BulletSpawnPoint;
+	[SerializeField] protected Transform m_BulletSpawnPoint;
 	private float m_NextShootTime;
 
 	public float TranslationSpeed { get { return m_TranslationSpeed; } }
@@ -71,7 +71,7 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 
 	}
 
-	void ShootBullet()
+	public virtual void ShootBullet()
 	{
 		GameObject bulletGO = Instantiate(m_BulletPrefab, m_BulletSpawnPoint.position, Quaternion.identity);
 	}

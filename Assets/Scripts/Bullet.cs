@@ -33,7 +33,11 @@ public class Bullet : SimpleGameStateObserver
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		Destroy(gameObject);
+		if (collision.gameObject.CompareTag("Enemy")
+			|| collision.gameObject.CompareTag("Player"))
+		{
+			Destroy(gameObject);
+		}
 	}
 
 	protected override void GameMenu(GameMenuEvent e)
