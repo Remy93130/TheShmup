@@ -78,14 +78,23 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		Debug.Log( name+" Collision with " + collision.gameObject.name);
-		if(collision.gameObject.CompareTag("PlayerBullet")
-			|| collision.gameObject.CompareTag("Player"))
+		GetComponent<Rigidbody>().isKinematic = true;
+		Debug.Log(name + " Collision with " + collision.gameObject.name);
+		if(collision.gameObject.CompareTag("PlayerBullet") || collision.gameObject.CompareTag("Player"))
 		{
-			EventManager.Instance.Raise(new ScoreItemEvent() { eScore = this as IScore });
-			EventManager.Instance.Raise(new EnemyHasBeenDestroyedEvent() { eEnemy = this,eDestroyedByPlayer = true });
-			m_Destroyed = true;
-			Destroy(gameObject);
+			ShieldCollision shield = GetComponentInChildren<ShieldCollision>();
+			if (shield != null)
+			{
+				Debug.Log("Haha shield go brrr");
+				shield.ManageCollision(collision);
+			} else
+			{
+				EventManager.Instance.Raise(new ScoreItemEvent() { eScore = this as IScore });
+				EventManager.Instance.Raise(new EnemyHasBeenDestroyedEvent() { eEnemy = this, eDestroyedByPlayer = true });
+				m_Destroyed = true;
+				Destroy(gameObject);
+			}
+			GetComponent<Rigidbody>().isKinematic = false;
 		}
 	}
 }

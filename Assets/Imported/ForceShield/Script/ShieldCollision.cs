@@ -1,13 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using UnityEngine;
 
 public class ShieldCollision : MonoBehaviour
 {
 
     [SerializeField] string[] _collisionTag;
-    float hitTime;
+    [SerializeField] int m_shieldLife;
     Material mat;
+
+    public int ShieldLife
+    {
+        get => m_shieldLife;
+    }
 
     void Start()
     {
@@ -15,40 +21,19 @@ public class ShieldCollision : MonoBehaviour
         {
             mat = GetComponent<Renderer>().sharedMaterial;
         }
-
     }
 
-    void Update()
-    {
-
-        if (hitTime > 0)
-        {
-            float myTime = Time.fixedDeltaTime * 1000;
-            hitTime -= myTime;
-            if (hitTime < 0)
-            {
-                hitTime = 0;
-            }
-            mat.SetFloat("_HitTime", hitTime);
-        }
-
-    }
-
-    void OnCollisionEnter(Collision collision)
+    public void ManageCollision(Collision collision)
     {
         for (int i = 0; i < _collisionTag.Length; i++)
         {
-
-            if (_collisionTag.Length > 0 || collision.transform.CompareTag(_collisionTag[i]))
+            if (collision.transform.CompareTag(_collisionTag[i]))
             {
-                Debug.Log("hit");
-                ContactPoint[] _contacts = collision.contacts;
-                for (int i2 = 0; i2 < _contacts.Length; i2++)
+                if (--m_shieldLife <= 0)
                 {
-                    mat.SetVector("_HitPosition", transform.InverseTransformPoint(_contacts[i2].point));
-                    hitTime = 500;
-                    mat.SetFloat("_HitTime", hitTime);
+                    Destroy(gameObject);
                 }
+                Debug.Log(Time.frameCount + "-Hit by " + collision.transform.tag + " life left:" + m_shieldLife);
             }
         }
     }
