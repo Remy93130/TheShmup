@@ -109,3 +109,4 @@ MonoBehaviour:
   _collisionTag:
   - Bullet
   - Player
+  m_shieldLife: 0

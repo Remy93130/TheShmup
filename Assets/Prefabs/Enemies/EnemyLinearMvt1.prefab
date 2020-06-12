@@ -118,7 +118,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  m_BulletPrefab: {fileID: 394082167773785553, guid: 4bb0bf8e33cd9a94bb27f825a4c990c0,
+  m_BulletPrefab: {fileID: 2030131833596731714, guid: 1523404a72c804e4a9230781fb3afc57,
     type: 3}
   m_ShootPeriod: 1
   m_ProbaShoot: 0.01

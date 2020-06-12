@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45069367, g: 0.5006475, b: 0.5748978, a: 1}
+  m_IndirectSpecularColor: {r: 0.45069432, g: 0.5006483, b: 0.5748987, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3181,7 +3181,7 @@ MonoBehaviour:
   m_FireAxisName: Fire1
   m_SpawnPoint: {fileID: 923453173}
   m_MaxTranslationSpeed: 10
-  m_BulletPrefab: {fileID: 394082167773785553, guid: 9f00e7ce7cda9d34ba97676214c4da1f,
+  m_BulletPrefab: {fileID: 2030131833596731714, guid: cac0528fdf4a1624db0c0cfc04f27859,
     type: 3}
   m_ShootPeriod: 0.25
   m_BulletSpawnPoint: {fileID: 479302978}
