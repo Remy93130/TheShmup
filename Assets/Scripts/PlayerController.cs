@@ -66,7 +66,7 @@ public class PlayerController : SimpleGameStateObserver {
 
 		Vector3 inputVector = new Vector3(hAxis, vAxis, 0);
 
-		Vector3 velocity =Vector3.ClampMagnitude( inputVector,1) * m_MaxTranslationSpeed;
+		Vector3 velocity = Vector3.ClampMagnitude( inputVector,1) * m_MaxTranslationSpeed;
 		m_Rigidbody.velocity = velocity ;
 		//Debug.Log("velocity = " + m_Rigidbody.velocity);
 	}
@@ -84,8 +84,7 @@ public class PlayerController : SimpleGameStateObserver {
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		if(collision.gameObject.CompareTag("Enemy") 
-			|| collision.gameObject.CompareTag("EnemyBullet"))
+		if(collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("EnemyBullet"))
 		{
 			EventManager.Instance.Raise(new PlayerHasBeenHitEvent() { ePlayerController = this });
 		}

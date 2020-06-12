@@ -71,6 +71,7 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 	{
 		if (!GameManager.Instance.IsPlaying) return;
 		m_Rigidbody.MovePosition(m_Rigidbody.position + MoveVect);
+		m_Rigidbody.velocity = Vector3.zero;
 	}
 
 	public virtual void ShootBullet()
@@ -80,9 +81,7 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		Rigidbody rigidbody = GetComponent<Rigidbody>();
 		ShieldCollision shield = GetComponentInChildren<ShieldCollision>();
-		rigidbody.isKinematic = true;
 		if (collision.gameObject.CompareTag("PlayerBullet") && shield != null)
 		{
 			shield.ManageCollision(collision);
@@ -93,6 +92,6 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 			m_Destroyed = true;
 			Destroy(gameObject);
 		}
-		rigidbody.isKinematic = false;
+		m_Rigidbody.velocity = Vector3.zero;
 	}
 }
