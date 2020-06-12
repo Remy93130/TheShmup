@@ -48,19 +48,22 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 
 	public virtual void Update()
 	{
+		if (!GameManager.Instance.IsPlaying) return;
 		if (Camera.main.WorldToViewportPoint(m_Transform.position).x < -.1f)
 		{
 			EventManager.Instance.Raise(new EnemyHasBeenDestroyedEvent() { eEnemy = this, eDestroyedByPlayer = false });
 			m_Destroyed = true;
 			Destroy(gameObject);
 		}
-
-		//Fire
-		float probaShoot = Random.Range(0f, 1f);
-		if (m_NextShootTime < Time.time && probaShoot <= m_ProbaShoot)
+		else
 		{
-			ShootBullet();
-			m_NextShootTime = Time.time + m_ShootPeriod;
+			//Fire
+			float probaShoot = Random.Range(0f, 1f);
+			if (m_NextShootTime < Time.time && probaShoot <= m_ProbaShoot)
+			{
+				ShootBullet();
+				m_NextShootTime = Time.time + m_ShootPeriod;
+			}
 		}
 	}
 
@@ -68,7 +71,6 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 	{
 		if (!GameManager.Instance.IsPlaying) return;
 		m_Rigidbody.MovePosition(m_Rigidbody.position + MoveVect);
-
 	}
 
 	public virtual void ShootBullet()
