@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4335698695360594}
   - component: {fileID: 7113636852307083015}
   m_Layer: 0
-  m_Name: TankPathPattern
+  m_Name: SinPathPattern
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,10 +45,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyPrefab: {fileID: 1812984978241422, guid: 97fc908cbf6134346930d98186d6eea5,
     type: 3}
-  m_NEnemiesToSpawn: 6
+  m_NEnemiesToSpawn: 10
   m_WaitDurationAfterLastEnemySpawn: 2
   m_Paths:
-  - {fileID: 2827799360992838027, guid: 4d30250d9b9cabb4eb04be7f8353b132, type: 3}
+  - {fileID: 2827799360992838027, guid: 8d2b531b38dd91d4e9f8fb6e59426474, type: 3}
+  - {fileID: 2827799360992838027, guid: ce2c0f99d8d05d841bdbf660a32df931, type: 3}
   m_MaxEnemySpawnPeriod: 2
   m_MinEnemySpawnPeriod: 1
   m_SpawnPeriodProbaCurve:
@@ -57,8 +58,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0

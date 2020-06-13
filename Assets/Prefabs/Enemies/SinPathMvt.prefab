@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 54513220008829282}
   - component: {fileID: 6446363647115892703}
   m_Layer: 8
-  m_Name: EnemyTankPathMvt
+  m_Name: SinPathMvt
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

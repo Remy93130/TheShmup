@@ -48,7 +48,7 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	{
 		base.SubscribeEvents();
 
-		EventManager.Instance.AddListener<PatternHasFinishedSpawningEvent>(PatternHasFinishedSpawning);
+		//EventManager.Instance.AddListener<PatternHasFinishedSpawningEvent>(PatternHasFinishedSpawning);
 		EventManager.Instance.AddListener<AllEnemiesOfPatternHaveBeenDestroyedEvent>(AllEnemiesOfPatternHaveBeenDestroyed);
 		EventManager.Instance.AddListener<GoToNextPatternEvent>(GoToNextPattern);
 	}
@@ -57,7 +57,7 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	{
 		base.UnsubscribeEvents();
 
-		EventManager.Instance.RemoveListener<PatternHasFinishedSpawningEvent>(PatternHasFinishedSpawning);
+		//EventManager.Instance.RemoveListener<PatternHasFinishedSpawningEvent>(PatternHasFinishedSpawning);
 		EventManager.Instance.RemoveListener<AllEnemiesOfPatternHaveBeenDestroyedEvent>(AllEnemiesOfPatternHaveBeenDestroyed);
 		EventManager.Instance.RemoveListener<GoToNextPatternEvent>(GoToNextPattern);
 	}
@@ -150,8 +150,8 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	{
 		EventManager.Instance.Raise(new GoToNextPatternEvent());
 	}
-	void PatternHasFinishedSpawning(PatternHasFinishedSpawningEvent e)
+	/*void PatternHasFinishedSpawning(PatternHasFinishedSpawningEvent e)
 	{
-	}
+	}*/
 	#endregion
 }

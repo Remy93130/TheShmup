@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class SplinePathPattern : Pattern
+public class PathPatternOneShot : Pattern
 {
-	[Header("Spline Path Pattern")]
-	[SerializeField] private iTweenPath m_Path;
+	[Header("Path Pattern One shot")]
+	[SerializeField] private iTweenPath[] m_Paths;
+	private iTweenPath m_CurrentPath;
 
 	[SerializeField] private float m_MaxEnemySpawnPeriod;
 	[SerializeField] private float m_MinEnemySpawnPeriod;
@@ -20,10 +21,12 @@ public class SplinePathPattern : Pattern
 	public override Enemy SpawnEnemy()
 	{
 		GameObject enemyGO = Instantiate(m_EnemyPrefab);
-		enemyGO.transform.position = m_Path.nodes[0];
+		int randomIndex = Random.Range(0, m_Paths.Length);
+		m_CurrentPath = m_Paths[randomIndex];
+		enemyGO.transform.position = m_CurrentPath.nodes[0];
 
-		EnemySplinePathMvt enemy = enemyGO.GetComponent<EnemySplinePathMvt>();
-		enemy.InitPath(m_Path);
+		EnemyPathMvtOneShot enemy = enemyGO.GetComponent<EnemyPathMvtOneShot>();
+		enemy.InitPath(m_CurrentPath);
 
 		return enemy;
 	}
