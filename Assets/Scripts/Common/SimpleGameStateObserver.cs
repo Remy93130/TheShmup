@@ -94,4 +94,8 @@ public abstract class SimpleGameStateObserver : MonoBehaviour,IEventHandler {
 	protected virtual void GameStatisticsChanged(GameStatisticsChangedEvent e)
 	{
 	}
+
+	protected virtual void ChangeBackgroundEvent(ChangeBackgroundEvent e)
+	{
+	}
 }

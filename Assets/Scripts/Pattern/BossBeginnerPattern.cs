@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SDD.Events;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class BossBeginnerPattern : Pattern
 
 	public override Enemy SpawnEnemy()
 	{
+		EventManager.Instance.Raise(new ChangeBackgroundEvent());
 		GameObject enemyGO = Instantiate(m_EnemyPrefab);
 
 		enemyGO.transform.position = SpawnWorldPos;

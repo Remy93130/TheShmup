@@ -137,3 +137,9 @@ public class LevelHasEnded : SDD.Events.Event
 {
 }
 #endregion
+
+#region Utility Events
+public class ChangeBackgroundEvent : SDD.Events.Event
+{
+}
+#endregion

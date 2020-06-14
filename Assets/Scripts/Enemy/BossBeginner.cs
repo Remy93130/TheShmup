@@ -19,16 +19,17 @@ public class BossBeginner: Enemy {
 	public override void FixedUpdate()
 	{
 		if (m_Destroyed) return;
-
-		if(m_Rigidbody.position.x > 10)
+		float currXPosition = m_Rigidbody.transform.position.x;
+		if (currXPosition > 10)
 		{
 			base.FixedUpdate();
 		}
-
+		m_Rigidbody.transform.position = new Vector3(currXPosition, 0, 0);
 	}
 
 	public void OnCollisionEnter(Collision collision)
 	{
+		float currXPosition = m_Rigidbody.transform.position.x;
 		if (collision.gameObject.CompareTag("PlayerBullet"))
 		{
 			NbLives -= 1;
@@ -41,6 +42,7 @@ public class BossBeginner: Enemy {
 			}
 		}
 		m_Rigidbody.velocity = Vector3.zero;
+		m_Rigidbody.transform.position = new Vector3(currXPosition, 0, 0);
 	}
 
 
