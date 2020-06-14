@@ -92,7 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa75e4e917f37ae4ca62e56c28339ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxTranslationSpeed: 6
+  m_NbLives: 1
+  m_MaxTranslationSpeed: 5
   m_MinTranslationSpeed: 3
   m_TranslationSpeedProbaCurve:
     serializedVersion: 2
@@ -109,26 +110,26 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.21466422
       value: 0.50504553
-      inSlope: -1.8313692
-      outSlope: -1.8313692
+      inSlope: -0.3110947
+      outSlope: -0.3110947
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.502262
-      value: 0.114768624
-      inSlope: -0.0027368665
-      outSlope: -0.0027368665
+      time: 0.5090975
+      value: 1.0007315
+      inSlope: -0.3870197
+      outSlope: -0.3870197
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.6884635
-      value: 0.3664292
-      inSlope: 1.6926233
-      outSlope: 1.6926233
+      time: 0.7107108
+      value: 0.5052537
+      inSlope: -0.37367553
+      outSlope: -0.37367553
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -136,8 +137,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2.033697
-      outSlope: 2.033697
+      inSlope: 1.7102138
+      outSlope: 1.7102138
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -147,8 +148,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   m_BulletPrefab: {fileID: 2030131833596731714, guid: 1523404a72c804e4a9230781fb3afc57,
     type: 3}
-  m_ShootPeriod: 1
-  m_ProbaShoot: 0.005
+  m_ShootPeriod: 2
+  m_ProbaShoot: 20
   m_BulletSpawnPoint: {fileID: 4546757359376846}
   m_Score: 10
 --- !u!1001 &5831957156403993733

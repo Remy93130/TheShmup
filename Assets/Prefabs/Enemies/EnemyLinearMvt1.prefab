@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c8483c5a9b14254f959b62668d21925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_NbLives: 1
   m_MaxTranslationSpeed: 10
   m_MinTranslationSpeed: 6
   m_TranslationSpeedProbaCurve:
@@ -120,8 +121,8 @@ MonoBehaviour:
     m_RotationOrder: 0
   m_BulletPrefab: {fileID: 2030131833596731714, guid: 1523404a72c804e4a9230781fb3afc57,
     type: 3}
-  m_ShootPeriod: 1
-  m_ProbaShoot: 0.01
+  m_ShootPeriod: 2
+  m_ProbaShoot: 50
   m_BulletSpawnPoint: {fileID: 4546757359376846}
   m_Score: 10
 --- !u!1001 &966388853891705273
@@ -185,6 +186,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933197075024123327, guid: cad5686423bb319409f5682506389909,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6036114070918792223, guid: cad5686423bb319409f5682506389909,
+        type: 3}
+      propertyPath: m_shieldLife
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6052966173179924181, guid: cad5686423bb319409f5682506389909,
         type: 3}

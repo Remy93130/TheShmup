@@ -107,6 +107,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collisionTag:
-  - Bullet
+  - PlayerBullet
   - Player
   m_shieldLife: 0

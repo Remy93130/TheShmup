@@ -50,16 +50,16 @@ MonoBehaviour:
   m_Paths:
   - {fileID: 2827799360992838027, guid: 4d30250d9b9cabb4eb04be7f8353b132, type: 3}
   m_MaxEnemySpawnPeriod: 2
-  m_MinEnemySpawnPeriod: 1
+  m_MinEnemySpawnPeriod: 2
   m_SpawnPeriodProbaCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
       value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0

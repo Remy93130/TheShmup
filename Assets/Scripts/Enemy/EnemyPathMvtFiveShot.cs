@@ -4,44 +4,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossBeginner: Enemy {
+public class EnemyPathMvtFiveShot : Enemy {
 
+	iTweenPath m_Path;
+	Vector3[] m_PathNodes;
+	float m_PathLength;
+	float m_Distance;
+
+	public void InitPath(iTweenPath path)
+	{
+		m_Path = path;
+		m_PathNodes = m_Path.nodes.ToArray();
+		m_PathLength = iTween.PathLength(m_PathNodes);
+
+		m_Distance = 0;
+	}
 
 	protected override Vector3 MoveVect
 	{
 		get
 		{
-			return m_Transform.right * m_TranslationSpeed * Time.fixedDeltaTime;
+			Vector3 nextPosition = iTween.PointOnPath(m_PathNodes, m_Distance / m_PathLength);
+			return nextPosition - m_Transform.position;
 		}
 	}
 
 	public override void FixedUpdate()
 	{
 		if (m_Destroyed) return;
-		float currXPosition = m_Rigidbody.transform.position.x;
-		if (currXPosition > 10)
-		{
-			base.FixedUpdate();
-		}
-		m_Rigidbody.transform.position = new Vector3(currXPosition, 0, 0);
-	}
 
-	public void OnCollisionEnter(Collision collision)
-	{
-		float currXPosition = m_Rigidbody.transform.position.x;
-		if (collision.gameObject.CompareTag("PlayerBullet"))
+		m_Distance += m_TranslationSpeed * Time.fixedDeltaTime;
+		if(m_Distance>m_PathLength)
 		{
-			NbLives -= 1;
-			if (NbLives == 0)
-			{
-				EventManager.Instance.Raise(new ScoreItemEvent() { eScore = this as IScore });
-				EventManager.Instance.Raise(new EnemyHasBeenDestroyedEvent() { eEnemy = this, eDestroyedByPlayer = true });
-				m_Destroyed = true;
-				Destroy(gameObject);
-			}
+			EventManager.Instance.Raise(new EnemyHasBeenDestroyedEvent() { eEnemy = this, eDestroyedByPlayer = false });
+			m_Destroyed = true;
+			Destroy(gameObject);
 		}
-		m_Rigidbody.velocity = Vector3.zero;
-		m_Rigidbody.transform.position = new Vector3(currXPosition, 0, 0);
+		else
+			base.FixedUpdate();
 	}
 
 

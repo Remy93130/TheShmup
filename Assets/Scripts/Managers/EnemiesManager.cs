@@ -39,8 +39,11 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	private Level m_CurrentLevel;
 	private GameObject m_CurrentPatternGO;
 	private IPattern m_CurrentPattern;
+	private float m_RationShootLevel;
 
 	public IPattern CurrentPattern { get { return m_CurrentPattern; } }
+
+	public float RationShootLevel { get { return m_RationShootLevel; } }
 	#endregion
 
 	#region Events' subscription
@@ -113,6 +116,7 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	{
 		m_CurrentLevelIndex = 0;
 		m_CurrentLevel = m_levels[m_CurrentLevelIndex];
+		m_RationShootLevel = 0.5f;
 		PlayLevel();
 	}
 
@@ -120,6 +124,7 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	{
 		m_CurrentLevelIndex = 0;
 		m_CurrentLevel = m_levels[m_CurrentLevelIndex];
+		m_RationShootLevel = 1;
 		PlayLevel();
 	}
 
@@ -127,6 +132,7 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	{
 		m_CurrentLevelIndex = 0;
 		m_CurrentLevel = m_levels[m_CurrentLevelIndex];
+		m_RationShootLevel = 1.3f;
 		PlayLevel();
 	}
 

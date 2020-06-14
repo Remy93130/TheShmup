@@ -43,10 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c1fca4ac123856479342a047e4b24f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyPrefab: {fileID: 1812984978241422, guid: 97fc908cbf6134346930d98186d6eea5,
+  m_EnemyPrefab: {fileID: 1812984978241422, guid: 3b12c8e116dd0e648a52bdcc900ffe98,
     type: 3}
-  m_NEnemiesToSpawn: 10
-  m_WaitDurationAfterLastEnemySpawn: 2
+  m_NEnemiesToSpawn: 7
+  m_WaitDurationAfterLastEnemySpawn: 1
   m_Paths:
   - {fileID: 2827799360992838027, guid: 3cd6720d91733734ba639ba22c3bf814, type: 3}
   - {fileID: 2827799360992838027, guid: 7e24c3c99f08acd4cbf187fb47f466c2, type: 3}

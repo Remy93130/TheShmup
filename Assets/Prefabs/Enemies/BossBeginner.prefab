@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8611daa0a10eb14b8e6c0a0cb7d335a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_NbLives: 15
   m_MaxTranslationSpeed: 1
   m_MinTranslationSpeed: 1
   m_TranslationSpeedProbaCurve:
@@ -120,11 +121,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   m_BulletPrefab: {fileID: 2030131833596731714, guid: d3df22b8ea2647443a6d5a22ce47a915,
     type: 3}
-  m_ShootPeriod: 1
-  m_ProbaShoot: 0.005
+  m_ShootPeriod: 2
+  m_ProbaShoot: 40
   m_BulletSpawnPoint: {fileID: 4546757359376846}
   m_Score: 100
-  NbLives: 10
 --- !u!1001 &5831957156403993733
 PrefabInstance:
   m_ObjectHideFlags: 0
