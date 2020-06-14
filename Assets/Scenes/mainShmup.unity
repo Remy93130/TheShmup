@@ -5245,6 +5245,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f21462bdb80842346824291c810e288b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_materials:
+  - {fileID: 2100000, guid: 08f5ec231645ff441a90ccd350a58024, type: 2}
+  - {fileID: 2100000, guid: cadb2b3a7106ff542a7df8b53b1d895e, type: 2}
 --- !u!1 &1002310410
 GameObject:
   m_ObjectHideFlags: 0
@@ -5840,7 +5843,7 @@ MonoBehaviour:
   m_DoNotDestroyGameObjectOnLoad: 0
   m_levels:
   - m_PatternsPrefabs:
-    - {fileID: 1593796370173536, guid: e9a4730a0d7b2b3459759116cf71690c, type: 3}
+    - {fileID: 1593796370173536, guid: 6c97554480385604db4cc59f67ff235d, type: 3}
     - {fileID: 1150860623414768, guid: 2e672562397ecec40a96eebf7d1cc24f, type: 3}
     - {fileID: 1150860623414768, guid: f258a7a2407b49646840762cf43a69c8, type: 3}
     - {fileID: 1150860623414768, guid: cdd2999a68d62e34baa5992fb8d05a9c, type: 3}
