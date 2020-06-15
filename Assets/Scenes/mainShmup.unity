@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45069367, g: 0.5006475, b: 0.5748978, a: 1}
+  m_IndirectSpecularColor: {r: 0.45069432, g: 0.5006483, b: 0.5748987, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2298,7 +2298,7 @@ Transform:
   - {fileID: 1463707027}
   - {fileID: 829682982}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &507094572
 GameObject:
@@ -3926,7 +3926,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 132.18, y: -43.665}
+  m_AnchoredPosition: {x: 132.18018, y: -43.66504}
   m_SizeDelta: {x: -1655.8215, y: -230.40302}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &839660812
@@ -5248,6 +5248,9 @@ MonoBehaviour:
   m_materials:
   - {fileID: 2100000, guid: 08f5ec231645ff441a90ccd350a58024, type: 2}
   - {fileID: 2100000, guid: cadb2b3a7106ff542a7df8b53b1d895e, type: 2}
+  m_explosionPrefab: {fileID: 1150934714579380, guid: 779aa8c25fbd0e1488637639c9fff976,
+    type: 3}
+  m_explosionSpawnPoint: {fileID: 2120763445}
 --- !u!1 &1002310410
 GameObject:
   m_ObjectHideFlags: 0
@@ -5844,9 +5847,9 @@ MonoBehaviour:
   m_levels:
   - m_PatternsPrefabs:
     - {fileID: 1150860623414768, guid: 80492f2d4aa375b4aa6204cd68392ce5, type: 3}
-    - {fileID: 1593796370173536, guid: 6c97554480385604db4cc59f67ff235d, type: 3}
+    - {fileID: 1593796370173536, guid: e9a4730a0d7b2b3459759116cf71690c, type: 3}
     - {fileID: 1150860623414768, guid: 2e672562397ecec40a96eebf7d1cc24f, type: 3}
-    - {fileID: 1150860623414768, guid: f258a7a2407b49646840762cf43a69c8, type: 3}
+    - {fileID: 1593796370173536, guid: e9a4730a0d7b2b3459759116cf71690c, type: 3}
     - {fileID: 1150860623414768, guid: cdd2999a68d62e34baa5992fb8d05a9c, type: 3}
     - {fileID: 1593796370173536, guid: e9a4730a0d7b2b3459759116cf71690c, type: 3}
   - m_PatternsPrefabs:
@@ -13113,6 +13116,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2120691743}
   m_CullTransparentMesh: 0
+--- !u!1 &2120763444
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2120763445}
+  m_Layer: 0
+  m_Name: ExplosionSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2120763445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120763444}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2129519631
 GameObject:
   m_ObjectHideFlags: 0

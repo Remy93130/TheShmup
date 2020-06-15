@@ -5,9 +5,14 @@ using UnityEngine;
 
 public class LoopOffsetBg : SimpleGameStateObserver
 {
-    [SerializeField]
-    private Material[] m_materials;
+    [Header("Backgrounds")]
+    [SerializeField] private Material[] m_materials;
     private int _index = 0;
+
+    [Header("Transition")]
+    [SerializeField] private GameObject m_explosionPrefab;
+    [SerializeField] private Transform m_explosionSpawnPoint;
+    
 
     MeshRenderer m_meshRenderer;
 
@@ -42,13 +47,13 @@ public class LoopOffsetBg : SimpleGameStateObserver
 
     protected override void ChangeBackgroundEvent(ChangeBackgroundEvent e)
     {
-        Debug.Log("Change back i=" + _index);
         if (e.DefaultBackground)
         {
             m_meshRenderer.material = m_materials[0];
             _index = 0;
         } else
         {
+            Instantiate(m_explosionPrefab, m_explosionSpawnPoint.position, Quaternion.identity);
             _index = (++_index % 2 == 0) ? 0 : 1;
             m_meshRenderer.material = m_materials[_index];
         }
