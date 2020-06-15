@@ -28,7 +28,7 @@ public class LoopOffsetBg : SimpleGameStateObserver
     void Start()
     {
         m_meshRenderer = GetComponent<MeshRenderer>();
-        m_meshRenderer.material = m_materials[_index];
+        m_meshRenderer.material = m_materials[0];
     }
 
     void Update()
@@ -42,6 +42,15 @@ public class LoopOffsetBg : SimpleGameStateObserver
 
     protected override void ChangeBackgroundEvent(ChangeBackgroundEvent e)
     {
-        m_meshRenderer.material = m_materials[++_index % m_materials.Length];
+        Debug.Log("Change back i=" + _index);
+        if (e.DefaultBackground)
+        {
+            m_meshRenderer.material = m_materials[0];
+            _index = 0;
+        } else
+        {
+            _index = (++_index % 2 == 0) ? 0 : 1;
+            m_meshRenderer.material = m_materials[_index];
+        }
     }
 }

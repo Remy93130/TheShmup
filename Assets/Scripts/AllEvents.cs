@@ -141,5 +141,9 @@ public class LevelHasEnded : SDD.Events.Event
 #region Utility Events
 public class ChangeBackgroundEvent : SDD.Events.Event
 {
+	/// <summary>
+	/// Permet de savoir si on remet le fond du quad par defaut
+	/// </summary>
+	public bool DefaultBackground = false;
 }
 #endregion

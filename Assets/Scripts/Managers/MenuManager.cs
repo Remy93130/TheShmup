@@ -101,6 +101,7 @@ public class MenuManager : Manager<MenuManager>
 	public void PlayButtonHasBeenClicked()
 	{
 		EventManager.Instance.Raise(new PlayButtonClickedEvent());
+		EventManager.Instance.Raise(new ChangeBackgroundEvent() { DefaultBackground = true });
 	}
 
 	public void ResumeButtonHasBeenClicked()
