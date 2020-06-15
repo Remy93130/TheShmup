@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 54513220008829282}
   - component: {fileID: 114804974684749522}
   m_Layer: 8
-  m_Name: EnemyLinearMvt1
+  m_Name: EnemyLinearMvtOneShot
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_BulletPrefab: {fileID: 2030131833596731714, guid: 1523404a72c804e4a9230781fb3afc57,
     type: 3}
   m_ShootPeriod: 2
-  m_ProbaShoot: 50
+  m_ProbaShoot: 8
   m_BulletSpawnPoint: {fileID: 4546757359376846}
   m_Score: 10
 --- !u!1001 &966388853891705273

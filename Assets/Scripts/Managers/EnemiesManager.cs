@@ -116,13 +116,13 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	{
 		m_CurrentLevelIndex = 0;
 		m_CurrentLevel = m_levels[m_CurrentLevelIndex];
-		m_RationShootLevel = 0.5f;
+		m_RationShootLevel = 0.8f;
 		PlayLevel();
 	}
 
 	protected override void GameIntermediateLevelPlay(GameIntermediateLevelEvent e)
 	{
-		m_CurrentLevelIndex = 0;
+		m_CurrentLevelIndex = 1;
 		m_CurrentLevel = m_levels[m_CurrentLevelIndex];
 		m_RationShootLevel = 1;
 		PlayLevel();
@@ -130,9 +130,9 @@ public class EnemiesManager : Manager<EnemiesManager> {
 
 	protected override void GameDifficultLevelPlay(GameDifficultLevelEvent e)
 	{
-		m_CurrentLevelIndex = 0;
+		m_CurrentLevelIndex = 2;
 		m_CurrentLevel = m_levels[m_CurrentLevelIndex];
-		m_RationShootLevel = 1.3f;
+		m_RationShootLevel = 1.2f;
 		PlayLevel();
 	}
 

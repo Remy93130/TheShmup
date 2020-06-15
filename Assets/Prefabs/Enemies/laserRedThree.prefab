@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8643308473450483476}
   - component: {fileID: -6067697232605240057}
   m_Layer: 8
-  m_Name: laserRedLinear
+  m_Name: laserRedThree
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_LifeDuration: 4
-  m_TranslationSpeed: -17
+  m_TranslationSpeed: -10
 --- !u!54 &8643308473450483476
 Rigidbody:
   m_ObjectHideFlags: 0

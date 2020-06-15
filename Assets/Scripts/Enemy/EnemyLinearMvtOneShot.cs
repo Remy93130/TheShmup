@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyLinearMvt : Enemy {
+public class EnemyLinearMvtOneShot : Enemy {
 
 	protected override Vector3 MoveVect
 	{

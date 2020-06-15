@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class BossBeginnerPattern : Pattern
+public class BossPattern : Pattern
 {
 	public override float NextWaitDurationBeforeSpawn
 	{
@@ -21,7 +21,7 @@ public class BossBeginnerPattern : Pattern
 
 		enemyGO.transform.position = SpawnWorldPos;
 
-		BossBeginner enemy = enemyGO.GetComponent<BossBeginner>();
+		Enemy enemy = enemyGO.GetComponent<Enemy>();
 		return enemy;
 	}
 }

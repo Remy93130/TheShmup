@@ -1,10 +1,17 @@
-﻿using SDD.Events;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPathMvtFiveShot : EnemyITweenPathMvt{
+public class EnemyLinearMvtFiveShot : Enemy {
+
+	protected override Vector3 MoveVect
+	{
+		get
+		{
+			return m_Transform.right * m_TranslationSpeed * Time.fixedDeltaTime;
+		}
+	}
 
 	public override void ShootBullet()
 	{

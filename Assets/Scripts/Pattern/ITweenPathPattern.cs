@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PathPatternOneShot : Pattern
+public class ITweenPathPattern : Pattern
 {
-	[Header("Path Pattern One shot")]
+	[Header("ITween Path Pattern")]
 	[SerializeField] private iTweenPath[] m_Paths;
 	private iTweenPath m_CurrentPath;
 
@@ -25,7 +25,7 @@ public class PathPatternOneShot : Pattern
 		m_CurrentPath = m_Paths[randomIndex];
 		enemyGO.transform.position = m_CurrentPath.nodes[0];
 
-		EnemyPathMvtOneShot enemy = enemyGO.GetComponent<EnemyPathMvtOneShot>();
+		EnemyITweenPathMvt enemy = enemyGO.GetComponent<EnemyITweenPathMvt>();
 		enemy.InitPath(m_CurrentPath);
 
 		return enemy;

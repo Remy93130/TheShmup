@@ -40,9 +40,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4427473539940658}
   - component: {fileID: 54513220008829282}
-  - component: {fileID: 6446363647115892703}
+  - component: {fileID: -7454694593430684004}
   m_Layer: 8
-  m_Name: ReversePathMvt
+  m_Name: UpDownPathMvt
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &6446363647115892703
+--- !u!114 &-7454694593430684004
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,12 +89,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1812984978241422}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa75e4e917f37ae4ca62e56c28339ec5, type: 3}
+  m_Script: {fileID: 11500000, guid: 10b45428de6301840b3f76578db5a16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_NbLives: 1
   m_MaxTranslationSpeed: 6
-  m_MinTranslationSpeed: 4
+  m_MinTranslationSpeed: 5
   m_TranslationSpeedProbaCurve:
     serializedVersion: 2
     m_Curve:
@@ -119,10 +119,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_BulletPrefab: {fileID: 2030131833596731714, guid: 1523404a72c804e4a9230781fb3afc57,
+  m_BulletPrefab: {fileID: 2030131833596731714, guid: d3df22b8ea2647443a6d5a22ce47a915,
     type: 3}
   m_ShootPeriod: 2
-  m_ProbaShoot: 8
+  m_ProbaShoot: 6
   m_BulletSpawnPoint: {fileID: 4546757359376846}
   m_Score: 20
 --- !u!136 &5343594567181519278
