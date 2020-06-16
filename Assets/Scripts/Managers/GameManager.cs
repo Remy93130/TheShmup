@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SDD.Events;
+using System.Dynamic;
 
 public enum GameState { gameMenu,gamePlay,gamePause,gameOver,gameVictory}
 
@@ -90,6 +91,8 @@ public class GameManager : Manager<GameManager> {
 	//Players
 	[SerializeField]
 	List<PlayerController> m_Players = new List<PlayerController>();
+
+	public PlayerController GetPlayer { get { return m_Players[UnityEngine.Random.Range(0,m_Players.Count)]; } }
 
 	#region Events' subscription
 	public override void SubscribeEvents()

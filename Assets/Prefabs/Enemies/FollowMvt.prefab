@@ -40,9 +40,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4427473539940658}
   - component: {fileID: 54513220008829282}
-  - component: {fileID: -2911035051065555131}
+  - component: {fileID: 1755844544463130359}
   m_Layer: 8
-  m_Name: BossIntermediate
+  m_Name: FollowMvt
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ Transform:
   m_GameObject: {fileID: 1812984978241422}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.00000058114523}
   m_LocalPosition: {x: 7.62, y: 4.62, z: -0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_Children:
   - {fileID: 4546757359376846}
   - {fileID: 2277464083107491922}
@@ -80,7 +80,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &-2911035051065555131
+--- !u!114 &1755844544463130359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,20 +89,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1812984978241422}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7899585256eff364686e1730e858a017, type: 3}
+  m_Script: {fileID: 11500000, guid: e835aff5c31d041488450a377a08e29e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NbLives: 15
-  m_MaxTranslationSpeed: 1
-  m_MinTranslationSpeed: 1
+  m_NbLives: 1
+  m_MaxTranslationSpeed: 5
+  m_MinTranslationSpeed: 4
   m_TranslationSpeedProbaCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
@@ -110,8 +110,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 1
+      outSlope: 1
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
@@ -119,14 +119,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_BulletPrefab: {fileID: 2030131833596731714, guid: fb1f39985497f1d4a95bf5f2a97e585b,
+  m_BulletPrefab: {fileID: 2030131833596731714, guid: 1523404a72c804e4a9230781fb3afc57,
     type: 3}
-  m_ShootPeriod: 2
-  m_ProbaShoot: 15
+  m_ShootPeriod: 3
+  m_ProbaShoot: 8
   m_BulletSpawnPoint: {fileID: 4546757359376846}
-  m_Score: 120
-  m_EnemyPrefab: {fileID: 1812984978241422, guid: 1bc17d8deacb1df4ba4c572a39f53c8d,
-    type: 3}
+  m_Score: 20
 --- !u!1001 &5831957156403993733
 PrefabInstance:
   m_ObjectHideFlags: 0

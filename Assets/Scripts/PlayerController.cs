@@ -31,6 +31,8 @@ public class PlayerController : SimpleGameStateObserver {
 	[SerializeField] private float m_GfxSwayPulsation;
 	Quaternion m_InitLocalOrientation;
 
+	public Transform GetGFX {  get { return m_Gfx; } }
+
 	protected override void Awake()
 	{
 		base.Awake();

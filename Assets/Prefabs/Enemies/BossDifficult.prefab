@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 54513220008829282}
   - component: {fileID: -2911035051065555131}
   m_Layer: 8
-  m_Name: BossIntermediate
+  m_Name: BossDifficult
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7899585256eff364686e1730e858a017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NbLives: 15
+  m_NbLives: 20
   m_MaxTranslationSpeed: 1
   m_MinTranslationSpeed: 1
   m_TranslationSpeedProbaCurve:
@@ -124,8 +124,8 @@ MonoBehaviour:
   m_ShootPeriod: 2
   m_ProbaShoot: 15
   m_BulletSpawnPoint: {fileID: 4546757359376846}
-  m_Score: 120
-  m_EnemyPrefab: {fileID: 1812984978241422, guid: 1bc17d8deacb1df4ba4c572a39f53c8d,
+  m_Score: 150
+  m_EnemyPrefab: {fileID: 1812984978241422, guid: 907f5acbbaa9ed84a98fb16c763432a4,
     type: 3}
 --- !u!1001 &5831957156403993733
 PrefabInstance:
