@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class LoopOffsetBg : SimpleGameStateObserver
 {
@@ -11,7 +12,7 @@ public class LoopOffsetBg : SimpleGameStateObserver
 
     [Header("Transition")]
     [SerializeField] private GameObject m_explosionPrefab;
-    [SerializeField] private Transform m_explosionSpawnPoint;
+    [SerializeField] private Transform[] m_explosionsSpawnPoint;
     
 
     MeshRenderer m_meshRenderer;
@@ -53,9 +54,37 @@ public class LoopOffsetBg : SimpleGameStateObserver
             _index = 0;
         } else
         {
-            Instantiate(m_explosionPrefab, m_explosionSpawnPoint.position, Quaternion.identity);
+            ShuffleArray();
+            StartCoroutine(TriggerExplosion());
             _index = (++_index % 2 == 0) ? 0 : 1;
-            m_meshRenderer.material = m_materials[_index];
+            StartCoroutine(BackgroundTransition());
         }
+    }
+
+    private void ShuffleArray()
+    {
+        System.Random rand = new System.Random();
+        for (int i = 0; i < m_explosionsSpawnPoint.Length - 1; i++)
+        {
+            int j = rand.Next(i, m_explosionsSpawnPoint.Length);
+            Transform tmp = m_explosionsSpawnPoint[i];
+            m_explosionsSpawnPoint[i] = m_explosionsSpawnPoint[j];
+            m_explosionsSpawnPoint[j] = tmp;
+        }
+    }
+
+    IEnumerator TriggerExplosion()
+    {
+        for (int i = 0; i < m_explosionsSpawnPoint.Length; i++)
+        {
+            yield return new WaitForSeconds(.125f);
+            Instantiate(m_explosionPrefab, m_explosionsSpawnPoint[i].position, Quaternion.identity);
+        }
+    }
+
+    IEnumerator BackgroundTransition()
+    {
+        yield return new WaitForSeconds(.5f);
+        m_meshRenderer.material = m_materials[_index];
     }
 }
