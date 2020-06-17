@@ -78,13 +78,18 @@ public class LoopOffsetBg : SimpleGameStateObserver
         for (int i = 0; i < m_explosionsSpawnPoint.Length; i++)
         {
             yield return new WaitForSeconds(.125f);
-            Instantiate(m_explosionPrefab, m_explosionsSpawnPoint[i].position, Quaternion.identity);
+            Vector3 spawnPosition = new Vector3(
+                m_explosionsSpawnPoint[i].position.x,
+                m_explosionsSpawnPoint[i].position.y,
+                UnityEngine.Random.Range(-0.3f, 0.25f)
+            );
+            Instantiate(m_explosionPrefab, spawnPosition, Quaternion.identity);
         }
     }
 
     IEnumerator BackgroundTransition()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.75f);
         m_meshRenderer.material = m_materials[_index];
     }
 }

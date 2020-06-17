@@ -43,7 +43,6 @@ public class HudManager : Manager<HudManager>
     private void SetImageState(Transform transform, bool init = false)
     {
         float duration = (init) ? 0.0f : 3.5f;
-        Debug.Log("Change image for " + transform.gameObject.name);
         Image image = transform.gameObject.GetComponent<Image>();
         if (image) image.CrossFadeAlpha(_fadeMode, duration, init);
         for (int i = 0; i < transform.childCount; i++)
