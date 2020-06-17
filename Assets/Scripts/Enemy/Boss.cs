@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class Boss: Enemy {
 
-
+    [SerializeField] GameObject m_PrefabBorder;
+    private GameObject m_Border; 
 	protected override Vector3 MoveVect
 	{
 		get
@@ -15,10 +16,18 @@ public class Boss: Enemy {
 		}
 	}
 
+    protected override void Awake()
+    {
+        base.Awake();
+        EventManager.Instance.Raise(new GameBossShotedEvent() { eNLives = NbLives });
+        HudManager.Instance.SetBorderBoss(true);
+    }
+
 	public override void FixedUpdate()
 	{
 		if (m_Destroyed) return;
 		float currXPosition = m_Rigidbody.transform.position.x;
+        
 		if (currXPosition > 10)
 		{
 			base.FixedUpdate();
@@ -28,7 +37,8 @@ public class Boss: Enemy {
 
 	public void OnCollisionEnter(Collision collision)
 	{
-		float currXPosition = m_Rigidbody.transform.position.x;
+        
+        float currXPosition = m_Rigidbody.transform.position.x;
 		if (collision.gameObject.CompareTag("PlayerBullet"))
 		{
 			NbLives -= 1;
@@ -36,11 +46,17 @@ public class Boss: Enemy {
 			{
 				EventManager.Instance.Raise(new ScoreItemEvent() { eScore = this as IScore });
 				EventManager.Instance.Raise(new EnemyHasBeenDestroyedEvent() { eEnemy = this, eDestroyedByPlayer = true });
-				m_Destroyed = true;
-				Destroy(gameObject);
-			}
+                
+                m_Destroyed = true;
+                Destroy(m_Border);
+                HudManager.Instance.SetBorderBoss(false);
+                Destroy(gameObject);
+                
+
+            }
 		}
-		m_Rigidbody.velocity = Vector3.zero;
+        EventManager.Instance.Raise(new GameBossShotedEvent() { eNLives = NbLives });
+        m_Rigidbody.velocity = Vector3.zero;
 		m_Rigidbody.transform.position = new Vector3(currXPosition, 0, 0);
 	}
 

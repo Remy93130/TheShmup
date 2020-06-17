@@ -19,7 +19,8 @@ public abstract class SimpleGameStateObserver : MonoBehaviour,IEventHandler {
         EventManager.Instance.AddListener<GameSettingsEvent>(GameSettings);
         EventManager.Instance.AddListener<GameControlsEvent>(GameControls);
 		EventManager.Instance.AddListener<GameChooseLevelEvent>(GameChooseLevel);
-	}
+        EventManager.Instance.AddListener<GameBossShotedEvent>(GameBossShoted);
+    }
 
 	public virtual void UnsubscribeEvents()
 	{
@@ -35,6 +36,7 @@ public abstract class SimpleGameStateObserver : MonoBehaviour,IEventHandler {
         EventManager.Instance.RemoveListener<GameSettingsEvent>(GameSettings);
         EventManager.Instance.RemoveListener<GameControlsEvent>(GameControls);
 		EventManager.Instance.RemoveListener<GameChooseLevelEvent>(GameChooseLevel);
+        EventManager.Instance.RemoveListener<GameBossShotedEvent>(GameBossShoted);
 	}
 
 	protected virtual void Awake()
@@ -51,6 +53,9 @@ public abstract class SimpleGameStateObserver : MonoBehaviour,IEventHandler {
 	{
 	}
 
+    protected virtual void GameBossShoted(GameBossShotedEvent e)
+    {
+    }
 	protected virtual void GameBeginnerLevelPlay(GameBeginnerLevelEvent e)
 	{
 	}

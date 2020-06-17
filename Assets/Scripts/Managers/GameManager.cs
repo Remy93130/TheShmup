@@ -62,21 +62,25 @@ public class GameManager : Manager<GameManager> {
 	[SerializeField] private int m_NStartLives;
 
 	private int m_NLives;
+
 	public int NLives { get { return m_NLives; } }
-	void DecrementNLives(int decrement)
+ 
+    void DecrementNLives(int decrement)
 	{
 		SetNLives(m_NLives-decrement);
 	}
+   
 
-	void SetNLives(int nLives)
+    void SetNLives(int nLives)
 	{
 		m_NLives =nLives;
 		//EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = m_Score, eNLives = m_NLives, eNEnemiesLeftBeforeVictory = m_NEnemiesLeftBeforeVictory });
 		EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = m_Score, eNLives = m_NLives});
 	}
+   
 
-	// Victory Condition
-	/*[SerializeField] private int m_NEnemiesToDestroyForVictory;
+    // Victory Condition
+    /*[SerializeField] private int m_NEnemiesToDestroyForVictory;
 	private int m_NEnemiesLeftBeforeVictory;
 	void DecrementNEnemiesLeftBeforeVictory(int decrement)
 	{
@@ -88,8 +92,8 @@ public class GameManager : Manager<GameManager> {
 		EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = m_Score, eNLives = m_NLives, eNEnemiesLeftBeforeVictory = m_NEnemiesLeftBeforeVictory });
 	}*/
 
-	//Players
-	[SerializeField]
+    //Players
+    [SerializeField]
 	List<PlayerController> m_Players = new List<PlayerController>();
 
 	public PlayerController GetPlayer { get { return m_Players[UnityEngine.Random.Range(0,m_Players.Count)]; } }
@@ -171,6 +175,7 @@ public class GameManager : Manager<GameManager> {
 		Menu();
 		//EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = 0, eNLives = 0, eNEnemiesLeftBeforeVictory = 0 });
 		EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = 0, eNLives = 0});
+        EventManager.Instance.Raise(new GameBossShotedEvent() { eNLives = 0 });
 		yield break;
 	}
 	#endregion

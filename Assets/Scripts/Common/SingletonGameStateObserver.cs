@@ -20,6 +20,8 @@ public abstract class SingletonGameStateObserver<T> :  Singleton<T>,IEventHandle
         EventManager.Instance.AddListener<GameSettingsEvent>(GameSettings);
         EventManager.Instance.AddListener<GameControlsEvent>(GameControls);
 		EventManager.Instance.AddListener<GameChooseLevelEvent>(GameChooseLevel);
+        EventManager.Instance.AddListener<GameBossShotedEvent>(GameBossShoted);
+
 	}
 
 	public virtual void UnsubscribeEvents()
@@ -36,6 +38,7 @@ public abstract class SingletonGameStateObserver<T> :  Singleton<T>,IEventHandle
         EventManager.Instance.RemoveListener<GameSettingsEvent>(GameSettings);
         EventManager.Instance.RemoveListener<GameControlsEvent>(GameControls);
 		EventManager.Instance.RemoveListener<GameChooseLevelEvent>(GameChooseLevel);
+        EventManager.Instance.RemoveListener<GameBossShotedEvent>(GameBossShoted);
 	}
 
 	protected override void Awake()
@@ -52,6 +55,10 @@ public abstract class SingletonGameStateObserver<T> :  Singleton<T>,IEventHandle
 	protected virtual void GameMenu(GameMenuEvent e)
 	{
 	}
+
+    protected virtual void GameBossShoted(GameBossShotedEvent e)
+    {
+    }
 
 	protected virtual void GameBeginnerLevelPlay(GameBeginnerLevelEvent e)
 	{
