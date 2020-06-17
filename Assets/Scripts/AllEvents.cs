@@ -45,6 +45,10 @@ public class GameStatisticsChangedEvent : SDD.Events.Event
 	//public int eNEnemiesLeftBeforeVictory { get; set; }
 }
 #endregion
+public class GameBossShotedEvent : SDD.Events.Event
+{
+    public int eNLives { get; set; }
+}
 
 #region MenuManager Events
 public class EscapeButtonClickedEvent : SDD.Events.Event

@@ -16,11 +16,17 @@ public class HudManager : Manager<HudManager>
 	[SerializeField] private Text m_TxtNLives;
 	[SerializeField] private Text m_TxtNEnemiesLeftBeforeVictory;
     [SerializeField] private Slider slider;
+    [SerializeField] private Slider sliderBoss;
 
+    [SerializeField] public GameObject m_Border;
 	#endregion
 
 	#region Manager implementation
-	
+	public void SetBorderBoss(bool state)
+    {
+
+        m_Border.SetActive(state);
+    }
 	#endregion
 
 	#region Callbacks to GameManager events
@@ -33,6 +39,11 @@ public class HudManager : Manager<HudManager>
         slider.value = e.eNLives;
        // m_TxtNEnemiesLeftBeforeVictory.text = e.eNEnemiesLeftBeforeVictory.ToString();
 	}
+
+    protected override void GameBossShoted(GameBossShotedEvent e)
+    {
+        sliderBoss.value = e.eNLives;
+    }
 
    
     protected override IEnumerator InitCoroutine()
