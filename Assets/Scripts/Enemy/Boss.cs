@@ -19,6 +19,7 @@ public class Boss: Enemy {
 	{
 		if (m_Destroyed) return;
 		float currXPosition = m_Rigidbody.transform.position.x;
+        Debug.Log(currXPosition);
 		if (currXPosition > 10)
 		{
 			base.FixedUpdate();
