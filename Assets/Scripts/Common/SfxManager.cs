@@ -9,10 +9,10 @@ using Random = UnityEngine.Random;
 [System.Serializable]
 public class MyAudioClip
 {
-	public MyAudioClip(AudioClip clip,float volume)
+	public MyAudioClip(AudioClip clip)
 	{
+		Debug.Log("Create a sfx: " + clip.name);
 		this.clip = clip;
-		this.volume = volume;
 	}
 
 	public AudioClip clip;
@@ -46,23 +46,18 @@ public class SfxManager : Singleton<SfxManager> {
 		return audioSource;
 	}
 
-	// Use this for initialization
-	void Start () {
-
+	void Start()
+	{
 		XmlDocument xmlDoc = new XmlDocument();
 		xmlDoc.LoadXml(m_SfxXmlSetup.text);
-
 		foreach(XmlNode node in xmlDoc.GetElementsByTagName("SFX"))
 		{
-			if(node.NodeType!= XmlNodeType.Comment)
-
-			m_DicoAudioClips.Add(
-				node.Attributes["name"].Value,
-			    new MyAudioClip(
-				(AudioClip)Resources.Load(m_ResourcesFolderName+"/"+node.Attributes["name"].Value,typeof(AudioClip)),
-				float.Parse(node.Attributes["volume"].Value)));
+			if (node.NodeType != XmlNodeType.Comment)
+				m_DicoAudioClips.Add(
+					node.Attributes["name"].Value,
+					new MyAudioClip((AudioClip)Resources.Load(m_ResourcesFolderName + "/" + node.Attributes["name"].Value, typeof(AudioClip)))
+				);
 		}
-
 		for (int i = 0; i < m_NAudioSources; i++) 
 			AddAudioSource();
 	}
@@ -71,25 +66,20 @@ public class SfxManager : Singleton<SfxManager> {
 	{
 		if(FlagsManager.Instance && !FlagsManager.Instance.GetFlag("SETTINGS_SFX",true))
 			return;
-
 		MyAudioClip audioClip;
 		if(!m_DicoAudioClips.TryGetValue(sfxName,out audioClip))
 		{
 			Debug.LogError("SFX, no audio clip with name: "+sfxName);
 			return;
 		}
-
 		AudioSource audioSource = m_AudioSources.Find(item=>!item.isPlaying);
-		if(audioSource) 
-			audioSource.PlayOneShot(audioClip.clip,audioClip.volume);
-
+		if(audioSource)
+			audioSource.PlayOneShot(audioClip.clip, MusicLoopsManager.Instance.GameVolume);
 	}
 
 	void OnGUI()
 	{
 		if(!m_ShowGui) return;
-
-
 		GUILayout.BeginArea(new Rect(Screen.width*.5f+10,10,200,Screen.height));
 		GUILayout.Label("SFX MANAGER");
 		GUILayout.Space(20);
@@ -99,8 +89,4 @@ public class SfxManager : Singleton<SfxManager> {
 		}
 		GUILayout.EndArea();
 	}
-
-    
-
-
 }
