@@ -1,6 +1,7 @@
 <SFX_SETUP>
   <SFX name="Button"/>
 	<SFX name="Selection"/>
+  <SFX name="Shot"/>
 	<SFX name="LetsGo"/>
 	<SFX name="Tick"/>
 	<SFX name="Victory"/>

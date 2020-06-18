@@ -71,6 +71,7 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 			if (m_NextShootTime < Time.time && probaShoot <= (m_ProbaShoot*m_RatioShootLevel))
 			{
 				ShootBullet();
+                SfxManager.Instance.PlaySfx(Constants.SHOT_SFX);
 				m_NextShootTime = Time.time + m_ShootPeriod;
 			}
 		}
@@ -85,8 +86,12 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 
 	public virtual void ShootBullet()
 	{
-		GameObject bulletGO = Instantiate(m_BulletPrefab, m_BulletSpawnPoint.position, Quaternion.identity);
-	}
+        Debug.Log("WENT HERE LEL");
+        GameObject bulletGO = Instantiate(m_BulletPrefab, m_BulletSpawnPoint.position, Quaternion.identity);
+        
+        SfxManager.Instance.PlaySfx(Constants.GAMEOVER_SFX);
+        EventManager.Instance.Raise(new GameOverEvent());
+    }
 
 	private void OnCollisionEnter(Collision collision)
 	{
