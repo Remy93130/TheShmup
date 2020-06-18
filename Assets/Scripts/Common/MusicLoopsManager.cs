@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 /// <summary>
 /// Music loops manager.
@@ -18,7 +19,13 @@ public class MusicLoopsManager : Singleton<MusicLoopsManager> {
 
 	[SerializeField] bool m_ShowGui;
 
-    private float gameVolume = 0.5f;
+	[SerializeField] GameObject[] m_Sliders;
+
+	public float GameVolume
+	{
+		get => PlayerPrefs.GetFloat("GAME_VOLUME", 0.5f);
+		set => PlayerPrefs.SetFloat("GAME_VOLUME", value);
+	}
 
 	int m_IndexFadeIn=0;
 	float[] m_MaxVolumes = new float[2] ;
@@ -68,12 +75,12 @@ public class MusicLoopsManager : Singleton<MusicLoopsManager> {
 		while(elapsedTime<m_FadeDuration)
 		{
 			float k = elapsedTime/m_FadeDuration;
-			m_AudioSources[m_IndexFadeIn].volume = Mathf.Lerp(0,gameVolume,k);			//Fade in 1st audiosource
-			m_AudioSources[1-m_IndexFadeIn].volume = Mathf.Lerp(0,gameVolume,1-k);	//Fade out 2nd audiosource
+			m_AudioSources[m_IndexFadeIn].volume = Mathf.Lerp(0, GameVolume,k);			//Fade in 1st audiosource
+			m_AudioSources[1-m_IndexFadeIn].volume = Mathf.Lerp(0, GameVolume,1-k);	//Fade out 2nd audiosource
 			elapsedTime+= Time.timeScale != 0 ? Time.deltaTime : 1 / 60f;
 			yield return null;
 		}
-		m_AudioSources[m_IndexFadeIn].volume = gameVolume;
+		m_AudioSources[m_IndexFadeIn].volume = GameVolume;
 		m_AudioSources[1-m_IndexFadeIn].volume = Mathf.Lerp(0,m_MaxVolumes[1-m_IndexFadeIn],0);
 		m_AudioSources[1-m_IndexFadeIn].Stop();
 	}
@@ -92,8 +99,8 @@ public class MusicLoopsManager : Singleton<MusicLoopsManager> {
 			m_AudioSources[m_IndexFadeIn].Play();
 			Time.timeScale = currentTimeScale;
 		}
-        SetVolume(gameVolume);
-        Debug.Log(gameVolume);
+        SetVolume(GameVolume);
+        Debug.Log(GameVolume);
     }
 
 	public void PlayCurrentMusic()
@@ -125,11 +132,25 @@ public class MusicLoopsManager : Singleton<MusicLoopsManager> {
 
     public void SetVolume(float volume)
     {
-        gameVolume = volume;
-        m_AudioSources[m_IndexFadeIn].volume = gameVolume;
-        m_AudioSources[1 - m_IndexFadeIn].volume = gameVolume;
-        Debug.Log(gameVolume);
+        GameVolume = volume;
+		PlayerPrefs.SetFloat("GAME_VOLUME", volume);
+		m_AudioSources[m_IndexFadeIn].volume = GameVolume;
+        m_AudioSources[1 - m_IndexFadeIn].volume = GameVolume;
+		UpdateSliderValue();
+        Debug.Log(GameVolume);
     }
+
+	private void UpdateSliderValue()
+	{
+		for (int i = 0; i < m_Sliders.Length; i++)
+		{
+			Slider slider = m_Sliders[i].GetComponent<Slider>();
+			if (slider)
+			{
+				slider.value = GameVolume;
+			}
+		}
+	}
 
 	void OnGUI()
 	{
