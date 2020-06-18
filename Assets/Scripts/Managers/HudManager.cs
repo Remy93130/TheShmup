@@ -32,15 +32,14 @@ public class HudManager : Manager<HudManager>
     }
 
     #region Manager implementation
-    public void SetBorderBoss(bool state)
+    public void SetBorderBoss(bool state, bool init = false)
     {
         _fadeMode = (state) ? 1.0f : 0.0f;
         m_Border.GetComponent<Image>().CrossFadeAlpha(_fadeMode, 3.25f, false);
-        SetImageState(m_Border.transform);
-
+        SetImageState(m_Border.transform, init);
     }
 
-    private void SetImageState(Transform transform, bool init = false)
+    private void SetImageState(Transform transform, bool init)
     {
         float duration = (init) ? 0.0f : 3.5f;
         Image image = transform.gameObject.GetComponent<Image>();
@@ -54,7 +53,6 @@ public class HudManager : Manager<HudManager>
     #region Callbacks to GameManager events
     protected override void GameStatisticsChanged(GameStatisticsChangedEvent e)
     {
-
         m_TxtBestScore.text = e.eBestScore.ToString();
         m_TxtScore.text = e.eScore.ToString();
         m_TxtNLives.text = e.eNLives.ToString();

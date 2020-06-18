@@ -76,9 +76,11 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	#region Pattern flow
 	void Reset()
 	{
+		Debug.Log("Reset the game boi");
 		Destroy(m_CurrentPatternGO);
 		m_CurrentPatternGO = null;
 		m_CurrentPatternIndex = -1;
+		HudManager.Instance.SetBorderBoss(false, true);
 	}
 
 	IPattern InstantiatePattern(int patternIndex)
