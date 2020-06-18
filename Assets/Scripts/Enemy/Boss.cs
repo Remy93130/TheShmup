@@ -28,7 +28,7 @@ public class Boss: Enemy {
 		if (m_Destroyed) return;
 		float currXPosition = m_Rigidbody.transform.position.x;
         
-		if (currXPosition > 10)
+		if (currXPosition > 8)
 		{
 			base.FixedUpdate();
 		}

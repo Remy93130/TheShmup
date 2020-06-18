@@ -11,14 +11,22 @@ public class EnemyFollowMvtOneShot : Enemy {
 	{
 		get
 		{
-			return m_Transform.right * m_TranslationSpeed * Time.fixedDeltaTime;
+			Vector3 playerPosition = GameManager.Instance.GetPlayer.GetPositionPlayer;
+			if (playerPosition.x < m_Rigidbody.position.x)
+			{
+				float Differencey = playerPosition.y - m_Rigidbody.position.y;
+				return (m_Transform.right + new Vector3(0,Differencey/m_TranslationSpeed,0)) * m_TranslationSpeed * Time.deltaTime;
+			}
+			else
+			{
+				return m_Transform.right * m_TranslationSpeed * Time.fixedDeltaTime;
+			}
 		}
 	}
 
 	protected override void Awake()
 	{
 		base.Awake();
-		player = GameManager.Instance.GetPlayer;
 	}
 
 	public override void ShootBullet()

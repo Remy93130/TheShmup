@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Bullet : SimpleGameStateObserver
 {
-	Rigidbody m_Rigidbody;
-	Transform m_Transform;
+	protected Rigidbody m_Rigidbody;
+	protected Transform m_Transform;
 
 	[Header("Life duration")]
 	[SerializeField]
@@ -13,7 +13,7 @@ public class Bullet : SimpleGameStateObserver
 
 	[Header("Movement")]
 	[SerializeField]
-	private float m_TranslationSpeed;
+	protected float m_TranslationSpeed;
 
 	protected override void Awake()
 	{
@@ -23,10 +23,10 @@ public class Bullet : SimpleGameStateObserver
 		Destroy(gameObject, m_LifeDuration);
 	}
 
-	private void FixedUpdate()
+
+	protected virtual void FixedUpdate()
 	{
 		if (!GameManager.Instance.IsPlaying) return;
-
 		Vector3 moveVect = m_Transform.right * m_TranslationSpeed * Time.fixedDeltaTime;
 		m_Rigidbody.MovePosition(m_Rigidbody.position + moveVect);
 	}
