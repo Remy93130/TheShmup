@@ -8,11 +8,19 @@ public class ShieldCollision : MonoBehaviour
 
     [SerializeField] string[] _collisionTag;
     [SerializeField] int m_shieldLife;
+    [SerializeField] GameObject m_explosionPrefab = null;
+    private GameObject _animation;
     Material mat;
 
     public int ShieldLife
     {
         get => m_shieldLife;
+    }
+
+    private void FixedUpdate()
+    {
+        /*if (_animation)
+            _animation.transform.position = transform.parent.position;*/
     }
 
     void Start()
@@ -31,6 +39,10 @@ public class ShieldCollision : MonoBehaviour
             {
                 if (--m_shieldLife <= 0)
                 {
+                    if (m_explosionPrefab)
+                    {
+                        _animation = Instantiate(m_explosionPrefab, gameObject.GetComponent<Collider>().transform.position, Quaternion.identity);
+                    }
                     Destroy(gameObject);
                 }
                 Debug.Log(Time.frameCount + "-Hit by " + collision.transform.tag + " life left:" + m_shieldLife);

@@ -27,6 +27,9 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 	private float m_NextShootTime;
 	private float m_RatioShootLevel;
 
+	[Header("Animation")]
+	[SerializeField] protected GameObject m_explosionPrefab = null;
+
 	public float TranslationSpeed { get { return m_TranslationSpeed; } }
 
 	public int NbLives { 
@@ -107,9 +110,15 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 				EventManager.Instance.Raise(new ScoreItemEvent() { eScore = this as IScore });
 				EventManager.Instance.Raise(new EnemyHasBeenDestroyedEvent() { eEnemy = this, eDestroyedByPlayer = true });
 				m_Destroyed = true;
+				if (m_explosionPrefab)
+					Instantiate(m_explosionPrefab, m_Rigidbody.transform.position, Quaternion.identity);
 				Destroy(gameObject);
 			}
 		}
 		m_Rigidbody.velocity = Vector3.zero;
+	}
+
+	private void OnDestroy()
+	{
 	}
 }
