@@ -149,6 +149,10 @@ public class MenuManager : Manager<MenuManager>
 	{
 		EventManager.Instance.Raise(new DifficultButtonClickedEvent());
 	}
+	public void ArcadeButtonHasBeenClicked()
+	{
+		EventManager.Instance.Raise(new ArcadeButtonClickedEvent());
+	}
 
 
 	#endregion
@@ -181,7 +185,10 @@ public class MenuManager : Manager<MenuManager>
 	{
 		OpenPanel(null);
 	}
-
+	protected override void GameArcadePlay(GameArcadeEvent e)
+	{
+		OpenPanel(null);
+	}
 	protected override void GamePause(GamePauseEvent e)
 	{
 		OpenPanel(m_PanelInGameMenu);

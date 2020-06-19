@@ -93,8 +93,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NbLives: 1
-  m_MaxTranslationSpeed: 4
-  m_MinTranslationSpeed: 3
+  m_MaxTranslationSpeed: 5.5
+  m_MinTranslationSpeed: 4.5
   m_TranslationSpeedProbaCurve:
     serializedVersion: 2
     m_Curve:

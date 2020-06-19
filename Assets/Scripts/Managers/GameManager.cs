@@ -118,6 +118,7 @@ public class GameManager : Manager<GameManager> {
 		EventManager.Instance.AddListener<BeginnerButtonClickedEvent>(BeginnerButtonClicked);
 		EventManager.Instance.AddListener<IntermediateButtonClickedEvent>(IntermediateButtonClicked);
 		EventManager.Instance.AddListener<DifficultButtonClickedEvent>(DifficultButtonClicked);
+		EventManager.Instance.AddListener<ArcadeButtonClickedEvent>(ArcadeButtonClicked);
 
 
 		//Enemy
@@ -153,6 +154,7 @@ public class GameManager : Manager<GameManager> {
 		EventManager.Instance.RemoveListener<BeginnerButtonClickedEvent>(BeginnerButtonClicked);
 		EventManager.Instance.RemoveListener<IntermediateButtonClickedEvent>(IntermediateButtonClicked);
 		EventManager.Instance.RemoveListener<DifficultButtonClickedEvent>(DifficultButtonClicked);
+		EventManager.Instance.RemoveListener<ArcadeButtonClickedEvent>(ArcadeButtonClicked);
 
 		//Enemy
 		//EventManager.Instance.RemoveListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);
@@ -261,7 +263,10 @@ public class GameManager : Manager<GameManager> {
 	{
 		DifficultLevel();
 	}
-
+	private void ArcadeButtonClicked(ArcadeButtonClickedEvent e)
+	{
+		Arcade();
+	}
 	private void NextLevelButtonClicked(NextLevelButtonClickedEvent e)
 	{
 		EventManager.Instance.Raise(new GoToNextLevelEvent());
@@ -339,6 +344,13 @@ public class GameManager : Manager<GameManager> {
 		EventManager.Instance.Raise(new GameDifficultLevelEvent());
         MusicLoopsManager.Instance.PlayMusic(Constants.GAMEPLAY_MUSIC);
     }
+
+	private void Arcade()
+	{
+		Play();
+		EventManager.Instance.Raise(new GameArcadeEvent());
+		MusicLoopsManager.Instance.PlayMusic(Constants.GAMEPLAY_MUSIC);
+	}
 
 	private void Pause()
 	{

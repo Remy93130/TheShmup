@@ -11,6 +11,7 @@ public abstract class SimpleGameStateObserver : MonoBehaviour,IEventHandler {
 		EventManager.Instance.AddListener<GameBeginnerLevelEvent>(GameBeginnerLevelPlay);
 		EventManager.Instance.AddListener<GameIntermediateLevelEvent>(GameIntermediateLevelPlay);
 		EventManager.Instance.AddListener<GameDifficultLevelEvent>(GameDifficultLevelPlay);
+		EventManager.Instance.AddListener<GameArcadeEvent>(GameArcadePlay);
 		EventManager.Instance.AddListener<GamePauseEvent>(GamePause);
 		EventManager.Instance.AddListener<GameResumeEvent>(GameResume);
 		EventManager.Instance.AddListener<GameOverEvent>(GameOver);
@@ -28,6 +29,7 @@ public abstract class SimpleGameStateObserver : MonoBehaviour,IEventHandler {
 		EventManager.Instance.RemoveListener<GameBeginnerLevelEvent>(GameBeginnerLevelPlay);
 		EventManager.Instance.RemoveListener<GameIntermediateLevelEvent>(GameIntermediateLevelPlay);
 		EventManager.Instance.RemoveListener<GameDifficultLevelEvent>(GameDifficultLevelPlay);
+		EventManager.Instance.RemoveListener<GameArcadeEvent>(GameArcadePlay);
 		EventManager.Instance.RemoveListener<GamePauseEvent>(GamePause);
 		EventManager.Instance.RemoveListener<GameResumeEvent>(GameResume);
 		EventManager.Instance.RemoveListener<GameOverEvent>(GameOver);
@@ -65,6 +67,10 @@ public abstract class SimpleGameStateObserver : MonoBehaviour,IEventHandler {
 	}
 
 	protected virtual void GameDifficultLevelPlay(GameDifficultLevelEvent e)
+	{
+	}
+
+	protected virtual void GameArcadePlay(GameArcadeEvent e)
 	{
 	}
 

@@ -107,7 +107,10 @@ public class PlayerController : SimpleGameStateObserver {
 	{
 		Reset();
 	}
-
+	protected override void GameArcadePlay(GameArcadeEvent e)
+	{
+		Reset();
+	}
 
 
 }

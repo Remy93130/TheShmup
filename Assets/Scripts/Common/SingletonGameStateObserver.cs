@@ -12,6 +12,7 @@ public abstract class SingletonGameStateObserver<T> :  Singleton<T>,IEventHandle
 		EventManager.Instance.AddListener<GameBeginnerLevelEvent>(GameBeginnerLevelPlay);
 		EventManager.Instance.AddListener<GameIntermediateLevelEvent>(GameIntermediateLevelPlay);
 		EventManager.Instance.AddListener<GameDifficultLevelEvent>(GameDifficultLevelPlay);
+		EventManager.Instance.AddListener<GameArcadeEvent>(GameArcadePlay);
 		EventManager.Instance.AddListener<GamePauseEvent>(GamePause);
 		EventManager.Instance.AddListener<GameResumeEvent>(GameResume);
 		EventManager.Instance.AddListener<GameOverEvent>(GameOver);
@@ -30,6 +31,7 @@ public abstract class SingletonGameStateObserver<T> :  Singleton<T>,IEventHandle
 		EventManager.Instance.RemoveListener<GameBeginnerLevelEvent>(GameBeginnerLevelPlay);
 		EventManager.Instance.RemoveListener<GameIntermediateLevelEvent>(GameIntermediateLevelPlay);
 		EventManager.Instance.RemoveListener<GameDifficultLevelEvent>(GameDifficultLevelPlay);
+		EventManager.Instance.RemoveListener<GameArcadeEvent>(GameArcadePlay);
 		EventManager.Instance.RemoveListener<GamePauseEvent>(GamePause);
 		EventManager.Instance.RemoveListener<GameResumeEvent>(GameResume);
 		EventManager.Instance.RemoveListener<GameOverEvent>(GameOver);
@@ -70,6 +72,11 @@ public abstract class SingletonGameStateObserver<T> :  Singleton<T>,IEventHandle
 
 	protected virtual void GameDifficultLevelPlay(GameDifficultLevelEvent e)
 	{
+	}
+
+	protected virtual void GameArcadePlay(GameArcadeEvent e)
+	{
+
 	}
 
 	protected virtual void GamePause(GamePauseEvent e)

@@ -16,6 +16,9 @@ public class GameIntermediateLevelEvent : SDD.Events.Event
 public class GameDifficultLevelEvent : SDD.Events.Event
 {
 }
+public class GameArcadeEvent : SDD.Events.Event
+{
+}
 public class GamePauseEvent : SDD.Events.Event
 {
 }
@@ -82,6 +85,9 @@ public class IntermediateButtonClickedEvent : SDD.Events.Event
 {
 }
 public class DifficultButtonClickedEvent : SDD.Events.Event
+{
+}
+public class ArcadeButtonClickedEvent : SDD.Events.Event
 {
 }
 #endregion

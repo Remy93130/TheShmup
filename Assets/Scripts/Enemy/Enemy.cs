@@ -86,11 +86,11 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 
 	public virtual void ShootBullet()
 	{
-        Debug.Log("WENT HERE LEL");
+        //Debug.Log("WENT HERE LEL");
         GameObject bulletGO = Instantiate(m_BulletPrefab, m_BulletSpawnPoint.position, Quaternion.identity);
         
-        SfxManager.Instance.PlaySfx(Constants.GAMEOVER_SFX);
-        EventManager.Instance.Raise(new GameOverEvent());
+       // SfxManager.Instance.PlaySfx(Constants.GAMEOVER_SFX);
+       //EventManager.Instance.Raise(new GameOverEvent());
     }
 
 	private void OnCollisionEnter(Collision collision)
