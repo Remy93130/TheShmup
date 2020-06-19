@@ -119,6 +119,7 @@ public class GameManager : Manager<GameManager> {
 		EventManager.Instance.AddListener<IntermediateButtonClickedEvent>(IntermediateButtonClicked);
 		EventManager.Instance.AddListener<DifficultButtonClickedEvent>(DifficultButtonClicked);
 		EventManager.Instance.AddListener<ArcadeButtonClickedEvent>(ArcadeButtonClicked);
+        EventManager.Instance.AddListener<NormalButtonClickedEvent>(NormalButtonClicked);
 
 
 		//Enemy
@@ -155,6 +156,7 @@ public class GameManager : Manager<GameManager> {
 		EventManager.Instance.RemoveListener<IntermediateButtonClickedEvent>(IntermediateButtonClicked);
 		EventManager.Instance.RemoveListener<DifficultButtonClickedEvent>(DifficultButtonClicked);
 		EventManager.Instance.RemoveListener<ArcadeButtonClickedEvent>(ArcadeButtonClicked);
+        EventManager.Instance.RemoveListener<NormalButtonClickedEvent>(NormalButtonClicked);
 
 		//Enemy
 		//EventManager.Instance.RemoveListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);
@@ -246,7 +248,7 @@ public class GameManager : Manager<GameManager> {
 
 	private void PlayButtonClicked(PlayButtonClickedEvent e)
 	{
-		ChooseLevel();
+		ChooseType();
 	}
 
 	private void BeginnerButtonClicked(BeginnerButtonClickedEvent e)
@@ -267,6 +269,10 @@ public class GameManager : Manager<GameManager> {
 	{
 		Arcade();
 	}
+    private void NormalButtonClicked(NormalButtonClickedEvent e)
+    {
+        ChooseLevel();
+    }
 	private void NextLevelButtonClicked(NextLevelButtonClickedEvent e)
 	{
 		EventManager.Instance.Raise(new GoToNextLevelEvent());
@@ -316,6 +322,13 @@ public class GameManager : Manager<GameManager> {
 		m_GameState = GameState.gameMenu;
 		EventManager.Instance.Raise(new GameChooseLevelEvent());
 	}
+
+    private void ChooseType()
+    {
+        SetTimeScale(0);
+        m_GameState = GameState.gameMenu;
+        EventManager.Instance.Raise(new GameChooseTypeEvent());
+    }
 	private void Play()
 	{
 		InitNewGame();

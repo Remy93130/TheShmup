@@ -21,9 +21,10 @@ public class MenuManager : Manager<MenuManager>
     [SerializeField] GameObject m_PanelSettings;
     [SerializeField] GameObject m_PanelControls;
 	[SerializeField] GameObject m_PanelChooseLevel;
+    [SerializeField] GameObject m_PanelChooseType;
 
 
-	List<GameObject> m_AllPanels;
+    List<GameObject> m_AllPanels;
 	#endregion
 
 	#region Events' subscription
@@ -81,6 +82,7 @@ public class MenuManager : Manager<MenuManager>
         if (m_PanelSettings) m_AllPanels.Add(m_PanelSettings);
         if (m_PanelControls) m_AllPanels.Add(m_PanelControls);
 		if (m_PanelChooseLevel) m_AllPanels.Add(m_PanelChooseLevel);
+        if (m_PanelChooseType) m_AllPanels.Add(m_PanelChooseType);
 
 	}
     
@@ -154,6 +156,11 @@ public class MenuManager : Manager<MenuManager>
 		EventManager.Instance.Raise(new ArcadeButtonClickedEvent());
 	}
 
+    public void NormalButtonHasBeenClicked()
+    {
+        EventManager.Instance.Raise(new NormalButtonClickedEvent());
+    }
+
 
 	#endregion
 
@@ -224,7 +231,12 @@ public class MenuManager : Manager<MenuManager>
 		OpenPanel(m_PanelChooseLevel);
 	}
 
-	public void QuitGame()
+    protected override void GameChooseType(GameChooseTypeEvent e)
+    {
+        OpenPanel(m_PanelChooseType);
+    }
+
+    public void QuitGame()
     {
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4493926149466882}
   - component: {fileID: 65804593480599290}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4155697023080426}
   - component: {fileID: 65496728617640758}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4224457839575558}
   - component: {fileID: 65836655639558022}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4568435854067596}
   - component: {fileID: 65118082849439914}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,9 +187,9 @@ GameObject:
   - component: {fileID: 4197128655073178}
   - component: {fileID: 33871795789200940}
   - component: {fileID: 23729984508991034}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StarSparrow6
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -266,7 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4717181859829926}
   - component: {fileID: 65157751683818626}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,7 +309,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4207690953640610}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

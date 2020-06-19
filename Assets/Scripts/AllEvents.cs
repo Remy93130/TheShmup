@@ -40,6 +40,10 @@ public class GameControlsEvent : SDD.Events.Event
 public class GameChooseLevelEvent : SDD.Events.Event
 {
 }
+
+public class GameChooseTypeEvent : SDD.Events.Event
+{
+}
 public class GameStatisticsChangedEvent : SDD.Events.Event
 {
 	public int eBestScore { get; set; }
@@ -88,6 +92,9 @@ public class DifficultButtonClickedEvent : SDD.Events.Event
 {
 }
 public class ArcadeButtonClickedEvent : SDD.Events.Event
+{
+}
+public class NormalButtonClickedEvent : SDD.Events.Event
 {
 }
 #endregion
