@@ -34,6 +34,12 @@ public class GameVictoryEvent : SDD.Events.Event
 public class GameSettingsEvent : SDD.Events.Event
 {
 }
+public class GameAboutUsEvent : SDD.Events.Event
+{
+}
+public class GameCrewEvent : SDD.Events.Event
+{
+}
 public class GameControlsEvent : SDD.Events.Event
 {
 }
@@ -98,6 +104,13 @@ public class ArcadeButtonClickedEvent : SDD.Events.Event
 public class NormalButtonClickedEvent : SDD.Events.Event
 {
 }
+
+public class AboutUsButtonClickedEvent : SDD.Events.Event
+{
+}
+public class CrewButtonClickedEvent : SDD.Events.Event
+{
+}
 #endregion
 
 #region Enemy Event
@@ -114,6 +127,8 @@ public class NewBossEvent : SDD.Events.Event
 {
     public int eNLives;
 }
+
+
 #endregion
 
 #region Score Event

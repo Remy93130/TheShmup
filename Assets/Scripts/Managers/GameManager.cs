@@ -120,13 +120,15 @@ public class GameManager : Manager<GameManager> {
 		EventManager.Instance.AddListener<DifficultButtonClickedEvent>(DifficultButtonClicked);
 		EventManager.Instance.AddListener<ArcadeButtonClickedEvent>(ArcadeButtonClicked);
         EventManager.Instance.AddListener<NormalButtonClickedEvent>(NormalButtonClicked);
+        EventManager.Instance.AddListener<AboutUsButtonClickedEvent>(AboutUsButtonClicked);
+        EventManager.Instance.AddListener<CrewButtonClickedEvent>(CrewButtonClicked);
 
 
-		//Enemy
-		//EventManager.Instance.AddListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);
+        //Enemy
+        //EventManager.Instance.AddListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);
 
-		//Enemy Manager
-		EventManager.Instance.AddListener<LevelHasEnded>(Victory);
+        //Enemy Manager
+        EventManager.Instance.AddListener<LevelHasEnded>(Victory);
 
 		//Score Item
 		EventManager.Instance.AddListener<ScoreItemEvent>(ScoreHasBeenGained);
@@ -157,12 +159,14 @@ public class GameManager : Manager<GameManager> {
 		EventManager.Instance.RemoveListener<DifficultButtonClickedEvent>(DifficultButtonClicked);
 		EventManager.Instance.RemoveListener<ArcadeButtonClickedEvent>(ArcadeButtonClicked);
         EventManager.Instance.RemoveListener<NormalButtonClickedEvent>(NormalButtonClicked);
+        EventManager.Instance.RemoveListener<AboutUsButtonClickedEvent>(AboutUsButtonClicked);
+        EventManager.Instance.RemoveListener<CrewButtonClickedEvent>(CrewButtonClicked);
 
-		//Enemy
-		//EventManager.Instance.RemoveListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);
+        //Enemy
+        //EventManager.Instance.RemoveListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);
 
-		//Enemy Manager
-		EventManager.Instance.RemoveListener<LevelHasEnded>(Victory);
+        //Enemy Manager
+        EventManager.Instance.RemoveListener<LevelHasEnded>(Victory);
 
 		//Score Item
 		EventManager.Instance.RemoveListener<ScoreItemEvent>(ScoreHasBeenGained);
@@ -273,6 +277,14 @@ public class GameManager : Manager<GameManager> {
     {
         ChooseLevel();
     }
+    private void AboutUsButtonClicked(AboutUsButtonClickedEvent e)
+    {
+        AboutUs();
+    }
+    private void CrewButtonClicked(CrewButtonClickedEvent e)
+    {
+        Crew();
+    }
 	private void NextLevelButtonClicked(NextLevelButtonClickedEvent e)
 	{
 		EventManager.Instance.Raise(new GoToNextLevelEvent());
@@ -337,6 +349,20 @@ public class GameManager : Manager<GameManager> {
 		
 	}
 
+    private void AboutUs()
+    {
+        SetTimeScale(0);
+        m_GameState = GameState.gameMenu;
+
+        EventManager.Instance.Raise(new GameAboutUsEvent());
+    }
+    private void Crew()
+    {
+        SetTimeScale(0);
+        m_GameState = GameState.gameMenu;
+
+        EventManager.Instance.Raise(new GameCrewEvent());
+    }
 	private void BeginnerLevel()
 	{
 		Play();

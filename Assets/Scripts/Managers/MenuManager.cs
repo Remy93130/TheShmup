@@ -22,6 +22,8 @@ public class MenuManager : Manager<MenuManager>
     [SerializeField] GameObject m_PanelControls;
 	[SerializeField] GameObject m_PanelChooseLevel;
     [SerializeField] GameObject m_PanelChooseType;
+    [SerializeField] GameObject m_PanelAboutUs;
+    [SerializeField] GameObject m_PanelCrew;
 
 
     List<GameObject> m_AllPanels;
@@ -83,12 +85,15 @@ public class MenuManager : Manager<MenuManager>
         if (m_PanelControls) m_AllPanels.Add(m_PanelControls);
 		if (m_PanelChooseLevel) m_AllPanels.Add(m_PanelChooseLevel);
         if (m_PanelChooseType) m_AllPanels.Add(m_PanelChooseType);
+        if (m_PanelAboutUs) m_AllPanels.Add(m_PanelAboutUs);
+        if (m_PanelCrew) m_AllPanels.Add(m_PanelCrew);
 
-	}
+    }
     
 
 	void OpenPanel(GameObject panel)
 	{
+
 		foreach (var item in m_AllPanels)
 			if (item) item.SetActive(item == panel);
 	}
@@ -115,7 +120,14 @@ public class MenuManager : Manager<MenuManager>
 	{
 		EventManager.Instance.Raise(new MainMenuButtonClickedEvent());
 	}
-
+    public void AboutUsButtonHasBeenClicked()
+    {
+        EventManager.Instance.Raise(new AboutUsButtonClickedEvent());
+    }
+    public void CrewButtonHasBeenClicked()
+    {
+        EventManager.Instance.Raise(new CrewButtonClickedEvent());
+    }
     public void MainMenuButtonFromSettingsHasBeenClicked()
     {
         EventManager.Instance.Raise(new MainMenuButtonFromSettingsClickedEvent());
@@ -180,7 +192,15 @@ public class MenuManager : Manager<MenuManager>
 		OpenPanel(m_PanelMainMenu);
 	}
 
-	protected override void GameBeginnerLevelPlay(GameBeginnerLevelEvent e)
+    protected override void AboutUs(GameAboutUsEvent e)
+    {
+        OpenPanel(m_PanelAboutUs);
+    }
+    protected override void Crew(GameCrewEvent e)
+    {
+        OpenPanel(m_PanelCrew);
+    }
+    protected override void GameBeginnerLevelPlay(GameBeginnerLevelEvent e)
 	{
 		OpenPanel(null);
 	}
