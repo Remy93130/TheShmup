@@ -2,7 +2,6 @@
 
 public class ScreenLocker : MonoBehaviour
 {
-    [SerializeField] Camera m_MainCamera;
     private Vector2 ScreenSize;
     private float PlayerWidth = 0;
     private float PlayerHeight = 0;
@@ -12,7 +11,7 @@ public class ScreenLocker : MonoBehaviour
         CapsuleCollider collider = GetComponentInChildren<CapsuleCollider>();
         PlayerWidth = collider.bounds.extents.x;
         PlayerHeight = collider.bounds.extents.y;
-        ScreenSize = m_MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, m_MainCamera.transform.position.z));
+        ScreenSize = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
     }
 
     void LateUpdate()

@@ -1,8 +1,6 @@
 ﻿using SDD.Events;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class LoopOffsetBg : SimpleGameStateObserver
 {
@@ -55,6 +53,7 @@ public class LoopOffsetBg : SimpleGameStateObserver
         } else
         {
             ShuffleArray();
+            StartCoroutine(ShakeCamera());
             StartCoroutine(TriggerExplosion());
             _index = (++_index % 2 == 0) ? 0 : 1;
             StartCoroutine(BackgroundTransition());
@@ -73,7 +72,7 @@ public class LoopOffsetBg : SimpleGameStateObserver
         }
     }
 
-    IEnumerator TriggerExplosion()
+    private IEnumerator TriggerExplosion()
     {
         for (int i = 0; i < m_explosionsSpawnPoint.Length; i++)
         {
@@ -81,17 +80,34 @@ public class LoopOffsetBg : SimpleGameStateObserver
             Vector3 spawnPosition = new Vector3(
                 m_explosionsSpawnPoint[i].position.x,
                 m_explosionsSpawnPoint[i].position.y,
-                UnityEngine.Random.Range(-0.3f, 0.25f)
+                Random.Range(-.3f, .25f)
             );
             Instantiate(m_explosionPrefab, spawnPosition, Quaternion.identity);
         }
     }
 
-    IEnumerator BackgroundTransition()
+    private IEnumerator BackgroundTransition()
     {
         yield return new WaitForSeconds(.75f);
         m_meshRenderer.material = m_materials[_index];
     }
 
     protected override void GameReset(GameResetEvent e) => StopAllCoroutines();
+
+    private IEnumerator ShakeCamera()
+    {
+        Vector3 startPosition = Camera.main.transform.localPosition;
+        float deltaTime = 0f;
+        while (deltaTime < 2.0f)
+        {
+            Camera.main.transform.localPosition = new Vector3(
+                Random.Range(-1f, 1f) * .1f,
+                Random.Range(-1f, 1f) * .1f,
+                Camera.main.transform.localPosition.z
+            );
+            deltaTime += Time.deltaTime;
+            yield return null;
+        }
+        Camera.main.transform.localPosition = startPosition;
+    }
 }
