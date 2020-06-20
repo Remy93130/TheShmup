@@ -85,6 +85,7 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	#region Pattern flow
 	void Reset()
 	{
+		EventManager.Instance.Raise(new GameResetEvent());
 		GameObject[] oldEnemies;
 		oldEnemies = GameObject.FindGameObjectsWithTag("Enemy");
 		foreach (GameObject enemy in oldEnemies)
@@ -101,11 +102,20 @@ public class EnemiesManager : Manager<EnemiesManager> {
 		{
 			Destroy(bullet);
 		}
-
+		ResetAnimation();
 		Destroy(m_CurrentPatternGO);
 		m_CurrentPatternGO = null;
 		m_CurrentPatternIndex = -1;
 		HudManager.Instance.SetBorderBoss(false, true);
+	}
+
+	private void ResetAnimation()
+	{
+		GameObject[] animations = GameObject.FindGameObjectsWithTag("Animation");
+		for (int i = 0; i < animations.Length; i++)
+		{
+			Destroy(animations[i]);
+		}
 	}
 
 	IPattern InstantiatePattern(int patternIndex)

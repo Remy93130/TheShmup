@@ -92,4 +92,6 @@ public class LoopOffsetBg : SimpleGameStateObserver
         yield return new WaitForSeconds(.75f);
         m_meshRenderer.material = m_materials[_index];
     }
+
+    protected override void GameReset(GameResetEvent e) => StopAllCoroutines();
 }

@@ -41,6 +41,10 @@ public class GameChooseLevelEvent : SDD.Events.Event
 {
 }
 
+public class GameResetEvent : SDD.Events.Event
+{
+}
+
 public class GameChooseTypeEvent : SDD.Events.Event
 {
 }

@@ -9528,7 +9528,7 @@ GameObject:
   - component: {fileID: 3507575578049290168}
   m_Layer: 0
   m_Name: FireReactor
-  m_TagString: Untagged
+  m_TagString: Animation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
