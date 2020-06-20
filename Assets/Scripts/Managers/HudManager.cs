@@ -67,7 +67,6 @@ public class HudManager : Manager<HudManager>
     }
     protected override void NewBoss(NewBossEvent e)
     {
-        Debug.Log("Max value : " + e.eNLives);
         sliderBoss.maxValue = e.eNLives;
     }
 

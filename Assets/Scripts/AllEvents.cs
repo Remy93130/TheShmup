@@ -27,6 +27,7 @@ public class GameResumeEvent : SDD.Events.Event
 }
 public class GameOverEvent : SDD.Events.Event
 {
+	public bool eIsArcadeMode = false;
 }
 public class GameVictoryEvent : SDD.Events.Event
 {

@@ -69,8 +69,7 @@ public class PlayerController : SimpleGameStateObserver {
 		Vector3 inputVector = new Vector3(hAxis, vAxis, 0);
 
 		Vector3 velocity = Vector3.ClampMagnitude( inputVector,1) * m_MaxTranslationSpeed;
-		m_Rigidbody.velocity = velocity ;
-		//Debug.Log("velocity = " + m_Rigidbody.velocity);
+		m_Rigidbody.velocity = velocity;
 	}
 
 	private void Reset()

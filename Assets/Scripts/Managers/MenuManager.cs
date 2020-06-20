@@ -95,7 +95,8 @@ public class MenuManager : Manager<MenuManager>
 	{
 
 		foreach (var item in m_AllPanels)
-			if (item) item.SetActive(item == panel);
+			if (item)
+				item.SetActive(item == panel);
 	}
 	#endregion
 
@@ -238,7 +239,7 @@ public class MenuManager : Manager<MenuManager>
 
     protected override void GameSettings(GameSettingsEvent e)
     {
-        OpenPanel(m_PanelSettings);
+		OpenPanel(m_PanelSettings);
     }
 
     protected override void GameControls(GameControlsEvent e)
@@ -259,27 +260,17 @@ public class MenuManager : Manager<MenuManager>
     public void QuitGame()
     {
         #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
+			UnityEditor.EditorApplication.isPlaying = false;
         #else
-        Application.Quit();
+			Application.Quit();
         #endif
         
     }
 
     public void setActiveRecursif(GameObject obj)
     {
-        //for (int i = 0; i < obj.Length; i++)
-        //{
-            if (obj.activeSelf)
-            {
-                obj.SetActive(false);
-            }
-            else
-            {
-                obj.SetActive(true);
-            }
-        //}
-
+		bool active = (obj.activeSelf)? false : true;
+		obj.SetActive(active);
     }
 
 

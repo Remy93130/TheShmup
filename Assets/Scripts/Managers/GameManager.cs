@@ -5,9 +5,11 @@ using UnityEngine;
 using SDD.Events;
 using System.Dynamic;
 
-public enum GameState { gameMenu,gamePlay,gamePause,gameOver,gameVictory}
+public enum GameState { gameMenu, gamePlay, gamePause, gameOver, gameVictory}
 
 public class GameManager : Manager<GameManager> {
+
+	private bool _isArcadeMode = false;
 
 	//Game State
 	private GameState m_GameState;
@@ -29,26 +31,17 @@ public class GameManager : Manager<GameManager> {
 		set
 		{
 			m_Score = value;
-			BestScore = Mathf.Max(BestScore, value);
+			// BestScore = Mathf.Max(BestScore, value);
 		}
 	}
 
 	public int BestScore
 	{
-		get
-		{
-			return PlayerPrefs.GetInt("BEST_SCORE", 0);
-		}
-		set
-		{
-			PlayerPrefs.SetInt("BEST_SCORE", value);
-		}
+		get => PlayerPrefs.GetInt("BEST_SCORE", 0);
+		set => PlayerPrefs.SetInt("BEST_SCORE", value);
 	}
 
-	void IncrementScore(int increment)
-	{
-		SetScore(m_Score + increment);
-	}
+	void IncrementScore(int increment) => SetScore(m_Score + increment);
 
 	void SetScore(int score)
 	{
@@ -389,6 +382,7 @@ public class GameManager : Manager<GameManager> {
 		Play();
 		EventManager.Instance.Raise(new GameArcadeEvent());
 		MusicLoopsManager.Instance.PlayMusic(Constants.GAMEPLAY_MUSIC);
+		_isArcadeMode = true;
 	}
 
 	private void Pause()
@@ -410,7 +404,10 @@ public class GameManager : Manager<GameManager> {
 		SetTimeScale(0);
 		m_GameState = GameState.gameOver;
 		SfxManager.Instance.PlaySfx(Constants.GAMEOVER_SFX);
-		EventManager.Instance.Raise(new GameOverEvent());
+		EventManager.Instance.Raise(new GameOverEvent() { eIsArcadeMode = _isArcadeMode });
+		if (_isArcadeMode && Score > BestScore)
+			BestScore = Score;
+		_isArcadeMode = false;
 	}
 
 	private void Victory(LevelHasEnded e)
