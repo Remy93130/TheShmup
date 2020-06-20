@@ -6,7 +6,6 @@ using System;
 using Random = UnityEngine.Random;
 using SDD.Events;
 
-
 [Serializable]
 public class Level
 {
@@ -16,6 +15,16 @@ public class Level
 	{
 		indexPattern = Mathf.Max(indexPattern, 0);
 		return m_PatternsPrefabs[indexPattern];
+	}
+
+	public int randomLevel()
+	{
+		return Random.Range(0,m_PatternsPrefabs.Length-1);
+	}
+
+	public int getBossIndex()
+	{
+		return m_PatternsPrefabs.Length - 1;
 	}
 
 	public Boolean hasLevelFinished(int indexPattern)
@@ -35,6 +44,7 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	[SerializeField] Level[] m_levels;
 	private int m_CurrentPatternIndex;
 	private int m_CurrentLevelIndex;
+	private int m_ArcadeCounter;
 	private Level m_CurrentLevel;
 	private GameObject m_CurrentPatternGO;
 	private IPattern m_CurrentPattern;
@@ -75,7 +85,6 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	#region Pattern flow
 	void Reset()
 	{
-		Debug.Log("Reset the game boi");
 		Destroy(m_CurrentPatternGO);
 		m_CurrentPatternGO = null;
 		m_CurrentPatternIndex = -1;
@@ -142,13 +151,14 @@ public class EnemiesManager : Manager<EnemiesManager> {
 		m_CurrentLevelIndex = 3;
 		m_CurrentLevel = m_levels[m_CurrentLevelIndex];
 		m_RationShootLevel = 1;
-		PlayLevel();
+		m_ArcadeCounter = 0;
+		PlayLevel(true);
 	}
 
-	protected void PlayLevel()
+	protected void PlayLevel(bool isArcade = false)
 	{
 		Reset();
-		EventManager.Instance.Raise(new GoToNextPatternEvent());
+		EventManager.Instance.Raise(new GoToNextPatternEvent() { eArcadeMode = isArcade });
 	}
 
 	#endregion
@@ -156,8 +166,26 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	#region Callbacks to EnemiesManager events
 	public void GoToNextPattern(GoToNextPatternEvent e)
 	{
-		m_CurrentPatternIndex++;
+		if (e.eArcadeMode)
+		{
+			m_ArcadeCounter++;
+			if (m_ArcadeCounter%10 == 0)
+			{
+				m_CurrentPatternIndex = m_CurrentLevel.getBossIndex();
+				m_RationShootLevel += 1;
+			}
+			else
+			{
+				m_CurrentPatternIndex = m_CurrentLevel.randomLevel();
+			}
+			
+		}
+		else
+		{
+			m_CurrentPatternIndex++;
+		}
 		StartCoroutine(InstantiatePatternCoroutine());
+
 	}
 	#endregion
 

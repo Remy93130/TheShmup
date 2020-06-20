@@ -122,9 +122,15 @@ MonoBehaviour:
   m_BulletPrefab: {fileID: 2030131833596731714, guid: fb1f39985497f1d4a95bf5f2a97e585b,
     type: 3}
   m_ShootPeriod: 2
-  m_ProbaShoot: 15
+  m_ProbaShoot: 20
   m_BulletSpawnPoint: {fileID: 4546757359376846}
+  m_explosionPrefab: {fileID: 0}
   m_Score: 120
+  m_PrefabBorder: {fileID: 0}
+  m_ExplosionsSpawns: []
+  m_DamageAnimation: {fileID: 0}
+  m_DamageAnimationSpawn: {fileID: 0}
+  m_LivesForDamageAnimation: 0
   m_EnemyPrefab: {fileID: 1812984978241422, guid: 1bc17d8deacb1df4ba4c572a39f53c8d,
     type: 3}
 --- !u!1001 &5831957156403993733

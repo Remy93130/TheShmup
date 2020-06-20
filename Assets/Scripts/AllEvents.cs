@@ -148,6 +148,7 @@ public class PatternHasBeenInstantiatedEvent : SDD.Events.Event
 }
 public class GoToNextPatternEvent : SDD.Events.Event
 {
+	public bool eArcadeMode;
 }
 
 public class LevelHasEnded : SDD.Events.Event

@@ -125,7 +125,7 @@ MonoBehaviour:
   m_BulletPrefab: {fileID: 2030131833596731714, guid: fb1f39985497f1d4a95bf5f2a97e585b,
     type: 3}
   m_ShootPeriod: 2
-  m_ProbaShoot: 15
+  m_ProbaShoot: 20
   m_BulletSpawnPoint: {fileID: 4546757359376846}
   m_explosionPrefab: {fileID: 1150934714579380, guid: 779aa8c25fbd0e1488637639c9fff976,
     type: 3}
