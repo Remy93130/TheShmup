@@ -39,7 +39,7 @@ public class Boss: Enemy {
 		{
 			base.FixedUpdate();
 		}
-		if (NbLives <= m_LivesForDamageAnimation)
+		if (NbLives <= m_LivesForDamageAnimation && !_animation)
 		{
 			_animation = Instantiate(m_DamageAnimation, m_DamageAnimationSpawn.transform.position, Quaternion.identity);
 		}

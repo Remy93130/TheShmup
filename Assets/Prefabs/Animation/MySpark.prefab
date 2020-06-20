@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1338645070452738}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4139479128625290}
   m_RootOrder: 1
@@ -4831,7 +4831,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4139479128625290}
   m_Layer: 0
-  m_Name: DamagedBossExplosion
+  m_Name: MySpark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4880,7 +4880,7 @@ Transform:
   m_GameObject: {fileID: 1889050273275062}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4139479128625290}
   m_RootOrder: 0
@@ -5512,7 +5512,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
+    type: 0
     angle: 20
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}

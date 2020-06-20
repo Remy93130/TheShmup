@@ -135,7 +135,7 @@ MonoBehaviour:
   m_ExplosionsSpawns:
   - {fileID: 5143191167898547827}
   - {fileID: 916546329116978481}
-  m_DamageAnimation: {fileID: 8129862776774197043, guid: 80345021ebb504849aa1c9563d99536b,
+  m_DamageAnimation: {fileID: 1491359990764140, guid: c0b746fa294cc2445b569d0210ac7a7a,
     type: 3}
   m_DamageAnimationSpawn: {fileID: 1018972581863058005}
   m_LivesForDamageAnimation: 5
