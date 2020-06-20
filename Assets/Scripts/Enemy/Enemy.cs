@@ -96,7 +96,7 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
        //EventManager.Instance.Raise(new GameOverEvent());
     }
 
-	protected virtual void OnCollisionEnter(Collision collision)
+	private void OnCollisionEnter(Collision collision)
 	{
 		ShieldCollision shield = GetComponentInChildren<ShieldCollision>();
 		if (collision.gameObject.CompareTag("PlayerBullet") && shield != null)
@@ -110,19 +110,15 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 				EventManager.Instance.Raise(new ScoreItemEvent() { eScore = this as IScore });
 				EventManager.Instance.Raise(new EnemyHasBeenDestroyedEvent() { eEnemy = this, eDestroyedByPlayer = true });
 				m_Destroyed = true;
-				Explosion();
+				if (m_explosionPrefab)
+					Instantiate(m_explosionPrefab, m_Rigidbody.transform.position, Quaternion.identity);
+				Destroy(gameObject);
 			}
 		}
 		m_Rigidbody.velocity = Vector3.zero;
 	}
 
-	public void Explosion()
+	private void OnDestroy()
 	{
-		if (m_explosionPrefab)
-		{
-			Instantiate(m_explosionPrefab, m_Rigidbody.transform.position, Quaternion.identity);
-		}
-		Destroy(gameObject);
 	}
-	
 }

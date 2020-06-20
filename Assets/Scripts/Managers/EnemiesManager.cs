@@ -85,23 +85,6 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	#region Pattern flow
 	void Reset()
 	{
-		GameObject[] oldEnemies;
-		oldEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-		foreach (GameObject enemy in oldEnemies)
-		{
-			Enemy e = enemy.GetComponent<Enemy>();
-			if (e)
-			{
-				e.Explosion();
-			}
-		}
-		GameObject[] oldBullet;
-		oldBullet = GameObject.FindGameObjectsWithTag("EnemyBullet");
-		foreach (GameObject bullet in oldBullet)
-		{
-			Destroy(bullet);
-		}
-
 		Destroy(m_CurrentPatternGO);
 		m_CurrentPatternGO = null;
 		m_CurrentPatternIndex = -1;

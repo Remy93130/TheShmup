@@ -18,12 +18,10 @@ public class BossIntermediateDifficult: Boss {
 		float probaJunior = UnityEngine.Random.Range(0f, 2f);
 		if (probaJunior <= 1)
 		{
-			float y = UnityEngine.Random.Range(-4f, 4f);
+			float y = UnityEngine.Random.Range(-4f,4f);
 			float x = m_BulletSpawnPoint.position.x;
-			GameObject enemyGO = Instantiate(m_EnemyPrefab, new Vector3(x, y, 0), new Quaternion(0, 90, 0, 1));
+			GameObject enemyGO = Instantiate(m_EnemyPrefab, new Vector3(x,y,0), new Quaternion(0,90,0,1));
 		}
 
 	}
-
-
 }
