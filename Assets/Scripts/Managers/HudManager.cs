@@ -16,6 +16,7 @@ public class HudManager : Manager<HudManager>
     [SerializeField] private Text m_TxtNLives;
     [SerializeField] private Text m_TxtNEnemiesLeftBeforeVictory;
     [SerializeField] private Slider slider;
+
     [SerializeField] private Slider sliderBoss;
 
     [SerializeField] public GameObject m_Border;
@@ -63,6 +64,11 @@ public class HudManager : Manager<HudManager>
     protected override void GameBossShoted(GameBossShotedEvent e)
     {
         sliderBoss.value = e.eNLives;
+    }
+    protected override void NewBoss(NewBossEvent e)
+    {
+        Debug.Log("Max value : " + e.eNLives);
+        sliderBoss.maxValue = e.eNLives;
     }
 
 

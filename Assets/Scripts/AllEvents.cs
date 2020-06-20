@@ -53,13 +53,10 @@ public class GameStatisticsChangedEvent : SDD.Events.Event
 	public int eBestScore { get; set; }
 	public int eScore { get; set; }
 	public int eNLives { get; set; }
-	//public int eNEnemiesLeftBeforeVictory { get; set; }
+	
 }
 #endregion
-public class GameBossShotedEvent : SDD.Events.Event
-{
-    public int eNLives { get; set; }
-}
+
 
 #region MenuManager Events
 public class EscapeButtonClickedEvent : SDD.Events.Event
@@ -108,6 +105,14 @@ public class EnemyHasBeenDestroyedEvent: SDD.Events.Event
 {
 	public Enemy eEnemy;
 	public bool eDestroyedByPlayer;
+}
+public class GameBossShotedEvent : SDD.Events.Event
+{
+    public int eNLives;
+}
+public class NewBossEvent : SDD.Events.Event
+{
+    public int eNLives;
 }
 #endregion
 

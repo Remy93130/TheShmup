@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Boss: Enemy {
 
-    [SerializeField] GameObject m_PrefabBorder;
+    
 
 	[Header("Boss animation")]
 	[SerializeField] private GameObject[] m_ExplosionsSpawns;
@@ -26,7 +26,9 @@ public class Boss: Enemy {
     protected override void Awake()
     {
         base.Awake();
-        EventManager.Instance.Raise(new GameBossShotedEvent() { eNLives = NbLives });
+        EventManager.Instance.Raise(new NewBossEvent() { eNLives = NbLives });
+        EventManager.Instance.Raise(new GameBossShotedEvent() { eNLives = NbLives});
+        
         HudManager.Instance.SetBorderBoss(true);
     }
 

@@ -23,6 +23,7 @@ public abstract class SimpleGameStateObserver : MonoBehaviour,IEventHandler {
         EventManager.Instance.AddListener<GameBossShotedEvent>(GameBossShoted);
         EventManager.Instance.AddListener<GameChooseTypeEvent>(GameChooseType);
 		EventManager.Instance.AddListener<GameResetEvent>(GameReset);
+        EventManager.Instance.AddListener<NewBossEvent>(NewBoss);
     }
 
 	public virtual void UnsubscribeEvents()
@@ -43,6 +44,7 @@ public abstract class SimpleGameStateObserver : MonoBehaviour,IEventHandler {
         EventManager.Instance.RemoveListener<GameBossShotedEvent>(GameBossShoted);
         EventManager.Instance.RemoveListener<GameChooseTypeEvent>(GameChooseType);
 		EventManager.Instance.RemoveListener<GameResetEvent>(GameReset);
+        EventManager.Instance.RemoveListener<NewBossEvent>(NewBoss);
 	}
 
 	protected virtual void Awake()
@@ -122,4 +124,8 @@ public abstract class SimpleGameStateObserver : MonoBehaviour,IEventHandler {
 	protected virtual void GameReset(GameResetEvent e)
 	{
 	}
+
+    protected virtual void NewBoss(NewBossEvent e)
+    {
+    }
 }
