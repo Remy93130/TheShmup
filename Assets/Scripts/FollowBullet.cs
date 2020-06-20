@@ -10,7 +10,7 @@ public class FollowBullet : Bullet
 		Vector3 moveVect;
 
 		Vector3 playerPosition = GameManager.Instance.GetPlayer.GetPositionPlayer;
-		if (playerPosition.x < m_Rigidbody.position.x)
+		if (playerPosition.x+2 < m_Rigidbody.position.x)
 		{
 			float Differencey = playerPosition.y - m_Rigidbody.position.y;
 			moveVect = ((m_Transform.right + new Vector3(0, Differencey / m_TranslationSpeed, 0)) * m_TranslationSpeed * Time.deltaTime);
