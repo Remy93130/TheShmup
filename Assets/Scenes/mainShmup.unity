@@ -7223,7 +7223,7 @@ MonoBehaviour:
   m_DoNotDestroyGameObjectOnLoad: 0
   m_levels:
   - m_PatternsPrefabs:
-    - {fileID: 1593796370173536, guid: 9332a2f137f4fc1449c87ff30d0677c7, type: 3}
+    - {fileID: 1593796370173536, guid: e81a7e048d5998b4290bc6e06bc3f318, type: 3}
     - {fileID: 1593796370173536, guid: e9a4730a0d7b2b3459759116cf71690c, type: 3}
     - {fileID: 1150860623414768, guid: 2e672562397ecec40a96eebf7d1cc24f, type: 3}
     - {fileID: 1593796370173536, guid: e9a4730a0d7b2b3459759116cf71690c, type: 3}

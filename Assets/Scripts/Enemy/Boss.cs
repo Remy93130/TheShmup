@@ -46,7 +46,7 @@ public class Boss: Enemy {
 		m_Rigidbody.transform.position = new Vector3(currXPosition, 0, 0);
 	}
 
-	public void OnCollisionEnter(Collision collision)
+	protected override void OnCollisionEnter(Collision collision)
 	{
         
         float currXPosition = m_Rigidbody.transform.position.x;
