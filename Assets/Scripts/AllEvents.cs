@@ -152,6 +152,7 @@ public class GoToNextLevelEvent : SDD.Events.Event
 public class PlayerHasBeenHitEvent:SDD.Events.Event
 {
 	public PlayerController ePlayerController;
+	public bool eOneShot = false;
 }
 #endregion
 

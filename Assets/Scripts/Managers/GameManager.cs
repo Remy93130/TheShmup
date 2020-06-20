@@ -206,9 +206,16 @@ public class GameManager : Manager<GameManager> {
 	#region Callbacks to events issued by Score items
 	private void PlayerHasBeenHit(PlayerHasBeenHitEvent e)
 	{
-		DecrementNLives(1);
+		if (e.eOneShot)
+		{
+			DecrementNLives(999);
+		}
+		else
+		{
+			DecrementNLives(1);
+		}
 
-		if (m_NLives == 0)
+		if (m_NLives <= 0)
 		{
 
 			Over();

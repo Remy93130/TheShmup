@@ -85,7 +85,12 @@ public class PlayerController : SimpleGameStateObserver {
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		if(collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("EnemyBullet"))
+		// Boss collision = oneshot
+		if (collision.gameObject.GetComponent<IBoss>() != null)
+		{
+			EventManager.Instance.Raise(new PlayerHasBeenHitEvent() { ePlayerController = this, eOneShot = true });
+		}
+		if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("EnemyBullet"))
 		{
 			EventManager.Instance.Raise(new PlayerHasBeenHitEvent() { ePlayerController = this });
 		}
