@@ -1,7 +1,6 @@
 <SFX_SETUP>
   <SFX name="Button"/>
 	<SFX name="Selection"/>
-  <SFX name="Tadam"/>
   <SFX name="Shot"/>
 	<SFX name="LetsGo"/>
   <SFX name="bossArrival"/>

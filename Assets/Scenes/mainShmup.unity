@@ -3002,7 +3002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54936f63cb4f6e347a300cd86a657118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SoundName: Tadam
+  m_SoundName: Button
 --- !u!1 &397891669
 GameObject:
   m_ObjectHideFlags: 0
@@ -3410,7 +3410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54936f63cb4f6e347a300cd86a657118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SoundName: Tadam
+  m_SoundName: Button
 --- !u!1 &429698211
 GameObject:
   m_ObjectHideFlags: 0
@@ -13513,8 +13513,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: He might be one of the worst pilot ever born but he knows how to manage
-    a project.
+  m_text: 'He might be one of the worst pilot ever born but he knows how to manage
+    a project
+
+
+    For him "To test is to doubt".'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9f2d3e0c706dfc94387ad07a2249e3c3, type: 2}
   m_sharedMaterial: {fileID: -1198850816775491465, guid: 9f2d3e0c706dfc94387ad07a2249e3c3,
@@ -18527,7 +18530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54936f63cb4f6e347a300cd86a657118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SoundName: Tadam
+  m_SoundName: Button
 --- !u!1 &1943317671
 GameObject:
   m_ObjectHideFlags: 0
