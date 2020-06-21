@@ -124,6 +124,8 @@ MonoBehaviour:
   m_ShootPeriod: 2
   m_ProbaShoot: 10
   m_BulletSpawnPoint: {fileID: 4546757359376846}
+  m_explosionPrefab: {fileID: 1150934714579380, guid: 779aa8c25fbd0e1488637639c9fff976,
+    type: 3}
   m_Score: 5
 --- !u!1001 &966388853891705273
 PrefabInstance:
