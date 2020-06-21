@@ -33,6 +33,8 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	private IPattern m_CurrentPattern;
 	private float m_RationShootLevel;
 
+	private bool _isArcadeMode = false;
+
 	public IPattern CurrentPattern { get => m_CurrentPattern; }
 
 	public float RationShootLevel { get => m_RationShootLevel; }
@@ -158,13 +160,15 @@ public class EnemiesManager : Manager<EnemiesManager> {
 		m_CurrentLevel = m_levels[m_CurrentLevelIndex];
 		m_RationShootLevel = 1;
 		m_ArcadeCounter = 0;
+		_isArcadeMode = true;
 		PlayLevel(true);
 	}
 
 	protected void PlayLevel(bool isArcade = false)
 	{
 		Reset();
-        HudManager.Instance.m_PrefScore.SetActive(isArcade);
+		_isArcadeMode = isArcade;
+		HudManager.Instance.m_PrefScore.SetActive(isArcade);
 		EventManager.Instance.Raise(new GoToNextPatternEvent() { eArcadeMode = isArcade });
 	}
 
@@ -195,6 +199,6 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	#endregion
 
 	#region Callbacks to Pattern events
-	void AllEnemiesOfPatternHaveBeenDestroyed(AllEnemiesOfPatternHaveBeenDestroyedEvent e) => EventManager.Instance.Raise(new GoToNextPatternEvent());
+	void AllEnemiesOfPatternHaveBeenDestroyed(AllEnemiesOfPatternHaveBeenDestroyedEvent e) => EventManager.Instance.Raise(new GoToNextPatternEvent() { eArcadeMode = _isArcadeMode });
 	#endregion
 }
