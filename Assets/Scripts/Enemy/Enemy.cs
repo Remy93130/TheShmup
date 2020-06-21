@@ -88,7 +88,7 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 
 	protected virtual void OnCollisionEnter(Collision collision)
 	{
-		ShieldCollision shield = GetComponentInChildren<ShieldCollision>();
+		Shield shield = GetComponentInChildren<Shield>();
 		if (collision.gameObject.CompareTag("PlayerBullet") && shield != null)
 		{
 			shield.ManageCollision(collision);
