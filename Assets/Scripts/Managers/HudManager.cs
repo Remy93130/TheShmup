@@ -34,6 +34,7 @@ public class HudManager : Manager<HudManager>
 
 
 
+
     private float _fadeMode;
     #endregion
 

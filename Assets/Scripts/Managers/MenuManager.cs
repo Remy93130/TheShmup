@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SDD.Events;
+using UnityEngine.UI;
 
 public class MenuManager : Manager<MenuManager>
 {
@@ -22,8 +23,13 @@ public class MenuManager : Manager<MenuManager>
     [SerializeField] GameObject m_PanelControls;
 	[SerializeField] GameObject m_PanelChooseLevel;
     [SerializeField] GameObject m_PanelChooseType;
-    [SerializeField] GameObject m_PanelAboutUs;
     [SerializeField] GameObject m_PanelCrew;
+
+    [Header("PopUp Field")]
+    [SerializeField] GameObject m_PopUpCommander;
+    [SerializeField] GameObject m_PopUpAmiral;
+    [SerializeField] GameObject m_PopUpPilot;
+
 
 
     List<GameObject> m_AllPanels;
@@ -81,7 +87,6 @@ public class MenuManager : Manager<MenuManager>
         if (m_PanelControls) m_AllPanels.Add(m_PanelControls);
 		if (m_PanelChooseLevel) m_AllPanels.Add(m_PanelChooseLevel);
         if (m_PanelChooseType) m_AllPanels.Add(m_PanelChooseType);
-        if (m_PanelAboutUs) m_AllPanels.Add(m_PanelAboutUs);
         if (m_PanelCrew) m_AllPanels.Add(m_PanelCrew);
 
     }
@@ -108,11 +113,17 @@ public class MenuManager : Manager<MenuManager>
 
 	public void MainMenuButtonHasBeenClicked() => EventManager.Instance.Raise(new MainMenuButtonClickedEvent());
 
-	public void AboutUsButtonHasBeenClicked() => EventManager.Instance.Raise(new AboutUsButtonClickedEvent());
-
 	public void CrewButtonHasBeenClicked() => EventManager.Instance.Raise(new CrewButtonClickedEvent());
 
-	public void MainMenuButtonFromSettingsHasBeenClicked() => EventManager.Instance.Raise(new MainMenuButtonFromSettingsClickedEvent());
+    public void ImageCommanderHasBeenClicked() => EventManager.Instance.Raise(new ImageCommanderClickedEvent());
+
+    public void ImageAmiralHasBeenClicked() => EventManager.Instance.Raise(new ImageAmiralClickedEvent());
+
+    public void ImagePilotHasBeenClicked() => EventManager.Instance.Raise(new ImagePilotClickedEvent());
+
+    public void CloseButtonHasBeenClicked() => EventManager.Instance.Raise(new CloseButtonClickedEvent());
+
+    public void MainMenuButtonFromSettingsHasBeenClicked() => EventManager.Instance.Raise(new MainMenuButtonFromSettingsClickedEvent());
 
 	public void NextLevelButtonHasBeenClicked() => EventManager.Instance.Raise(new NextLevelButtonClickedEvent());
 
@@ -138,10 +149,47 @@ public class MenuManager : Manager<MenuManager>
 	private void GoToNextLevel(GoToNextLevelEvent e) => OpenPanel(null);
 
 	protected override void GameMenu(GameMenuEvent e) => OpenPanel(m_PanelMainMenu);
-
-	protected override void AboutUs(GameAboutUsEvent e) => OpenPanel(m_PanelAboutUs);
 	protected override void Crew(GameCrewEvent e) => OpenPanel(m_PanelCrew);
-	protected override void GameBeginnerLevelPlay(GameBeginnerLevelEvent e) => OpenPanel(null);
+    protected override void ImageCommander(GameImageCommanderEvent e)
+    {
+        MenuManager.Instance.m_PopUpCommander.SetActive(true);
+        for (int i = 0; i < m_PanelCrew.transform.childCount; i++)
+        {
+            Button button = m_PanelCrew.transform.GetChild(i).GetComponent<Button>();
+            if (button) button.interactable = false; 
+        }
+    }
+    protected override void ImageAmiral(GameImageAmiralEvent e)
+    {
+        MenuManager.Instance.m_PopUpAmiral.SetActive(true);
+        for (int i = 0; i < m_PanelCrew.transform.childCount; i++)
+        {
+            Button button = m_PanelCrew.transform.GetChild(i).GetComponent<Button>();
+            if (button) button.interactable = false;
+        }
+    }
+    protected override void ImagePilot(GameImagePilotEvent e)
+    {
+        MenuManager.Instance.m_PopUpPilot.SetActive(true);
+        for (int i = 0; i < m_PanelCrew.transform.childCount; i++)
+        {
+            Button button = m_PanelCrew.transform.GetChild(i).GetComponent<Button>();
+            if (button) button.interactable = false;
+        }
+    }
+    protected override void CloseButton(GameCloseButtonEvent e)
+    {
+        MenuManager.Instance.m_PopUpCommander.SetActive(false);
+        MenuManager.Instance.m_PopUpAmiral.SetActive(false);
+        MenuManager.Instance.m_PopUpPilot.SetActive(false);
+        for (int i = 0; i < m_PanelCrew.transform.childCount; i++)
+        {
+            Button button = m_PanelCrew.transform.GetChild(i).GetComponent<Button>();
+            if (button) button.interactable = true;
+        }
+
+    }
+    protected override void GameBeginnerLevelPlay(GameBeginnerLevelEvent e) => OpenPanel(null);
 	protected override void GameIntermediateLevelPlay(GameIntermediateLevelEvent e) => OpenPanel(null);
 	protected override void GameDifficultLevelPlay(GameDifficultLevelEvent e) => OpenPanel(null);
 	protected override void GameArcadePlay(GameArcadeEvent e) => OpenPanel(null);

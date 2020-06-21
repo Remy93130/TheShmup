@@ -78,13 +78,16 @@ public class GameManager : Manager<GameManager> {
 		EventManager.Instance.AddListener<DifficultButtonClickedEvent>(DifficultButtonClicked);
 		EventManager.Instance.AddListener<ArcadeButtonClickedEvent>(ArcadeButtonClicked);
         EventManager.Instance.AddListener<NormalButtonClickedEvent>(NormalButtonClicked);
-        EventManager.Instance.AddListener<AboutUsButtonClickedEvent>(AboutUsButtonClicked);
         EventManager.Instance.AddListener<CrewButtonClickedEvent>(CrewButtonClicked);
         EventManager.Instance.AddListener<LevelHasEnded>(Victory);
 		EventManager.Instance.AddListener<ScoreItemEvent>(ScoreHasBeenGained);
 		EventManager.Instance.AddListener<PatternHasBeenInstantiatedEvent>(PatternHasBeenInstantiated);
 		EventManager.Instance.AddListener<AllEnemiesOfPatternHaveBeenDestroyedEvent>(AllEnemiesOfPatternHaveBeenDestroyed);
-	}
+        EventManager.Instance.AddListener<ImageCommanderClickedEvent>(ImageCommanderClicked);
+        EventManager.Instance.AddListener<ImageAmiralClickedEvent>(ImageAmiralClicked);
+        EventManager.Instance.AddListener<ImagePilotClickedEvent>(ImagePilotClicked);
+        EventManager.Instance.AddListener<CloseButtonClickedEvent>(CloseButtonClicked);
+    }
 
 	/// <summary>
 	/// TODO: Same
@@ -106,13 +109,16 @@ public class GameManager : Manager<GameManager> {
 		EventManager.Instance.RemoveListener<DifficultButtonClickedEvent>(DifficultButtonClicked);
 		EventManager.Instance.RemoveListener<ArcadeButtonClickedEvent>(ArcadeButtonClicked);
         EventManager.Instance.RemoveListener<NormalButtonClickedEvent>(NormalButtonClicked);
-        EventManager.Instance.RemoveListener<AboutUsButtonClickedEvent>(AboutUsButtonClicked);
         EventManager.Instance.RemoveListener<CrewButtonClickedEvent>(CrewButtonClicked);
         EventManager.Instance.RemoveListener<LevelHasEnded>(Victory);
 		EventManager.Instance.RemoveListener<ScoreItemEvent>(ScoreHasBeenGained);
 		EventManager.Instance.RemoveListener<PatternHasBeenInstantiatedEvent>(PatternHasBeenInstantiated);
 		EventManager.Instance.RemoveListener<AllEnemiesOfPatternHaveBeenDestroyedEvent>(AllEnemiesOfPatternHaveBeenDestroyed);
-	}
+        EventManager.Instance.RemoveListener<ImageCommanderClickedEvent>(ImageCommanderClicked);
+        EventManager.Instance.RemoveListener<ImageAmiralClickedEvent>(ImageAmiralClicked);
+        EventManager.Instance.RemoveListener<ImagePilotClickedEvent>(ImagePilotClicked);
+        EventManager.Instance.RemoveListener<CloseButtonClickedEvent>(CloseButtonClicked);
+    }
 	#endregion
 
 	#region Manager implementation
@@ -186,11 +192,17 @@ public class GameManager : Manager<GameManager> {
 
     private void NormalButtonClicked(NormalButtonClickedEvent e) => ChooseLevel();
 
-    private void AboutUsButtonClicked(AboutUsButtonClickedEvent e) => AboutUs();
-
     private void CrewButtonClicked(CrewButtonClickedEvent e) => Crew();
 
-	private void NextLevelButtonClicked(NextLevelButtonClickedEvent e) => EventManager.Instance.Raise(new GoToNextLevelEvent());
+    private void ImageCommanderClicked(ImageCommanderClickedEvent e) => ImageCommander();
+
+    private void ImageAmiralClicked(ImageAmiralClickedEvent e) => ImageAmiral();
+
+    private void ImagePilotClicked(ImagePilotClickedEvent e) => ImagePilot();
+
+    private void CloseButtonClicked(CloseButtonClickedEvent e) => CloseButton();
+
+    private void NextLevelButtonClicked(NextLevelButtonClickedEvent e) => EventManager.Instance.Raise(new GoToNextLevelEvent());
 
 	private void ResumeButtonClicked(ResumeButtonClickedEvent e) => Resume();
 
@@ -247,17 +259,39 @@ public class GameManager : Manager<GameManager> {
 		m_GameState = GameState.gamePlay;
 	}
 
-    private void AboutUs()
-    {
-        SetTimeScale(0);
-        m_GameState = GameState.gameMenu;
-        EventManager.Instance.Raise(new GameAboutUsEvent());
-    }
     private void Crew()
     {
         SetTimeScale(0);
         m_GameState = GameState.gameMenu;
         EventManager.Instance.Raise(new GameCrewEvent());
+    }
+
+    private void ImageCommander()
+    {
+        SetTimeScale(0);
+        m_GameState = GameState.gameMenu;
+        EventManager.Instance.Raise(new GameImageCommanderEvent());
+    }
+
+    private void ImageAmiral()
+    {
+        SetTimeScale(0);
+        m_GameState = GameState.gameMenu;
+        EventManager.Instance.Raise(new GameImageAmiralEvent());
+    }
+
+    private void ImagePilot()
+    {
+        SetTimeScale(0);
+        m_GameState = GameState.gameMenu;
+        EventManager.Instance.Raise(new GameImagePilotEvent());
+    }
+
+    private void CloseButton()
+    {
+        SetTimeScale(0);
+        m_GameState = GameState.gameMenu;
+        EventManager.Instance.Raise(new GameCloseButtonEvent());
     }
 	private void BeginnerLevel()
 	{

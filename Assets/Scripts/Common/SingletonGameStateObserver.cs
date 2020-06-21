@@ -24,8 +24,11 @@ public abstract class SingletonGameStateObserver<T> :  Singleton<T>,IEventHandle
         EventManager.Instance.AddListener<GameBossShotedEvent>(GameBossShoted);
         EventManager.Instance.AddListener<GameChooseTypeEvent>(GameChooseType);
         EventManager.Instance.AddListener<NewBossEvent>(NewBoss);
-        EventManager.Instance.AddListener<GameAboutUsEvent>(AboutUs);
         EventManager.Instance.AddListener<GameCrewEvent>(Crew);
+        EventManager.Instance.AddListener<GameImageCommanderEvent>(ImageCommander);
+        EventManager.Instance.AddListener<GameCloseButtonEvent>(CloseButton);
+        EventManager.Instance.AddListener<GameImageAmiralEvent>(ImageAmiral);
+        EventManager.Instance.AddListener<GameImagePilotEvent>(ImagePilot);
 
     }
 
@@ -47,8 +50,11 @@ public abstract class SingletonGameStateObserver<T> :  Singleton<T>,IEventHandle
         EventManager.Instance.RemoveListener<GameBossShotedEvent>(GameBossShoted);
         EventManager.Instance.RemoveListener<GameChooseTypeEvent>(GameChooseType);
         EventManager.Instance.RemoveListener<NewBossEvent>(NewBoss);
-        EventManager.Instance.RemoveListener<GameAboutUsEvent>(AboutUs);
         EventManager.Instance.RemoveListener<GameCrewEvent>(Crew);
+        EventManager.Instance.RemoveListener<GameImageCommanderEvent>(ImageCommander);
+        EventManager.Instance.RemoveListener<GameCloseButtonEvent>(CloseButton);
+        EventManager.Instance.RemoveListener<GameImageAmiralEvent>(ImageAmiral);
+        EventManager.Instance.RemoveListener<GameImagePilotEvent>(ImagePilot);
     }
 
 	protected override void Awake()
@@ -65,11 +71,19 @@ public abstract class SingletonGameStateObserver<T> :  Singleton<T>,IEventHandle
 	protected virtual void GameMenu(GameMenuEvent e)
 	{
 	}
-
-    protected virtual void AboutUs(GameAboutUsEvent e)
+    protected virtual void Crew(GameCrewEvent e)
     {
     }
-    protected virtual void Crew(GameCrewEvent e)
+    protected virtual void ImageCommander(GameImageCommanderEvent e)
+    {
+    }
+    protected virtual void ImageAmiral(GameImageAmiralEvent e)
+    {
+    }
+    protected virtual void ImagePilot(GameImagePilotEvent e)
+    {
+    }
+    protected virtual void CloseButton(GameCloseButtonEvent e)
     {
     }
 
