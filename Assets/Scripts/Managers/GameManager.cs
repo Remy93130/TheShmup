@@ -347,9 +347,17 @@ public class GameManager : Manager<GameManager> {
             BestScore = Score;
             EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eNLives = NLives, eScore = Score });
         }
-        SfxManager.Instance.PlaySfx(Constants.GAMEOVER_SFX);
+		StartCoroutine(GameOverAnimation());
+		SfxManager.Instance.PlaySfx(Constants.GAMEOVER_SFX);
 		EventManager.Instance.Raise(new GameOverEvent() { eIsArcadeMode = _isArcadeMode });
 		_isArcadeMode = false;
+	}
+
+	private IEnumerator GameOverAnimation()
+	{
+		Debug.Log("its the end boi");
+		MusicLoopsManager.Instance.StopAllRightAway();
+		yield return new WaitForSeconds(.5f);
 	}
 
 	private void Victory(LevelHasEnded e)

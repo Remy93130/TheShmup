@@ -10087,12 +10087,7 @@ MonoBehaviour:
   m_DoNotDestroyGameObjectOnLoad: 0
   m_levels:
   - m_PatternsPrefabs:
-    - {fileID: 1593796370173536, guid: e81a7e048d5998b4290bc6e06bc3f318, type: 3}
     - {fileID: 1593796370173536, guid: 8ee7be13dc27e8148a0bcb1f4df0cf48, type: 3}
-    - {fileID: 1150860623414768, guid: 2e672562397ecec40a96eebf7d1cc24f, type: 3}
-    - {fileID: 1593796370173536, guid: e9a4730a0d7b2b3459759116cf71690c, type: 3}
-    - {fileID: 1150860623414768, guid: cdd2999a68d62e34baa5992fb8d05a9c, type: 3}
-    - {fileID: 1593796370173536, guid: e9a4730a0d7b2b3459759116cf71690c, type: 3}
   - m_PatternsPrefabs:
     - {fileID: 1150860623414768, guid: f258a7a2407b49646840762cf43a69c8, type: 3}
     - {fileID: 1593796370173536, guid: 6c97554480385604db4cc59f67ff235d, type: 3}

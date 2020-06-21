@@ -107,7 +107,7 @@ public class EnemiesManager : Manager<EnemiesManager> {
 		while (m_CurrentPatternGO) yield return null;
 		if (m_CurrentLevel.hasLevelFinished(m_CurrentPatternIndex))
 		{
-			EventManager.Instance.Raise(new LevelHasEnded());
+			StartCoroutine(GameEndAnimation());
 		}
 		else
 		{
@@ -115,6 +115,13 @@ public class EnemiesManager : Manager<EnemiesManager> {
 			m_CurrentPattern.StartPattern();
 			EventManager.Instance.Raise(new PatternHasBeenInstantiatedEvent() { ePattern = m_CurrentPattern });
 		}
+	}
+
+	private IEnumerator GameEndAnimation()
+	{
+		MusicLoopsManager.Instance.StopAllRightAway();
+		yield return new WaitForSeconds(5f);
+		EventManager.Instance.Raise(new LevelHasEnded());
 	}
 	#endregion
 
