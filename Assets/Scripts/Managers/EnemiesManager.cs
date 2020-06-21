@@ -71,8 +71,6 @@ public class EnemiesManager : Manager<EnemiesManager> {
 		m_CurrentPatternGO = null;
 		m_CurrentPatternIndex = -1;
 		HudManager.Instance.SetBorderBoss(false, true);
-
-        //HudManager.Instance.m_PrefScore.SetActive(false);
     }
 
 	private void DeleteOldGameObject()
