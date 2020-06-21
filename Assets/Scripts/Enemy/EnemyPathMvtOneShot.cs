@@ -6,9 +6,5 @@ using UnityEngine;
 
 public class EnemyPathMvtOneShot : EnemyITweenPathMvt
 {
-
-	public override void ShootBullet()
-	{
-		GameObject bulletGO1 = Instantiate(m_BulletPrefab, m_BulletSpawnPoint.position, Quaternion.identity);
-	}
+	public override void ShootBullet() => Instantiate(m_BulletPrefab, m_BulletSpawnPoint.position, Quaternion.identity);
 }

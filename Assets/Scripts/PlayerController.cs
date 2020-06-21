@@ -22,7 +22,7 @@ public class PlayerController : SimpleGameStateObserver {
 	[Header("Shoot")]
 	[SerializeField] private GameObject m_BulletPrefab;
 	[SerializeField] private float m_ShootPeriod;
-	private float m_NextShootTime;
+	private float _nextShootTime;
 	[SerializeField] private Transform m_BulletSpawnPoint;
 
 	[Header("Gfx")]
@@ -33,7 +33,9 @@ public class PlayerController : SimpleGameStateObserver {
 
 	public Vector3 GetPositionPlayer {  get { return m_Rigidbody.position; } }
 
-	protected override void Awake()
+    #region Lifecycle
+
+    protected override void Awake()
 	{
 		base.Awake();
 		m_Rigidbody = GetComponent<Rigidbody>();
@@ -45,10 +47,10 @@ public class PlayerController : SimpleGameStateObserver {
 		if (!GameManager.Instance.IsPlaying) return;
 
 		//Fire
-		if (Input.GetButton(m_FireAxisName) && m_NextShootTime<Time.time)
+		if (Input.GetButton(m_FireAxisName) && _nextShootTime<Time.time)
 		{
 			ShootBullet();
-			m_NextShootTime = Time.time + m_ShootPeriod;
+			_nextShootTime = Time.time + m_ShootPeriod;
 		}
 
 		//Gfx rotation
@@ -72,16 +74,15 @@ public class PlayerController : SimpleGameStateObserver {
 		m_Rigidbody.velocity = velocity;
 	}
 
-	private void Reset()
+    #endregion
+
+    private void Reset()
 	{
 		m_Rigidbody.position = m_SpawnPoint.position;
-		m_NextShootTime = Time.time;
+		_nextShootTime = Time.time;
 	}
 
-	void ShootBullet()
-	{
-		GameObject bulletGO = Instantiate(m_BulletPrefab, m_BulletSpawnPoint.position, Quaternion.identity);
-	}
+	void ShootBullet() => Instantiate(m_BulletPrefab, m_BulletSpawnPoint.position, Quaternion.identity);
 
 	private void OnCollisionEnter(Collision collision)
 	{
@@ -96,25 +97,16 @@ public class PlayerController : SimpleGameStateObserver {
 		}
 	}
 
-	//Game state events
-	protected override void GameBeginnerLevelPlay(GameBeginnerLevelEvent e)
-	{
-		Reset();
-	}
+    #region Game state event
 
-	protected override void GameIntermediateLevelPlay(GameIntermediateLevelEvent e)
-	{
-		Reset();
-	}
+    protected override void GameBeginnerLevelPlay(GameBeginnerLevelEvent e) => Reset();
 
-	protected override void GameDifficultLevelPlay(GameDifficultLevelEvent e)
-	{
-		Reset();
-	}
-	protected override void GameArcadePlay(GameArcadeEvent e)
-	{
-		Reset();
-	}
+	protected override void GameIntermediateLevelPlay(GameIntermediateLevelEvent e) => Reset();
+
+	protected override void GameDifficultLevelPlay(GameDifficultLevelEvent e) => Reset();
+	protected override void GameArcadePlay(GameArcadeEvent e) => Reset();
+
+    #endregion
 
 
 }

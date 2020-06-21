@@ -11,29 +11,18 @@ public class GameManager : Manager<GameManager> {
 
 	private bool _isArcadeMode = false;
 
-	//Game State
 	private GameState m_GameState;
 	public bool IsPlaying { get { return m_GameState == GameState.gamePlay; } }
 
-	// TIME SCALE
 	private float m_TimeScale;
-	public float TimeScale { get { return m_TimeScale; } }
+	public float TimeScale { get => m_TimeScale; }
 	void SetTimeScale(float newTimeScale)
 	{
 		m_TimeScale = newTimeScale;
 		Time.timeScale = m_TimeScale;
 	}
 
-	//SCORE
-	private int m_Score;
-	public int Score {
-		get { return m_Score; }
-		set
-		{
-			m_Score = value;
-			// BestScore = Mathf.Max(BestScore, value);
-		}
-	}
+	public int Score { get; set; }
 
 	public int BestScore
 	{
@@ -41,65 +30,41 @@ public class GameManager : Manager<GameManager> {
 		set => PlayerPrefs.SetInt("BEST_SCORE", value);
 	}
 
-	void IncrementScore(int increment) => SetScore(m_Score + increment);
+	void IncrementScore(int increment) => SetScore(Score + increment);
 
 	void SetScore(int score)
 	{
 		Score = score;
-		//EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = m_Score, eNLives = m_NLives, eNEnemiesLeftBeforeVictory = m_NEnemiesLeftBeforeVictory });
-		EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = m_Score, eNLives = m_NLives});
+		EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = Score, eNLives = NLives});
 	}
 
-	//LIVES
 	[Header("GameManager")]
 	[SerializeField] private int m_NStartLives;
 
-	private int m_NLives;
+	public int NLives { get; private set; }
 
-	public int NLives { get { return m_NLives; } }
- 
-    void DecrementNLives(int decrement)
-	{
-		SetNLives(m_NLives-decrement);
-	}
-   
+	void DecrementNLives(int decrement) => SetNLives(NLives-decrement);
 
     void SetNLives(int nLives)
 	{
-		m_NLives =nLives;
-		//EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = m_Score, eNLives = m_NLives, eNEnemiesLeftBeforeVictory = m_NEnemiesLeftBeforeVictory });
-		EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = m_Score, eNLives = m_NLives});
+		NLives = nLives;
+		EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = Score, eNLives = NLives});
 	}
-   
 
-    // Victory Condition
-    /*[SerializeField] private int m_NEnemiesToDestroyForVictory;
-	private int m_NEnemiesLeftBeforeVictory;
-	void DecrementNEnemiesLeftBeforeVictory(int decrement)
-	{
-		SetNEnemiesLeftBeforeVictory(m_NEnemiesLeftBeforeVictory - decrement);
-	}
-	void SetNEnemiesLeftBeforeVictory(int nEnemies)
-	{
-		m_NEnemiesLeftBeforeVictory = Mathf.Max(nEnemies,0);
-		EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = m_Score, eNLives = m_NLives, eNEnemiesLeftBeforeVictory = m_NEnemiesLeftBeforeVictory });
-	}*/
-
-    //Players
     [SerializeField]
 	List<PlayerController> m_Players = new List<PlayerController>();
 
 	public PlayerController GetPlayer { get { return m_Players[UnityEngine.Random.Range(0,m_Players.Count)]; } }
 
 	#region Events' subscription
+
+	/// <summary>
+	/// TODO: Voir si c est vraiment utile car lol un peu
+	/// </summary>
 	public override void SubscribeEvents()
 	{
 		base.SubscribeEvents();
-
-		//PlayerController
 		EventManager.Instance.AddListener<PlayerHasBeenHitEvent>(PlayerHasBeenHit);
-
-		//MainMenuManager
 		EventManager.Instance.AddListener<MainMenuButtonClickedEvent>(MainMenuButtonClicked);
         EventManager.Instance.AddListener<MainMenuButtonFromSettingsClickedEvent>(MainMenuButtonFromSettingsClicked);
         EventManager.Instance.AddListener<PlayButtonClickedEvent>(PlayButtonClicked);
@@ -115,30 +80,19 @@ public class GameManager : Manager<GameManager> {
         EventManager.Instance.AddListener<NormalButtonClickedEvent>(NormalButtonClicked);
         EventManager.Instance.AddListener<AboutUsButtonClickedEvent>(AboutUsButtonClicked);
         EventManager.Instance.AddListener<CrewButtonClickedEvent>(CrewButtonClicked);
-
-
-        //Enemy
-        //EventManager.Instance.AddListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);
-
-        //Enemy Manager
         EventManager.Instance.AddListener<LevelHasEnded>(Victory);
-
-		//Score Item
 		EventManager.Instance.AddListener<ScoreItemEvent>(ScoreHasBeenGained);
-
-		//Pattern
 		EventManager.Instance.AddListener<PatternHasBeenInstantiatedEvent>(PatternHasBeenInstantiated);
 		EventManager.Instance.AddListener<AllEnemiesOfPatternHaveBeenDestroyedEvent>(AllEnemiesOfPatternHaveBeenDestroyed);
 	}
 
+	/// <summary>
+	/// TODO: Same
+	/// </summary>
 	public override void UnsubscribeEvents()
 	{
 		base.UnsubscribeEvents();
-
-		//PlayerController
 		EventManager.Instance.RemoveListener<PlayerHasBeenHitEvent>(PlayerHasBeenHit);
-
-		//MainMenuManager
 		EventManager.Instance.RemoveListener<MainMenuButtonClickedEvent>(MainMenuButtonClicked);
         EventManager.Instance.RemoveListener<MainMenuButtonFromSettingsClickedEvent>(MainMenuButtonFromSettingsClicked);
 		EventManager.Instance.RemoveListener<PlayButtonClickedEvent>(PlayButtonClicked);
@@ -154,27 +108,18 @@ public class GameManager : Manager<GameManager> {
         EventManager.Instance.RemoveListener<NormalButtonClickedEvent>(NormalButtonClicked);
         EventManager.Instance.RemoveListener<AboutUsButtonClickedEvent>(AboutUsButtonClicked);
         EventManager.Instance.RemoveListener<CrewButtonClickedEvent>(CrewButtonClicked);
-
-        //Enemy
-        //EventManager.Instance.RemoveListener<EnemyHasBeenDestroyedEvent>(EnemyHasBeenDestroyed);
-
-        //Enemy Manager
         EventManager.Instance.RemoveListener<LevelHasEnded>(Victory);
-
-		//Score Item
 		EventManager.Instance.RemoveListener<ScoreItemEvent>(ScoreHasBeenGained);
-
-		//Pattern
 		EventManager.Instance.RemoveListener<PatternHasBeenInstantiatedEvent>(PatternHasBeenInstantiated);
 		EventManager.Instance.RemoveListener<AllEnemiesOfPatternHaveBeenDestroyedEvent>(AllEnemiesOfPatternHaveBeenDestroyed);
 	}
 	#endregion
 
 	#region Manager implementation
+
 	protected override IEnumerator InitCoroutine()
 	{
 		Menu();
-		//EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = 0, eNLives = 0, eNEnemiesLeftBeforeVictory = 0 });
 		EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eScore = 0, eNLives = 0});
         EventManager.Instance.Raise(new GameBossShotedEvent() { eNLives = 0 });
 		yield break;
@@ -185,54 +130,39 @@ public class GameManager : Manager<GameManager> {
 	{
 		SetScore(0);
 		SetNLives(m_NStartLives);
-		//SetNEnemiesLeftBeforeVictory(m_NEnemiesToDestroyForVictory);
 	}
 
-	#region Callbacks to events issued by Enemy
-	/*private void EnemyHasBeenDestroyed(EnemyHasBeenDestroyedEvent e)
-	{
-		if (e.eDestroyedByPlayer)
-		{
-			DecrementNEnemiesLeftBeforeVictory(1);
-
-			if (m_NEnemiesLeftBeforeVictory == 0)
-			{
-				Victory();
-			}
-		}
-	}*/
-	#endregion
-
 	#region Callbacks to events issued by Score items
+
 	private void PlayerHasBeenHit(PlayerHasBeenHitEvent e)
 	{
 		if (e.eOneShot)
-		{
 			DecrementNLives(999);
-		}
 		else
-		{
 			DecrementNLives(1);
-		}
-
-		if (m_NLives <= 0)
-		{
-
+		if (NLives <= 0)
 			Over();
-		}
 	}
+
 	#endregion
 
 	#region Callbacks to events issued by Score items
-	private void ScoreHasBeenGained(ScoreItemEvent e)
-	{
-		IncrementScore(e.eScore.Score);
-	}
+
+	private void ScoreHasBeenGained(ScoreItemEvent e) => IncrementScore(e.eScore.Score);
+
 	#endregion
 
 	#region Callbacks to events issued by Pattern
+	/// <summary>
+	/// TODO: Voir si on peut delete (je pense que oui)
+	/// </summary>
+	/// <param name="e"></param>
 	private void PatternHasBeenInstantiated(PatternHasBeenInstantiatedEvent e)
 	{ }
+	/// <summary>
+	/// TODO: Same
+	/// </summary>
+	/// <param name="e"></param>
 	private void AllEnemiesOfPatternHaveBeenDestroyed(AllEnemiesOfPatternHaveBeenDestroyedEvent e)
 	{ }
 	#endregion
@@ -240,80 +170,49 @@ public class GameManager : Manager<GameManager> {
 
 
 	#region Callbacks to Events issued by MenuManager
-	private void MainMenuButtonClicked(MainMenuButtonClickedEvent e)
-	{
-		Menu();
-	}
+	private void MainMenuButtonClicked(MainMenuButtonClickedEvent e) => Menu();
 
-    private void MainMenuButtonFromSettingsClicked(MainMenuButtonFromSettingsClickedEvent e)
-    {
-        MenuFromSettings();
-    }
+    private void MainMenuButtonFromSettingsClicked(MainMenuButtonFromSettingsClickedEvent e) => MenuFromSettings();
 
-	private void PlayButtonClicked(PlayButtonClickedEvent e)
-	{
-		ChooseType();
-	}
+	private void PlayButtonClicked(PlayButtonClickedEvent e) => ChooseType();
 
-	private void BeginnerButtonClicked(BeginnerButtonClickedEvent e)
-	{
-		BeginnerLevel();
-	}
+	private void BeginnerButtonClicked(BeginnerButtonClickedEvent e) => BeginnerLevel();
 
-	private void IntermediateButtonClicked(IntermediateButtonClickedEvent e)
-	{
-		IntermediateLevel();
-	}
+	private void IntermediateButtonClicked(IntermediateButtonClickedEvent e) => IntermediateLevel();
 
-	private void DifficultButtonClicked(DifficultButtonClickedEvent e)
-	{
-		DifficultLevel();
-	}
-	private void ArcadeButtonClicked(ArcadeButtonClickedEvent e)
-	{
-		Arcade();
-	}
-    private void NormalButtonClicked(NormalButtonClickedEvent e)
-    {
-        ChooseLevel();
-    }
-    private void AboutUsButtonClicked(AboutUsButtonClickedEvent e)
-    {
-        AboutUs();
-    }
-    private void CrewButtonClicked(CrewButtonClickedEvent e)
-    {
-        Crew();
-    }
-	private void NextLevelButtonClicked(NextLevelButtonClickedEvent e)
-	{
-		EventManager.Instance.Raise(new GoToNextLevelEvent());
-	}
+	private void DifficultButtonClicked(DifficultButtonClickedEvent e) => DifficultLevel();
 
-	private void ResumeButtonClicked(ResumeButtonClickedEvent e)
-	{
-		Resume();
-	}
+	private void ArcadeButtonClicked(ArcadeButtonClickedEvent e) => Arcade();
 
+    private void NormalButtonClicked(NormalButtonClickedEvent e) => ChooseLevel();
+
+    private void AboutUsButtonClicked(AboutUsButtonClickedEvent e) => AboutUs();
+
+    private void CrewButtonClicked(CrewButtonClickedEvent e) => Crew();
+
+	private void NextLevelButtonClicked(NextLevelButtonClickedEvent e) => EventManager.Instance.Raise(new GoToNextLevelEvent());
+
+	private void ResumeButtonClicked(ResumeButtonClickedEvent e) => Resume();
+
+	/// <summary>
+	/// Perso j aimerai bien que quand on appuie sur esc en pause on relance le jeu :)
+	/// </summary>
+	/// <param name="e"></param>
 	private void EscapeButtonClicked(EscapeButtonClickedEvent e)
 	{
-		if (IsPlaying)
-			Pause();
+		if (IsPlaying) Pause();
 	}
-    private void SettingsButtonClicked(SettingsButtonClickedEvent e)
-    {
-        Settings();
-    }
-    private void ControlsButtonClicked(ControlsButtonClickedEvent e)
-    {
-        Controls();
-    }
-	#endregion
+    private void SettingsButtonClicked(SettingsButtonClickedEvent e) => Settings();
+
+    private void ControlsButtonClicked(ControlsButtonClickedEvent e) => Controls();
+
+    #endregion
 
 
 
-	//EVENTS
-	private void Menu()
+    #region Events
+
+    private void Menu()
 	{
 		SetTimeScale(0);
 		m_GameState = GameState.gameMenu;
@@ -346,21 +245,18 @@ public class GameManager : Manager<GameManager> {
 		InitNewGame();
 		SetTimeScale(1);
 		m_GameState = GameState.gamePlay;
-		
 	}
 
     private void AboutUs()
     {
         SetTimeScale(0);
         m_GameState = GameState.gameMenu;
-
         EventManager.Instance.Raise(new GameAboutUsEvent());
     }
     private void Crew()
     {
         SetTimeScale(0);
         m_GameState = GameState.gameMenu;
-
         EventManager.Instance.Raise(new GameCrewEvent());
     }
 	private void BeginnerLevel()
@@ -429,14 +325,14 @@ public class GameManager : Manager<GameManager> {
     {
         SetTimeScale(0);
         m_GameState = GameState.gameMenu;
-        
         EventManager.Instance.Raise(new GameSettingsEvent());
     }
     private void Controls()
     {
         SetTimeScale(0);
         m_GameState = GameState.gameMenu;
-        
         EventManager.Instance.Raise(new GameControlsEvent());
     }
+
+    #endregion
 }

@@ -7,18 +7,18 @@ using UnityEngine.UI;
 
 public class HudManager : Manager<HudManager>
 {
-    [Header("HudManager")]
     #region Labels & Values
+    [Header("HudManager")]
     [Header("Texts")]
     [SerializeField]
     private Text m_TxtBestScore;
     [SerializeField] private Text m_TxtScore;
     [SerializeField] private Text m_TxtNLives;
     [SerializeField] private Text m_TxtNEnemiesLeftBeforeVictory;
-    [SerializeField] private Slider slider;
 
-    [SerializeField] private Slider sliderBoss;
-
+    [Header("Health bar")]
+    [SerializeField] private Slider m_Slider;
+    [SerializeField] private Slider m_SliderBoss;
     [SerializeField] public GameObject m_Border;
 
     private float _fadeMode;
@@ -57,18 +57,12 @@ public class HudManager : Manager<HudManager>
         m_TxtBestScore.text = e.eBestScore.ToString();
         m_TxtScore.text = e.eScore.ToString();
         m_TxtNLives.text = e.eNLives.ToString();
-        slider.value = e.eNLives;
-        // m_TxtNEnemiesLeftBeforeVictory.text = e.eNEnemiesLeftBeforeVictory.ToString();
+        m_Slider.value = e.eNLives;
     }
 
-    protected override void GameBossShoted(GameBossShotedEvent e)
-    {
-        sliderBoss.value = e.eNLives;
-    }
-    protected override void NewBoss(NewBossEvent e)
-    {
-        sliderBoss.maxValue = e.eNLives;
-    }
+    protected override void GameBossShoted(GameBossShotedEvent e) => m_SliderBoss.value = e.eNLives;
+
+    protected override void NewBoss(NewBossEvent e) => m_SliderBoss.maxValue = e.eNLives;
 
 
     protected override IEnumerator InitCoroutine()

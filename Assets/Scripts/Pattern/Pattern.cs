@@ -12,17 +12,11 @@ public abstract class Pattern : MonoBehaviour, IPattern,IEventHandler {
 
 	public bool IsPatternOver
 	{
-		get
-		{
-			return m_NSpawnedEnemies == m_NEnemiesToSpawn
-			  && m_Enemies.Count == 0;
-		}
+		get => m_NSpawnedEnemies == m_NEnemiesToSpawn && m_Enemies.Count == 0;
 	}
 
-	public virtual void StartPattern()
-	{
-		StartCoroutine(SpawnCoroutine());
-	}
+	public virtual void StartPattern() => StartCoroutine(SpawnCoroutine());
+
 	#endregion
 
 	#region IEventHandler implementation
@@ -38,18 +32,14 @@ public abstract class Pattern : MonoBehaviour, IPattern,IEventHandler {
 	#endregion
 
 	#region Monobehaviour Implementation
-	private void Awake()
-	{
-		SubscribeEvents();
-	}
-	private void OnDestroy()
-	{
-		UnsubscribeEvents();
-	}
+	private void Awake() => SubscribeEvents();
+	private void OnDestroy() => UnsubscribeEvents();
+
 	#endregion
 
-	[Header("Pattern")]
 	#region enemies spawn
+
+	[Header("Pattern")]
 	[SerializeField] protected GameObject m_EnemyPrefab;
 	[SerializeField] private int m_NEnemiesToSpawn;
 	private int m_NSpawnedEnemies;
@@ -60,8 +50,7 @@ public abstract class Pattern : MonoBehaviour, IPattern,IEventHandler {
 	IEnumerator SpawnCoroutine()
 	{
 		m_NSpawnedEnemies = 0;
-
-		while (m_NSpawnedEnemies< m_NEnemiesToSpawn)
+		while (m_NSpawnedEnemies < m_NEnemiesToSpawn)
 		{
 			float waitDurationBeforeSpawn = NextWaitDurationBeforeSpawn;
 			float elapsedTime = 0;
@@ -83,10 +72,8 @@ public abstract class Pattern : MonoBehaviour, IPattern,IEventHandler {
 
 	void ClearEnemies()
 	{
-		foreach (var item in m_Enemies)
-		{
-			if (item) Destroy(item.gameObject);
-		}
+		for (int i = 0; i < m_Enemies.Count; i++)
+			if (m_Enemies[i]) Destroy(m_Enemies[i].gameObject);
 		m_Enemies.Clear();
 	}
 	#endregion
@@ -96,9 +83,8 @@ public abstract class Pattern : MonoBehaviour, IPattern,IEventHandler {
 	{
 		m_Enemies.Remove(e.eEnemy);
 		if (IsPatternOver)
-		{
 			EventManager.Instance.Raise(new AllEnemiesOfPatternHaveBeenDestroyedEvent());
-		}
 	}
+
 	#endregion
 }

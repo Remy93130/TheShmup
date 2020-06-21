@@ -1,10 +1,6 @@
 ﻿using SDD.Events;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-using Random = UnityEngine.Random;
 
 public abstract class Enemy : SimpleGameStateObserver,IScore {
 
@@ -45,16 +41,15 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 
 	protected bool m_Destroyed = false;
 
-	protected override void Awake()
+    #region Lifecycle
+
+    protected override void Awake()
 	{
 		base.Awake();
-
 		m_Rigidbody = GetComponent<Rigidbody>();
 		m_Transform = GetComponent<Transform>();
 		m_NextShootTime = Time.time;
 		m_RatioShootLevel = EnemiesManager.Instance.RationShootLevel;
-
-
 		m_TranslationSpeed = Mathf.Lerp(m_MinTranslationSpeed, m_MaxTranslationSpeed, m_TranslationSpeedProbaCurve.Evaluate(Random.value));
 	}
 
@@ -87,14 +82,9 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 		m_Rigidbody.velocity = Vector3.zero;
 	}
 
-	public virtual void ShootBullet()
-	{
-        //Debug.Log("WENT HERE LEL");
-        GameObject bulletGO = Instantiate(m_BulletPrefab, m_BulletSpawnPoint.position, Quaternion.identity);
-        
-       // SfxManager.Instance.PlaySfx(Constants.GAMEOVER_SFX);
-       //EventManager.Instance.Raise(new GameOverEvent());
-    }
+    #endregion
+
+    public virtual void ShootBullet() => Instantiate(m_BulletPrefab, m_BulletSpawnPoint.position, Quaternion.identity);
 
 	protected virtual void OnCollisionEnter(Collision collision)
 	{
@@ -102,10 +92,10 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 		if (collision.gameObject.CompareTag("PlayerBullet") && shield != null)
 		{
 			shield.ManageCollision(collision);
-		} else if (collision.gameObject.CompareTag("PlayerBullet") || collision.gameObject.CompareTag("Player"))
+		}
+		else if (collision.gameObject.CompareTag("PlayerBullet") || collision.gameObject.CompareTag("Player"))
 		{
-			m_NbLives -= 1;
-			if (m_NbLives == 0)
+			if (--m_NbLives == 0)
 			{
 				EventManager.Instance.Raise(new ScoreItemEvent() { eScore = this as IScore });
 				EventManager.Instance.Raise(new EnemyHasBeenDestroyedEvent() { eEnemy = this, eDestroyedByPlayer = true });
@@ -119,10 +109,7 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 	public void Explosion()
 	{
 		if (m_explosionPrefab)
-		{
 			Instantiate(m_explosionPrefab, m_Rigidbody.transform.position, Quaternion.identity);
-		}
 		Destroy(gameObject);
 	}
-	
 }

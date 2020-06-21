@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class RandomPattern : Pattern
@@ -14,17 +11,20 @@ public class RandomPattern : Pattern
 
 	Vector3 m_PreviousSpawnPos;
 
-	public override float NextWaitDurationBeforeSpawn {
-		get { return Mathf.Lerp(m_MinEnemySpawnPeriod, m_MaxEnemySpawnPeriod, m_SpawnPeriodProbaCurve.Evaluate(Random.value)); }
+	public override float NextWaitDurationBeforeSpawn
+	{
+		get => Mathf.Lerp(m_MinEnemySpawnPeriod, m_MaxEnemySpawnPeriod, m_SpawnPeriodProbaCurve.Evaluate(Random.value));
 	}
 
-	private Vector3 RandomSpawnWorldPos { get { return Camera.main.ViewportToWorldPoint(new Vector3(1.025f, (Random.value - .5f) * m_SpawnViewportYAmplitude / 2f + .5f, -Camera.main.transform.position.z)); } }
+	private Vector3 RandomSpawnWorldPos
+	{
+		get => Camera.main.ViewportToWorldPoint(new Vector3(1.025f, (Random.value - .5f) * m_SpawnViewportYAmplitude / 2f + .5f, -Camera.main.transform.position.z));
+	}
 
 	public override Enemy SpawnEnemy()
 	{
 		GameObject enemyGO = Instantiate(m_EnemyPrefab);
 		Vector3 newSpawnWorldPos = Vector3.zero;
-
 		do
 		{
 			newSpawnWorldPos = RandomSpawnWorldPos;
@@ -32,7 +32,6 @@ public class RandomPattern : Pattern
 
 		enemyGO.transform.position = newSpawnWorldPos;
 		m_PreviousSpawnPos = newSpawnWorldPos;
-
 		Enemy enemy = enemyGO.GetComponent<Enemy>();
 		return enemy;
 	}

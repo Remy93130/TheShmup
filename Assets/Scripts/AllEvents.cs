@@ -188,6 +188,6 @@ public class ChangeBackgroundEvent : SDD.Events.Event
 	/// <summary>
 	/// Permet de savoir si on remet le fond du quad par defaut
 	/// </summary>
-	public bool DefaultBackground = false;
+	public bool eDefaultBackground = false;
 }
 #endregion

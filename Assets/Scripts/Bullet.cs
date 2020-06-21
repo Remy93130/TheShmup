@@ -15,7 +15,8 @@ public class Bullet : SimpleGameStateObserver
 	[SerializeField]
 	protected float m_TranslationSpeed;
 
-	protected override void Awake()
+    #region Lifecycle
+    protected override void Awake()
 	{
 		base.Awake();
 		m_Rigidbody = GetComponent<Rigidbody>();
@@ -31,7 +32,11 @@ public class Bullet : SimpleGameStateObserver
 		m_Rigidbody.MovePosition(m_Rigidbody.position + moveVect);
 	}
 
-	private void OnCollisionEnter(Collision collision)
+    #endregion
+
+    #region Events
+
+    private void OnCollisionEnter(Collision collision)
 	{
 		if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player"))
 		{
@@ -39,18 +44,11 @@ public class Bullet : SimpleGameStateObserver
 		}
 	}
 
-	protected override void GameMenu(GameMenuEvent e)
-	{
-		Destroy(gameObject);
-	}
+	protected override void GameMenu(GameMenuEvent e) => Destroy(gameObject);
 
-	protected override void GameOver(GameOverEvent e)
-	{
-		Destroy(gameObject);
-	}
+	protected override void GameOver(GameOverEvent e) => Destroy(gameObject);
 
-	protected override void GameVictory(GameVictoryEvent e)
-	{
-		Destroy(gameObject);
-	}
+	protected override void GameVictory(GameVictoryEvent e) => Destroy(gameObject);
+
+    #endregion
 }

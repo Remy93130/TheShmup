@@ -16,7 +16,6 @@ public class EnemyITweenPathMvt: Enemy {
 		m_Path = path;
 		m_PathNodes = m_Path.nodes.ToArray();
 		m_PathLength = iTween.PathLength(m_PathNodes);
-
 		m_Distance = 0;
 	}
 
@@ -32,9 +31,8 @@ public class EnemyITweenPathMvt: Enemy {
 	public override void FixedUpdate()
 	{
 		if (m_Destroyed) return;
-
 		m_Distance += m_TranslationSpeed * Time.fixedDeltaTime;
-		if(m_Distance>m_PathLength)
+		if(m_Distance > m_PathLength)
 		{
 			EventManager.Instance.Raise(new EnemyHasBeenDestroyedEvent() { eEnemy = this, eDestroyedByPlayer = false });
 			m_Destroyed = true;

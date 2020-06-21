@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class Boss: Enemy, IBoss {
 
-    
-
 	[Header("Boss animation")]
 	[SerializeField] private GameObject[] m_ExplosionsSpawns;
 	[SerializeField] private GameObject m_DamageAnimation;
@@ -17,18 +15,16 @@ public class Boss: Enemy, IBoss {
 
 	protected override Vector3 MoveVect
 	{
-		get
-		{
-			return m_Transform.right * m_TranslationSpeed * Time.fixedDeltaTime;
-		}
+		get => m_Transform.right * m_TranslationSpeed * Time.fixedDeltaTime;
 	}
+
+    #region Lifecycle
 
     protected override void Awake()
     {
         base.Awake();
         EventManager.Instance.Raise(new NewBossEvent() { eNLives = NbLives });
         EventManager.Instance.Raise(new GameBossShotedEvent() { eNLives = NbLives});
-        
         HudManager.Instance.SetBorderBoss(true);
     }
 
@@ -48,14 +44,15 @@ public class Boss: Enemy, IBoss {
 		m_Rigidbody.transform.position = new Vector3(currXPosition, 0, 0);
 	}
 
-	public void OnCollisionEnter(Collision collision)
+    #endregion
+
+    protected override void OnCollisionEnter(Collision collision)
 	{
         
         float currXPosition = m_Rigidbody.transform.position.x;
 		if (collision.gameObject.CompareTag("PlayerBullet"))
 		{
-			NbLives -= 1;
-			if (NbLives == 0)
+			if (--NbLives == 0)
 			{
 				EventManager.Instance.Raise(new ScoreItemEvent() { eScore = this as IScore });
 				EventManager.Instance.Raise(new EnemyHasBeenDestroyedEvent() { eEnemy = this, eDestroyedByPlayer = true });

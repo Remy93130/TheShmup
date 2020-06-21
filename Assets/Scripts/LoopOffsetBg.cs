@@ -29,6 +29,8 @@ public class LoopOffsetBg : SimpleGameStateObserver
     }
     #endregion
 
+    #region Lifecycle
+
     void Start()
     {
         m_meshRenderer = GetComponent<MeshRenderer>();
@@ -44,9 +46,11 @@ public class LoopOffsetBg : SimpleGameStateObserver
         mat.mainTextureOffset = offset;
     }
 
+    #endregion
+
     protected override void ChangeBackgroundEvent(ChangeBackgroundEvent e)
     {
-        if (e.DefaultBackground)
+        if (e.eDefaultBackground)
         {
             m_meshRenderer.material = m_materials[0];
             _index = 0;

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using UnityEngine;
+
 
 using Random = UnityEngine.Random;
 using SDD.Events;
@@ -11,36 +11,19 @@ public class Level
 {
 	[SerializeField] GameObject[] m_PatternsPrefabs;
 
-	public GameObject getLevelPattern(int indexPattern)
-	{
-		indexPattern = Mathf.Max(indexPattern, 0);
-		return m_PatternsPrefabs[indexPattern];
-	}
+	public GameObject getLevelPattern(int indexPattern) => m_PatternsPrefabs[Mathf.Max(indexPattern, 0)];
 
-	public int randomLevel()
-	{
-		return Random.Range(0,m_PatternsPrefabs.Length-1);
-	}
+	public int randomLevel() => Random.Range(0, m_PatternsPrefabs.Length - 1);
 
-	public int getBossIndex()
-	{
-		return m_PatternsPrefabs.Length - 1;
-	}
+	public int getBossIndex() => m_PatternsPrefabs.Length - 1;
 
-	public Boolean hasLevelFinished(int indexPattern)
-	{
-		if (indexPattern == m_PatternsPrefabs.Length)
-		{
-			return true;
-		}
-		return false;
-	}
+	public bool hasLevelFinished(int indexPattern) => (indexPattern == m_PatternsPrefabs.Length) ? true : false;
 }
 
 public class EnemiesManager : Manager<EnemiesManager> {
 
-	[Header("EnemiesManager")]
 	#region patterns & current pattern management
+	[Header("EnemiesManager")]
 	[SerializeField] Level[] m_levels;
 	private int m_CurrentPatternIndex;
 	private int m_CurrentLevelIndex;
@@ -50,17 +33,16 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	private IPattern m_CurrentPattern;
 	private float m_RationShootLevel;
 
-	public IPattern CurrentPattern { get { return m_CurrentPattern; } }
+	public IPattern CurrentPattern { get => m_CurrentPattern; }
 
-	public float RationShootLevel { get { return m_RationShootLevel; } }
+	public float RationShootLevel { get => m_RationShootLevel; }
+
 	#endregion
 
 	#region Events' subscription
 	public override void SubscribeEvents()
 	{
 		base.SubscribeEvents();
-
-		//EventManager.Instance.AddListener<PatternHasFinishedSpawningEvent>(PatternHasFinishedSpawning);
 		EventManager.Instance.AddListener<AllEnemiesOfPatternHaveBeenDestroyedEvent>(AllEnemiesOfPatternHaveBeenDestroyed);
 		EventManager.Instance.AddListener<GoToNextPatternEvent>(GoToNextPattern);
 	}
@@ -68,8 +50,6 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	public override void UnsubscribeEvents()
 	{
 		base.UnsubscribeEvents();
-
-		//EventManager.Instance.RemoveListener<PatternHasFinishedSpawningEvent>(PatternHasFinishedSpawning);
 		EventManager.Instance.RemoveListener<AllEnemiesOfPatternHaveBeenDestroyedEvent>(AllEnemiesOfPatternHaveBeenDestroyed);
 		EventManager.Instance.RemoveListener<GoToNextPatternEvent>(GoToNextPattern);
 	}
@@ -86,36 +66,33 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	void Reset()
 	{
 		EventManager.Instance.Raise(new GameResetEvent());
-		GameObject[] oldEnemies;
-		oldEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-		foreach (GameObject enemy in oldEnemies)
-		{
-			Enemy e = enemy.GetComponent<Enemy>();
-			if (e)
-			{
-				e.Explosion();
-			}
-		}
-		GameObject[] oldBullet;
-		oldBullet = GameObject.FindGameObjectsWithTag("EnemyBullet");
-		foreach (GameObject bullet in oldBullet)
-		{
-			Destroy(bullet);
-		}
-		ResetAnimation();
+		DeleteOldGameObject();
 		Destroy(m_CurrentPatternGO);
 		m_CurrentPatternGO = null;
 		m_CurrentPatternIndex = -1;
 		HudManager.Instance.SetBorderBoss(false, true);
 	}
 
+	private void DeleteOldGameObject()
+	{
+		GameObject[] oldEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+		for (int i = 0; i < oldEnemies.Length; i++)
+		{
+			Enemy enemyComponent = oldEnemies[i].GetComponent<Enemy>();
+			if (enemyComponent)
+				enemyComponent.Explosion();
+		}
+		GameObject[] oldBullet = GameObject.FindGameObjectsWithTag("EnemyBullet");
+		for (int i = 0; i < oldBullet.Length; i++)
+			Destroy(oldBullet[i]);
+		ResetAnimation();
+	}
+
 	private void ResetAnimation()
 	{
 		GameObject[] animations = GameObject.FindGameObjectsWithTag("Animation");
 		for (int i = 0; i < animations.Length; i++)
-		{
 			Destroy(animations[i]);
-		}
 	}
 
 	IPattern InstantiatePattern(int patternIndex)
@@ -128,7 +105,6 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	{
 		Destroy(m_CurrentPatternGO);
 		while (m_CurrentPatternGO) yield return null;
-
 		if (m_CurrentLevel.hasLevelFinished(m_CurrentPatternIndex))
 		{
 			EventManager.Instance.Raise(new LevelHasEnded());
@@ -137,17 +113,13 @@ public class EnemiesManager : Manager<EnemiesManager> {
 		{
 			m_CurrentPattern = InstantiatePattern(m_CurrentPatternIndex);
 			m_CurrentPattern.StartPattern();
-
 			EventManager.Instance.Raise(new PatternHasBeenInstantiatedEvent() { ePattern = m_CurrentPattern });
 		}
 	}
 	#endregion
 
 	#region Callbacks to GameManager events
-	protected override void GameMenu(GameMenuEvent e)
-	{
-		Reset();
-	}
+	protected override void GameMenu(GameMenuEvent e) => Reset();
 
 	protected override void GameBeginnerLevelPlay(GameBeginnerLevelEvent e)
 	{
@@ -194,35 +166,27 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	public void GoToNextPattern(GoToNextPatternEvent e)
 	{
 		if (e.eArcadeMode)
+			ArcadePattern();
+		else
+			m_CurrentPatternIndex++;
+		StartCoroutine(InstantiatePatternCoroutine());
+	}
+
+	private void ArcadePattern()
+	{
+		if (++m_ArcadeCounter % 10 == 0)
 		{
-			m_ArcadeCounter++;
-			if (m_ArcadeCounter%10 == 0)
-			{
-				m_CurrentPatternIndex = m_CurrentLevel.getBossIndex();
-				m_RationShootLevel += 1;
-			}
-			else
-			{
-				m_CurrentPatternIndex = m_CurrentLevel.randomLevel();
-			}
-			
+			m_CurrentPatternIndex = m_CurrentLevel.getBossIndex();
+			m_RationShootLevel += 1;
 		}
 		else
 		{
-			m_CurrentPatternIndex++;
+			m_CurrentPatternIndex = m_CurrentLevel.randomLevel();
 		}
-		StartCoroutine(InstantiatePatternCoroutine());
-
 	}
 	#endregion
 
 	#region Callbacks to Pattern events
-	void AllEnemiesOfPatternHaveBeenDestroyed(AllEnemiesOfPatternHaveBeenDestroyedEvent e)
-	{
-		EventManager.Instance.Raise(new GoToNextPatternEvent());
-	}
-	/*void PatternHasFinishedSpawning(PatternHasFinishedSpawningEvent e)
-	{
-	}*/
+	void AllEnemiesOfPatternHaveBeenDestroyed(AllEnemiesOfPatternHaveBeenDestroyedEvent e) => EventManager.Instance.Raise(new GoToNextPatternEvent());
 	#endregion
 }

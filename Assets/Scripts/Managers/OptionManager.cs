@@ -15,6 +15,4 @@ public class OptionManager : MonoBehaviour
     {
         QualitySettings.SetQualityLevel(qualityIndex);
     }
-
-    
 }

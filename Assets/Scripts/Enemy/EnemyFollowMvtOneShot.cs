@@ -6,16 +6,15 @@ using UnityEngine;
 public class EnemyFollowMvtOneShot : Enemy {
 
 	private PlayerController player;
-
 	protected override Vector3 MoveVect
 	{
 		get
 		{
 			Vector3 playerPosition = GameManager.Instance.GetPlayer.GetPositionPlayer;
-			if (playerPosition.x+2 < m_Rigidbody.position.x)
+			if (playerPosition.x + 2 < m_Rigidbody.position.x)
 			{
-				float Differencey = playerPosition.y - m_Rigidbody.position.y;
-				return (m_Transform.right + new Vector3(0,Differencey/m_TranslationSpeed,0)) * m_TranslationSpeed * Time.deltaTime;
+				float deltaY = playerPosition.y - m_Rigidbody.position.y;
+				return (m_Transform.right + new Vector3(0,deltaY / m_TranslationSpeed, 0)) * m_TranslationSpeed * Time.deltaTime;
 			}
 			else
 			{
@@ -24,13 +23,7 @@ public class EnemyFollowMvtOneShot : Enemy {
 		}
 	}
 
-	protected override void Awake()
-	{
-		base.Awake();
-	}
+	protected override void Awake() => base.Awake();
 
-	public override void ShootBullet()
-	{
-		GameObject bulletGO1 = Instantiate(m_BulletPrefab, m_BulletSpawnPoint.position, Quaternion.identity);
-	}
+	public override void ShootBullet() => Instantiate(m_BulletPrefab, m_BulletSpawnPoint.position, Quaternion.identity);
 }

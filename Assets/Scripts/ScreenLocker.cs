@@ -2,23 +2,27 @@
 
 public class ScreenLocker : MonoBehaviour
 {
-    private Vector2 ScreenSize;
-    private float PlayerWidth = 0;
-    private float PlayerHeight = 0;
+    private Vector2 _screenSize;
+    private float _playerWidth = 0;
+    private float _playerHeight = 0;
+
+    #region Lifecycle
 
     void Start()
     {
         CapsuleCollider collider = GetComponentInChildren<CapsuleCollider>();
-        PlayerWidth = collider.bounds.extents.x;
-        PlayerHeight = collider.bounds.extents.y;
-        ScreenSize = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        _playerWidth = collider.bounds.extents.x;
+        _playerHeight = collider.bounds.extents.y;
+        _screenSize = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
     }
 
     void LateUpdate()
     {
         Vector3 position = transform.position;
-        position.x = Mathf.Clamp(position.x, ScreenSize.x + PlayerWidth, ScreenSize.x * -1 - PlayerWidth);
-        position.y = Mathf.Clamp(position.y, ScreenSize.y + PlayerHeight, ScreenSize.y * -1 - PlayerHeight);
+        position.x = Mathf.Clamp(position.x, _screenSize.x + _playerWidth, _screenSize.x * -1 - _playerWidth);
+        position.y = Mathf.Clamp(position.y, _screenSize.y + _playerHeight, _screenSize.y * -1 - _playerHeight);
         transform.position = position;
     }
+
+    #endregion
 }
