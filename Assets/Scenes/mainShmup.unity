@@ -2680,7 +2680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54936f63cb4f6e347a300cd86a657118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SoundName: Button
+  m_SoundName: Tadam
 --- !u!1 &397891669
 GameObject:
   m_ObjectHideFlags: 0
@@ -3088,7 +3088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54936f63cb4f6e347a300cd86a657118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SoundName: Button
+  m_SoundName: Tadam
 --- !u!1 &429698211
 GameObject:
   m_ObjectHideFlags: 0
@@ -18132,7 +18132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54936f63cb4f6e347a300cd86a657118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SoundName: Button
+  m_SoundName: Tadam
 --- !u!1 &1943317671
 GameObject:
   m_ObjectHideFlags: 0
