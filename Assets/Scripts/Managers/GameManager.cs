@@ -306,10 +306,15 @@ public class GameManager : Manager<GameManager> {
 	{
 		SetTimeScale(0);
 		m_GameState = GameState.gameOver;
-		SfxManager.Instance.PlaySfx(Constants.GAMEOVER_SFX);
+        if (_isArcadeMode && Score > BestScore)
+        {
+            BestScore = Score;
+            EventManager.Instance.Raise(new GameStatisticsChangedEvent() { eBestScore = BestScore, eNLives = NLives, eScore = Score });
+        }
+        HudManager.Instance.m_PrefGameOverScore.SetActive(_isArcadeMode);
+        HudManager.Instance.m_PrefNewBestScore.SetActive(_isArcadeMode && Score > BestScore);
+        SfxManager.Instance.PlaySfx(Constants.GAMEOVER_SFX);
 		EventManager.Instance.Raise(new GameOverEvent() { eIsArcadeMode = _isArcadeMode });
-		if (_isArcadeMode && Score > BestScore)
-			BestScore = Score;
 		_isArcadeMode = false;
 	}
 

@@ -21,6 +21,19 @@ public class HudManager : Manager<HudManager>
     [SerializeField] private Slider m_SliderBoss;
     [SerializeField] public GameObject m_Border;
 
+    [Header("Texts Prefabs")]
+    [SerializeField] public GameObject m_PrefScore;
+    [SerializeField] public GameObject m_PrefGameOverScore;
+    [SerializeField] public GameObject m_PrefNewBestScore;
+
+    [Header("GameOverTexts")]
+    [SerializeField] private Text m_TxtGameOverScore;
+    [SerializeField] private Text m_TxtGameOverBestScore;
+
+
+
+
+
     private float _fadeMode;
     #endregion
 
@@ -55,7 +68,9 @@ public class HudManager : Manager<HudManager>
     protected override void GameStatisticsChanged(GameStatisticsChangedEvent e)
     {
         m_TxtBestScore.text = e.eBestScore.ToString();
+        m_TxtGameOverBestScore.text = e.eBestScore.ToString();
         m_TxtScore.text = e.eScore.ToString();
+        m_TxtGameOverScore.text = e.eScore.ToString();
         m_TxtNLives.text = e.eNLives.ToString();
         m_Slider.value = e.eNLives;
     }

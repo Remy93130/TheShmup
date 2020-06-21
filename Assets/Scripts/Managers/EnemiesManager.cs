@@ -71,7 +71,9 @@ public class EnemiesManager : Manager<EnemiesManager> {
 		m_CurrentPatternGO = null;
 		m_CurrentPatternIndex = -1;
 		HudManager.Instance.SetBorderBoss(false, true);
-	}
+
+        //HudManager.Instance.m_PrefScore.SetActive(false);
+    }
 
 	private void DeleteOldGameObject()
 	{
@@ -157,6 +159,7 @@ public class EnemiesManager : Manager<EnemiesManager> {
 	protected void PlayLevel(bool isArcade = false)
 	{
 		Reset();
+        HudManager.Instance.m_PrefScore.SetActive(isArcade);
 		EventManager.Instance.Raise(new GoToNextPatternEvent() { eArcadeMode = isArcade });
 	}
 

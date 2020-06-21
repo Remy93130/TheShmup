@@ -144,7 +144,11 @@ public class MenuManager : Manager<MenuManager>
 	protected override void GameBeginnerLevelPlay(GameBeginnerLevelEvent e) => OpenPanel(null);
 	protected override void GameIntermediateLevelPlay(GameIntermediateLevelEvent e) => OpenPanel(null);
 	protected override void GameDifficultLevelPlay(GameDifficultLevelEvent e) => OpenPanel(null);
-	protected override void GameArcadePlay(GameArcadeEvent e) => OpenPanel(null);
+    protected override void GameArcadePlay(GameArcadeEvent e)
+    {
+        OpenPanel(null);
+        //HudManager.Instance.m_PrefScore.SetActive(true);
+    }
 	protected override void GamePause(GamePauseEvent e) => OpenPanel(m_PanelInGameMenu);
 
 	protected override void GameResume(GameResumeEvent e) => OpenPanel(null);
