@@ -111,5 +111,6 @@ public abstract class Enemy : SimpleGameStateObserver,IScore {
 		if (m_explosionPrefab)
 			Instantiate(m_explosionPrefab, m_Rigidbody.transform.position, Quaternion.identity);
 		Destroy(gameObject);
+        SfxManager.Instance.PlaySfx(Constants.EXPLOSION_SFX);
 	}
 }

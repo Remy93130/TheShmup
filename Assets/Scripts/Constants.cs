@@ -11,4 +11,8 @@ public static class Constants {
 	public static string GAMEOVER_SFX = "GameOver";
 	public static string VICTORY_SFX = "Victory";
     public static string SHOT_SFX = "Shot";
+    public static string BOSS_SFX = "bossArrival";
+    public static string EXPLOSION_SFX = "Explosion";
+    public static string EXPLOSIONBOSS_SFX = "ExplosionBoss";
+
 }

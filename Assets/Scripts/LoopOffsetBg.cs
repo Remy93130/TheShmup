@@ -78,6 +78,7 @@ public class LoopOffsetBg : SimpleGameStateObserver
 
     private IEnumerator TriggerExplosion()
     {
+        SfxManager.Instance.PlaySfx(Constants.BOSS_SFX);
         for (int i = 0; i < m_explosionsSpawnPoint.Length; i++)
         {
             yield return new WaitForSeconds(.125f);

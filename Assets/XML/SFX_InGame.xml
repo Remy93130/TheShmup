@@ -3,6 +3,9 @@
 	<SFX name="Selection"/>
   <SFX name="Shot"/>
 	<SFX name="LetsGo"/>
+  <SFX name="bossArrival"/>
+  <SFX name="Explosion"/>
+  <SFX name="ExplosionBoss"/>
 	<SFX name="Tick"/>
 	<SFX name="Victory"/>
 	<SFX name="GameOver"/>

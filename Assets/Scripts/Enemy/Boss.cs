@@ -65,8 +65,7 @@ public class Boss: Enemy, IBoss {
 				}
 				Destroy(_animation);
                 Destroy(gameObject);
-                
-
+                SfxManager.Instance.PlaySfx(Constants.EXPLOSIONBOSS_SFX);
             }
 		}
         EventManager.Instance.Raise(new GameBossShotedEvent() { eNLives = NbLives });
