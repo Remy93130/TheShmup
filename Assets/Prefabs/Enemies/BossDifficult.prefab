@@ -61,6 +61,9 @@ Transform:
   m_Children:
   - {fileID: 4546757359376846}
   - {fileID: 2277464083107491922}
+  - {fileID: 698922187783011926}
+  - {fileID: 5845077577286890541}
+  - {fileID: 5909505557444032975}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -180.00002, z: 0}
@@ -124,15 +127,108 @@ MonoBehaviour:
   m_ShootPeriod: 2
   m_ProbaShoot: 20
   m_BulletSpawnPoint: {fileID: 4546757359376846}
-  m_explosionPrefab: {fileID: 0}
+  m_explosionPrefab: {fileID: 1150934714579380, guid: 779aa8c25fbd0e1488637639c9fff976,
+    type: 3}
   m_Score: 150
-  m_PrefabBorder: {fileID: 0}
-  m_ExplosionsSpawns: []
-  m_DamageAnimation: {fileID: 0}
-  m_DamageAnimationSpawn: {fileID: 0}
-  m_LivesForDamageAnimation: 0
+  m_ExplosionsSpawns:
+  - {fileID: 8662034142502844983}
+  - {fileID: 6014621239052180540}
+  m_DamageAnimation: {fileID: 1491359990764140, guid: c0b746fa294cc2445b569d0210ac7a7a,
+    type: 3}
+  m_DamageAnimationSpawn: {fileID: 6016355327913057636}
+  m_LivesForDamageAnimation: 10
   m_EnemyPrefab: {fileID: 1812984978241422, guid: 907f5acbbaa9ed84a98fb16c763432a4,
     type: 3}
+--- !u!1 &6014621239052180540
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5909505557444032975}
+  m_Layer: 0
+  m_Name: ExplosionSpawn2
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5909505557444032975
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014621239052180540}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00000058114523}
+  m_LocalPosition: {x: -1.069, y: -0, z: -0.245}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4427473539940658}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6016355327913057636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 698922187783011926}
+  m_Layer: 0
+  m_Name: DamageSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &698922187783011926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6016355327913057636}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00000058114523}
+  m_LocalPosition: {x: 0.288, y: -0, z: 0.59}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4427473539940658}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8662034142502844983
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5845077577286890541}
+  m_Layer: 0
+  m_Name: ExplosionSpawn1
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5845077577286890541
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8662034142502844983}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00000058114523}
+  m_LocalPosition: {x: 0.934, y: 0, z: 0.296}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4427473539940658}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5831957156403993733
 PrefabInstance:
   m_ObjectHideFlags: 0

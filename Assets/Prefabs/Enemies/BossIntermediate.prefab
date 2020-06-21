@@ -61,6 +61,9 @@ Transform:
   m_Children:
   - {fileID: 4546757359376846}
   - {fileID: 4617037273133950405}
+  - {fileID: 5260504420464731431}
+  - {fileID: 7658218968306053345}
+  - {fileID: 5931355576589916075}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -180.00002, z: 0}
@@ -124,16 +127,108 @@ MonoBehaviour:
   m_ShootPeriod: 2
   m_ProbaShoot: 20
   m_BulletSpawnPoint: {fileID: 4546757359376846}
-  m_explosionPrefab: {fileID: 0}
-  m_Score: 120
-  m_PrefabBorder: {fileID: 8144990589917373806, guid: c8a3dc6192dd855448f7d0ce4dddd666,
+  m_explosionPrefab: {fileID: 1150934714579380, guid: 779aa8c25fbd0e1488637639c9fff976,
     type: 3}
-  m_ExplosionsSpawns: []
-  m_DamageAnimation: {fileID: 0}
-  m_DamageAnimationSpawn: {fileID: 0}
-  m_LivesForDamageAnimation: 0
+  m_Score: 120
+  m_ExplosionsSpawns:
+  - {fileID: 1653736400962504229}
+  - {fileID: 3347903430066339435}
+  m_DamageAnimation: {fileID: 1491359990764140, guid: c0b746fa294cc2445b569d0210ac7a7a,
+    type: 3}
+  m_DamageAnimationSpawn: {fileID: 353357733306053327}
+  m_LivesForDamageAnimation: 7
   m_EnemyPrefab: {fileID: 1812984978241422, guid: 1bc17d8deacb1df4ba4c572a39f53c8d,
     type: 3}
+--- !u!1 &353357733306053327
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5260504420464731431}
+  m_Layer: 0
+  m_Name: DamageSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5260504420464731431
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353357733306053327}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00000058114523}
+  m_LocalPosition: {x: 0.274, y: -0, z: 0.59}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4427473539940658}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1653736400962504229
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7658218968306053345}
+  m_Layer: 0
+  m_Name: ExplosionSpawn1
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7658218968306053345
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653736400962504229}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00000058114523}
+  m_LocalPosition: {x: 0.92, y: 0, z: 0.296}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4427473539940658}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3347903430066339435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5931355576589916075}
+  m_Layer: 0
+  m_Name: ExplosionSpawn2
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5931355576589916075
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3347903430066339435}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00000058114523}
+  m_LocalPosition: {x: -1.083, y: -0, z: -0.245}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4427473539940658}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1109971652088154386
 PrefabInstance:
   m_ObjectHideFlags: 0

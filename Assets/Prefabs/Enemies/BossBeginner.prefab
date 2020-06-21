@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1640943098963366}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.34, y: 0, z: 0}
+  m_LocalPosition: {x: 1.35, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4427473539940658}
@@ -56,7 +56,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812984978241422}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: 5.75, y: 4.62, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4546757359376846}
@@ -130,8 +130,6 @@ MonoBehaviour:
   m_explosionPrefab: {fileID: 1150934714579380, guid: 779aa8c25fbd0e1488637639c9fff976,
     type: 3}
   m_Score: 100
-  m_PrefabBorder: {fileID: 6557924154635205052, guid: b0dd56f6a2fd05c42b2ee88e0a67f9dd,
-    type: 3}
   m_ExplosionsSpawns:
   - {fileID: 5143191167898547827}
   - {fileID: 916546329116978481}
