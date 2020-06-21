@@ -1702,7 +1702,8 @@ GameObject:
   - component: {fileID: 241647590}
   - component: {fileID: 241647589}
   m_Layer: 5
-  m_Name: TMP SubMeshUI [CLASSIC SDF Material + LiberationSans SDF Atlas]
+  m_Name: TMP SubMeshUI [AVENGEANCE HEROIC AVENGER SDF Material + LiberationSans
+    SDF Atlas]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2549,6 +2550,7 @@ GameObject:
   - component: {fileID: 381604127}
   - component: {fileID: 381604126}
   - component: {fileID: 381604125}
+  - component: {fileID: 381604128}
   m_Layer: 5
   m_Name: ButtonPilot
   m_TagString: Untagged
@@ -2666,6 +2668,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381604123}
   m_CullTransparentMesh: 0
+--- !u!114 &381604128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381604123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54936f63cb4f6e347a300cd86a657118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SoundName: Button
 --- !u!1 &397891669
 GameObject:
   m_ObjectHideFlags: 0
@@ -2943,6 +2958,7 @@ GameObject:
   - component: {fileID: 420583103}
   - component: {fileID: 420583102}
   - component: {fileID: 420583101}
+  - component: {fileID: 420583104}
   m_Layer: 5
   m_Name: ButtonAmiral
   m_TagString: Untagged
@@ -3060,6 +3076,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 420583099}
   m_CullTransparentMesh: 0
+--- !u!114 &420583104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420583099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54936f63cb4f6e347a300cd86a657118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SoundName: Button
 --- !u!1 &429698211
 GameObject:
   m_ObjectHideFlags: 0
@@ -8651,7 +8680,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Dealt with the GFX and SFX issues \n\n\n"
+  m_text: "Leaving his family behind him, he had to design the ally spaceship and
+    defend the galaxy. \n\n\"In time of war, leave no one behind ! Except for L'amour
+    est dans le pre's fans\"\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9f2d3e0c706dfc94387ad07a2249e3c3, type: 2}
   m_sharedMaterial: {fileID: -1198850816775491465, guid: 9f2d3e0c706dfc94387ad07a2249e3c3,
@@ -8721,12 +8752,12 @@ MonoBehaviour:
   m_margin: {x: -235.44147, y: -177.65924, z: -314.3955, w: -292.0031}
   m_textInfo:
     textComponent: {fileID: 945887237}
-    characterCount: 37
+    characterCount: 176
     spriteCount: 0
-    spaceCount: 10
-    wordCount: 7
+    spaceCount: 37
+    wordCount: 32
     linkCount: 0
-    lineCount: 3
+    lineCount: 8
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -17971,6 +18002,7 @@ GameObject:
   - component: {fileID: 1939015921}
   - component: {fileID: 1939015920}
   - component: {fileID: 1939015919}
+  - component: {fileID: 1939015922}
   m_Layer: 5
   m_Name: ButtonCommander
   m_TagString: Untagged
@@ -18088,6 +18120,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1939015917}
   m_CullTransparentMesh: 0
+--- !u!114 &1939015922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939015917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54936f63cb4f6e347a300cd86a657118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SoundName: Button
 --- !u!1 &1943317671
 GameObject:
   m_ObjectHideFlags: 0
